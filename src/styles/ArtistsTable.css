@@ -1,0 +1,65 @@
+/* Table Styles */
+.table-wrapper {
+  max-width: 100%;
+  margin: auto;
+  overflow-x: auto;
+  margin-top: 2rem;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+
+.fl-table {
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: Montserrat;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  background-color: white;
+}
+
+.fl-table td,
+.fl-table th {
+  text-align: left;
+  padding: 12px 10px;
+}
+
+.fl-table td {
+  border-right: 1px solid #f8f8f8;
+  border-bottom: 1px solid #f8f8f8;
+  font-size: 12px;
+}
+
+.fl-table thead th {
+  color: #333333;
+  background: #fff;
+  border-right: 1px solid #f8f8f8;
+}
+
+.fl-table thead tr {
+  border-bottom: 2px solid #f8f8f8;
+}
+
+.fl-table thead th:nth-child(odd) {
+  color: #333333;
+  background: #fff;
+}
+
+.fl-table tr:nth-child(even) {
+  background: #fff;
+}
+
+.artist-blockBtn {
+  padding: 2px 15px;
+  border: 2px solid #1c7ebf;
+  border-radius: 31px;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 14px;
+  color: #1c7ebf;
+  outline: none;
+  cursor: pointer;
+}
