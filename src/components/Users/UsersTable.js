@@ -1,7 +1,8 @@
 import React from 'react';
 import '../../styles/ArtistsTable.css';
 
-const UsersTable = () => {
+const UsersTable = (props) => {
+  // const { allUsers } = props;
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
@@ -16,8 +17,8 @@ const UsersTable = () => {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((row) => (
-            <tr>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((row, i) => (
+            <tr key={i}>
               <td>{`Darrell Williamson`}</td>
               <td>{`Corona, Michigan`}</td>
               <td>{`03/03/12 22:43`}</td>

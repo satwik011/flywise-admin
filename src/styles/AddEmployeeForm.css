@@ -1,15 +1,15 @@
-.addArtist-container {
+.addEmployee-container {
   width: 90%;
   margin: auto;
 }
 
-.addArtist-personalDetails {
+.addEmployee-personalDetails {
   width: 70%;
   margin: auto;
   margin-top: 2rem;
 }
 
-.addArtist-alignRow {
+.addEmployee-alignRow {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -17,7 +17,7 @@
   align-items: center;
 }
 
-.addArtist-inputFieldDiv {
+.addEmployee-inputFieldDiv {
   width: 46%;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@
   margin-top: 2rem;
 }
 
-.addArtist-inputLabel {
+.addEmployee-inputLabel {
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.3px;
@@ -35,7 +35,7 @@
   margin-bottom: 1px;
 }
 
-.addArtist-inputField {
+.addEmployee-inputField {
   border: 0.5px solid #155b89;
   box-sizing: border-box;
   width: 100%;
@@ -49,7 +49,7 @@
   outline: none;
 }
 
-.addArtist-selectFieldDiv {
+.addEmployee-selectFieldDiv {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@
   margin-top: 2rem;
 }
 
-.addArtist-selectField {
+.addEmployee-selectField {
   border: 0.5px solid #155b89;
   box-sizing: border-box;
   width: 100%;
@@ -72,13 +72,13 @@
   outline: none;
 }
 
-.addArtist-submitDetailDiv {
+.addEmployee-submitDetailDiv {
   width: 40%;
   margin: auto;
   margin-top: 3rem;
 }
 
-.addArtist-submitDetailBtn {
+.addEmployee-submitDetailBtn {
   width: 100%;
   border: none;
   outline: none;
@@ -97,25 +97,25 @@
 
 /* Setup Payment Options*/
 
-.artist-setPaymentContainer {
+.employee-setPaymentContainer {
   width: 40%;
   margin-left: 10%;
   margin-right: auto;
   text-align: left;
 }
 
-.artist-setPayment {
+.employee-setPayment {
   margin-top: 5rem;
 }
 
-.artist-setPaymentHeader {
+.employee-setPaymentHeader {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
-.artist-setPaymentHeading {
+.employee-setPaymentHeading {
   font-family: Montserrat;
   font-weight: 500;
   font-size: 24px;
@@ -123,24 +123,24 @@
   color: #000000;
 }
 
-.artist-paymentOptionsDiv {
+.employee-paymentOptionsDiv {
   margin-top: 2rem;
 }
 
-.artist-paymentOption {
+.employee-paymentOption {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
-.artist-radioBtn {
+.employee-radioBtn {
   width: 20px;
   height: 20px;
   margin-right: 15px;
 }
 
-.artist-btnPara {
+.employee-btnPara {
   font-family: Montserrat;
   font-weight: 500;
   font-size: 18px;
@@ -156,12 +156,12 @@ input[type='radio']:checked:after {
   background-color: #00365b !important;
 }
 
-.artist-setPaymentBtnDiv {
+.employee-setPaymentBtnDiv {
   width: 100%;
   margin-top: 2.2rem;
 }
 
-.artist-setPaymentBtn {
+.employee-setPaymentBtn {
   width: 80%;
   margin: auto;
   border: none;
@@ -197,13 +197,13 @@ input[type='radio']:checked:after {
 
 /*  Account Details Page  */
 
-.artist-accountDetailsDiv {
+.employee-accountDetailsDiv {
   width: 40%;
   margin-left: 10%;
   margin-right: auto;
 }
 
-.artist-accountDetailHeader {
+.employee-accountDetailHeader {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -211,19 +211,19 @@ input[type='radio']:checked:after {
   margin-top: 2rem;
 }
 
-.artist-accountDetailHeading {
+.employee-accountDetailHeading {
   font-family: Montserrat;
   font-style: 500;
   font-size: 24px;
   color: #000000;
 }
 
-.artist-accountFormDiv {
+.employee-accountFormDiv {
   margin-top: 2rem;
   width: 100%;
 }
 
-.artist-accountInputDiv {
+.employee-accountInputDiv {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -232,7 +232,7 @@ input[type='radio']:checked:after {
   margin-bottom: 2rem;
 }
 
-.artist-accountInputLabel {
+.employee-accountInputLabel {
   font-family: Montserrat;
   font-weight: 400;
   font-size: 14px;
@@ -241,7 +241,7 @@ input[type='radio']:checked:after {
   margin-left: 5px;
 }
 
-.artist-accountInput {
+.employee-accountInput {
   border: none;
   outline: none;
   border-bottom: 2px solid #e2e2e2;
@@ -251,17 +251,17 @@ input[type='radio']:checked:after {
   padding: 5px;
 }
 
-.artist-accountInput::placeholder {
+.employee-accountInput::placeholder {
   font-size: 16px;
   color: #c4cacd;
 }
 
-.artist-submitAccountDiv {
+.employee-submitAccountDiv {
   width: 100%;
   margin-top: 2.2rem;
 }
 
-.artist-submitAccount {
+.employee-submitAccount {
   width: 90%;
   margin: auto;
   border: none;
@@ -281,13 +281,13 @@ input[type='radio']:checked:after {
 
 /** Congratulation Screen **/
 
-.artist-congratsContainer {
+.employee-congratsContainer {
   width: 50%;
   margin: 4rem auto;
   text-align: center;
 }
 
-.artist-congratsHeading {
+.employee-congratsHeading {
   font-family: Montserrat;
   font-weight: 500;
   font-size: 28px;
@@ -296,7 +296,7 @@ input[type='radio']:checked:after {
   margin-bottom: 10px;
 }
 
-.artist-congratsSubheading {
+.employee-congratsSubheading {
   font-family: Montserrat;
   font-weight: 500;
   font-size: 18px;
@@ -305,7 +305,7 @@ input[type='radio']:checked:after {
   margin-top: 0;
 }
 
-.artist-goBackBtn {
+.employee-goBackBtn {
   margin-top: 1rem;
   border: none;
   outline: none;

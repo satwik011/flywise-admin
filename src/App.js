@@ -7,6 +7,9 @@ import NavSidebar from './components/NavSidebar';
 import ArtistPage from './components/Artists/ArtistPage';
 import UserPage from './components/Users/UserPage';
 import AddArtistForm from './components/Artists/AddArtistForm';
+import EmployeePage from './components/Employees/EmployeePage';
+import AddEmployeeForm from './components/Employees/AddEmployeeForm';
+import PaymentPage from './components/Payments/PaymentPage';
 
 export const history = createHistory();
 const App = () => {
@@ -18,7 +21,10 @@ const App = () => {
           <Route path='/home' exact component={DashboardPage} />
           <Route path='/artists' exact component={ArtistPage} />
           <Route path='/artists/add' exact component={AddArtistForm} />
+          <Route path='/employees' exact component={EmployeePage} />
+          <Route path='/employees/add' exact component={AddEmployeeForm} />
           <Route path='/users' exact component={UserPage} />
+          <Route path='/payments' exact component={PaymentPage} />
         </NavSidebar>
       </Switch>
     </Router>

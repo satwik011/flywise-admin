@@ -85,6 +85,11 @@
   text-transform: capitalize;
 }
 
+.forgotPass:hover {
+  color: #155b89;
+  text-decoration-line: underline;
+}
+
 .loginPage-inputField {
   width: 100%;
   padding: 14px;

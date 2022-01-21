@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import demoLogo from '../images/demo-logo.png';
+import { login } from '../redux/api';
+import Cookies from 'js-cookie';
+
 import '../styles/LoginPage.css';
 
+const initialData = {
+  email: '',
+  password: '',
+};
+
 const LoginPage = () => {
+  const history = useHistory();
+  const [formData, setFormData] = useState(initialData);
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    setFormData({ ...formData, [name]: e.target.value });
+  };
+
+  const handleLogin = async () => {
+    if (formData.email && formData.password) {
+      try {
+        const { data } = await login(formData);
+        Cookies.set('fanstarAdmin', data);
+        history.push('/home');
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert('Both fields required');
+    }
+  };
+
   return (
     <div className='loginPage-container'>
       <div className='loginPage-formDiv'>
@@ -26,6 +57,8 @@ const LoginPage = () => {
               name='email'
               className='loginPage-inputField'
               placeholder='Email address'
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div className='loginPage-formFieldDiv'>
@@ -37,13 +70,17 @@ const LoginPage = () => {
             </div>
             <input
               type='password'
-              name='email'
+              name='password'
               placeholder='Password'
+              onChange={handleChange}
+              value={formData.password}
               className='loginPage-inputField'
             />
           </div>
           <div className='loginPage-submitBtnDiv'>
-            <button className='loginPage-submitBtn'>Log In</button>
+            <button className='loginPage-submitBtn' onClick={handleLogin}>
+              Log In
+            </button>
           </div>
         </div>
       </div>

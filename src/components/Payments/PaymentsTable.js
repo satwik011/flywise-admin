@@ -1,31 +1,30 @@
 import React from 'react';
 import '../../styles/ArtistsTable.css';
 
-const ArtistsTable = (props) => {
-  // const {allArtists} = props;
+const PaymentsTable = () => {
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
         <thead>
           <tr>
-            <th>Artist</th>
-            <th>Location</th>
-            <th>Start Date</th>
-            <th>Total Orders</th>
-            <th>Pending Orders</th>
-            <th>Action</th>
+            <th>Transaction ID</th>
+            <th>Credited to</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((row, i) => (
-            <tr key={i}>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((row) => (
+            <tr>
               <td>{`Darrell Williamson`}</td>
               <td>{`Corona, Michigan`}</td>
               <td>{`03/03/12 22:43`}</td>
               <td>{`100`}</td>
               <td>{`20`}</td>
               <td>
-                <button className='artist-blockBtn'>Block</button>
+                <button className='payment-blockBtn'>Block</button>
               </td>
             </tr>
           ))}
@@ -35,4 +34,4 @@ const ArtistsTable = (props) => {
   );
 };
 
-export default ArtistsTable;
+export default PaymentsTable;

@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../styles/ArtistsTable.css';
 
-const ArtistsTable = (props) => {
-  // const {allArtists} = props;
+const EmployeesTable = (props) => {
+  // const { allEmployees } = props;
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
@@ -11,7 +11,7 @@ const ArtistsTable = (props) => {
             <th>Artist</th>
             <th>Location</th>
             <th>Start Date</th>
-            <th>Total Orders</th>
+            <th>Total Artists</th>
             <th>Pending Orders</th>
             <th>Action</th>
           </tr>
@@ -35,4 +35,4 @@ const ArtistsTable = (props) => {
   );
 };
 
-export default ArtistsTable;
+export default EmployeesTable;

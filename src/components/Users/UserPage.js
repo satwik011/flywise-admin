@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import printIcon from '../../images/printIcon.svg';
 import filterIcon from '../../images/filterIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import UsersTable from './UsersTable';
+
+import { getUserList } from '../../redux/api';
+
 import '../../styles/UserPage.css';
 
 const UserPage = () => {
+  const [allUsers, setAllUsers] = useState([]);
+  const [boolVal, setBoolVal] = useState(false);
+
+  const fetchUserList = async () => {
+    try {
+      const { data } = await getUserList();
+      setAllUsers(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!boolVal) {
+      fetchUserList();
+      setBoolVal(true);
+    }
+  }, [boolVal]);
+
   return (
     <div className='user-container'>
       <div className='user-firstSection'>
@@ -38,7 +60,7 @@ const UserPage = () => {
         </div>
       </div>
       <div className='user-tableSection'>
-        <UsersTable />
+        <UsersTable allUsers={allUsers} />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import backTick from '../../images/backTick.png';
 import '../../styles/AddArtistForm.css';
 
 const ArtistSetPaymentMode = (props) => {
@@ -6,7 +7,12 @@ const ArtistSetPaymentMode = (props) => {
   return (
     <div className='artist-setPaymentContainer'>
       <div className='artist-setPayment'>
-        <h1 className='artist-setPaymentHeading'>Setup payment options</h1>
+        <div className='artist-setPaymentHeader'>
+          <button className='backBtnTick' onClick={() => setPage(page - 1)}>
+            <img src={backTick} alt='back' className='backBtnIcon' />
+          </button>
+          <h1 className='artist-setPaymentHeading'>Setup payment options</h1>
+        </div>
         <div className='artist-paymentOptionsDiv'>
           <div className='artist-paymentOption'>
             <input type='radio' name='bankAcount' className='artist-radioBtn' />
