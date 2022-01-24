@@ -5,8 +5,26 @@ import CongratulationScreen from './CongratulationScreen';
 
 import '../../styles/AddEmployeeForm.css';
 
+const initialData = {
+  username: '',
+  phone: '',
+  email: '',
+  address: '',
+  accountNo: '',
+  ifscCode: '',
+  upiId: '',
+};
+
 const AddEmployeeForm = () => {
+  const [formData, setFormData] = useState(initialData);
+  const [mode, setMode] = useState('account');
   const [page, setPage] = useState(1);
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    setFormData({ ...formData, [name]: e.target.value });
+  };
+
   return (
     <div className='addEmployee-container'>
       {page === 1 && (
@@ -16,18 +34,22 @@ const AddEmployeeForm = () => {
               <label className='addEmployee-inputLabel'>Full Name</label>
               <input
                 type='text'
-                name='fullName'
+                name='username'
                 placeholder='Full Name'
                 className='addEmployee-inputField'
+                value={formData.username}
+                onChange={handleChange}
               />
             </div>
             <div className='addEmployee-inputFieldDiv'>
               <label className='addEmployee-inputLabel'>Contact Number</label>
               <input
                 type='text'
-                name='contactNumber'
+                name='phone'
+                value={formData.phone}
                 placeholder='Contact Number'
                 className='addEmployee-inputField'
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -37,8 +59,10 @@ const AddEmployeeForm = () => {
               <input
                 type='text'
                 name='email'
+                value={formData.email}
                 placeholder='E-mail'
                 className='addEmployee-inputField'
+                onChange={handleChange}
               />
             </div>
             <div className='addEmployee-inputFieldDiv'>
@@ -46,8 +70,10 @@ const AddEmployeeForm = () => {
               <input
                 type='text'
                 name='address'
+                value={formData.address}
                 placeholder='Address & Pincode'
                 className='addEmployee-inputField'
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -61,9 +87,31 @@ const AddEmployeeForm = () => {
           </div>
         </div>
       )}
-      {page === 2 && <EmployeePaymentMode page={page} setPage={setPage} />}
-      {page === 3 && <EmployeeAccountDetails page={page} setPage={setPage} />}
-      {page === 4 && <CongratulationScreen page={page} setPage={setPage} />}
+      {page === 2 && (
+        <EmployeePaymentMode
+          page={page}
+          setPage={setPage}
+          mode={mode}
+          setMode={setMode}
+        />
+      )}
+      {page === 3 && (
+        <EmployeeAccountDetails
+          page={page}
+          setPage={setPage}
+          mode={mode}
+          formData={formData}
+          setFormData={setFormData}
+          handleChange={handleChange}
+        />
+      )}
+      {page === 4 && (
+        <CongratulationScreen
+          page={page}
+          setPage={setPage}
+          formData={formData}
+        />
+      )}
     </div>
   );
 };

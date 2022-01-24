@@ -3,7 +3,7 @@ import backTick from '../../images/backTick.png';
 import '../../styles/AddEmployeeForm.css';
 
 const EmployeePaymentMode = (props) => {
-  const { page, setPage } = props;
+  const { page, setPage, mode, setMode } = props;
   return (
     <div className='employee-setPaymentContainer'>
       <div className='employee-setPayment'>
@@ -19,11 +19,19 @@ const EmployeePaymentMode = (props) => {
               type='radio'
               name='bankAcount'
               className='employee-radioBtn'
+              checked={mode === 'account'}
+              onChange={() => setMode('account')}
             />
             <p className='employee-btnPara'>Enter Bank Account</p>
           </div>
           <div className='employee-paymentOption'>
-            <input type='radio' name='upiId' className='employee-radioBtn' />
+            <input
+              type='radio'
+              name='upiId'
+              className='employee-radioBtn'
+              checked={mode === 'upi'}
+              onChange={() => setMode('upi')}
+            />
             <p className='employee-btnPara'>Enter UPI Id</p>
           </div>
         </div>

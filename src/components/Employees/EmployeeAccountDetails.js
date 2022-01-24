@@ -1,16 +1,50 @@
 import React, { Fragment, useState } from 'react';
 import backTick from '../../images/backTick.png';
+import { createEmployee } from '../../redux/api';
 import '../../styles/AddEmployeeForm.css';
 
 const EmployeeAccountDetails = (props) => {
-  const { page, setPage } = props;
-  const [show, setShow] = useState(false);
+  const { page, setPage, mode, formData, handleChange, setFormData } = props;
+  const [confirmAccount, setConfirmAccount] = useState('');
+  // const [show, setShow] = useState(mode === 'account' ? false : true);
+
+  const handleBack = () => {
+    setFormData({ ...formData, accountNo: '', ifscCode: '', upiId: '' });
+    setConfirmAccount('');
+    setPage(page - 1);
+  };
+
+  const handleNext = () => {
+    if (mode === 'account') {
+      if (formData.accountNo === confirmAccount) {
+        // setPage(page + 1);
+        handleSubmit();
+      } else {
+        alert('Account number and confirm account number are different');
+      }
+    } else {
+      handleSubmit();
+      // setPage(page + 1);
+    }
+  };
+
+  const handleSubmit = async () => {
+    // console.log(formData);
+    try {
+      const { data } = await createEmployee(formData);
+      console.log(data);
+      setPage(page + 1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='employee-accountDetailsDiv'>
-      {!show ? (
+      {mode === 'account' ? (
         <Fragment>
           <div className='employee-accountDetailHeader'>
-            <button className='backBtnTick' onClick={() => setPage(page - 1)}>
+            <button className='backBtnTick' onClick={handleBack}>
               <img src={backTick} alt='back' className='backBtnIcon' />
             </button>
             <h1 className='employee-accountDetailHeading'>
@@ -31,9 +65,11 @@ const EmployeeAccountDetails = (props) => {
               <label className='employee-accountInputLabel'>ACCOUNT NO</label>
               <input
                 type='text'
-                name='fullName'
+                name='accountNo'
                 placeholder='Account number'
                 className='employee-accountInput'
+                onChange={handleChange}
+                value={formData.accountNo}
               />
             </div>
             <div className='employee-accountInputDiv'>
@@ -42,7 +78,9 @@ const EmployeeAccountDetails = (props) => {
               </label>
               <input
                 type='text'
-                name='fullName'
+                name='confirmAccount'
+                value={confirmAccount}
+                onChange={(e) => setConfirmAccount(e.target.value)}
                 placeholder='Confirm account number'
                 className='employee-accountInput'
               />
@@ -51,16 +89,15 @@ const EmployeeAccountDetails = (props) => {
               <label className='employee-accountInputLabel'>IFSC Code</label>
               <input
                 type='text'
-                name='fullName'
+                name='ifscCode'
+                onChange={handleChange}
+                value={formData.ifscCode}
                 placeholder='IFSC code'
                 className='employee-accountInput'
               />
             </div>
             <div className='employee-submitAccountDiv'>
-              <button
-                className='employee-submitAccount'
-                onClick={() => setPage(page + 1)}
-              >
+              <button className='employee-submitAccount' onClick={handleNext}>
                 Next
               </button>
             </div>
@@ -79,16 +116,15 @@ const EmployeeAccountDetails = (props) => {
               <label className='employee-accountInputLabel'>UPI ID</label>
               <input
                 type='text'
-                name='upi'
+                name='upiId'
+                value={formData.upiId}
+                onChange={handleChange}
                 placeholder='UPI ID'
                 className='employee-accountInput'
               />
             </div>
             <div className='employee-submitAccountDiv'>
-              <button
-                className='employee-submitAccount'
-                onClick={() => setPage(page + 1)}
-              >
+              <button className='employee-submitAccount' onClick={handleNext}>
                 Next
               </button>
             </div>

@@ -3,7 +3,7 @@ import backTick from '../../images/backTick.png';
 import '../../styles/AddArtistForm.css';
 
 const ArtistSetPaymentMode = (props) => {
-  const { page, setPage } = props;
+  const { page, setPage, mode, setMode } = props;
   return (
     <div className='artist-setPaymentContainer'>
       <div className='artist-setPayment'>
@@ -15,11 +15,23 @@ const ArtistSetPaymentMode = (props) => {
         </div>
         <div className='artist-paymentOptionsDiv'>
           <div className='artist-paymentOption'>
-            <input type='radio' name='bankAcount' className='artist-radioBtn' />
+            <input
+              type='radio'
+              name='bankAcount'
+              className='artist-radioBtn'
+              checked={mode === 'account'}
+              onChange={() => setMode('account')}
+            />
             <p className='artist-btnPara'>Enter Bank Account</p>
           </div>
           <div className='artist-paymentOption'>
-            <input type='radio' name='upiId' className='artist-radioBtn' />
+            <input
+              type='radio'
+              name='upiId'
+              className='artist-radioBtn'
+              checked={mode === 'upi'}
+              onChange={() => setMode('upi')}
+            />
             <p className='artist-btnPara'>Enter UPI Id</p>
           </div>
         </div>

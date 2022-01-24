@@ -6,7 +6,8 @@
 .addArtist-personalDetails {
   width: 70%;
   margin: auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
 }
 
 .addArtist-alignRow {
@@ -23,7 +24,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .addArtist-inputLabel {
@@ -49,13 +50,27 @@
   outline: none;
 }
 
-.addArtist-selectFieldDiv {
+.addArtist-textFieldDiv {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
+}
+
+.addArtist-textField {
+  border: 0.5px solid #155b89;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 5px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  color: #a4a5a9;
+  background-color: transparent;
+  padding: 13px 15px;
+  outline: none;
 }
 
 .addArtist-selectField {
@@ -92,6 +107,47 @@
   text-align: center;
   letter-spacing: 0.2px;
   color: #ffffff;
+  cursor: pointer;
+}
+
+.addArtist-servicesDiv {
+  width: 100%;
+  position: relative;
+}
+
+.removeBtnDiv {
+  position: absolute;
+  top: 40%;
+  right: -10%;
+}
+
+.removeBtn {
+  border: none;
+  background-color: transparent;
+  transform: rotate(-45deg);
+  padding: 0;
+  font-size: 40px;
+  font-weight: 600;
+  color: #155b89;
+  cursor: pointer;
+}
+
+.addBtnDiv {
+  position: absolute;
+  bottom: 0%;
+  right: -10%;
+}
+
+.service-addBtn {
+  border: none;
+  /* border-bottom: 0.5px solid #155b89; */
+  /* border-radius: 5px; */
+  background-color: transparent;
+  padding: 2px 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #155b89;
+  text-decoration: underline;
   cursor: pointer;
 }
 

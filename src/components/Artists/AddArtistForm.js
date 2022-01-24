@@ -1,11 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ArtistSetPaymentMode from './ArtistSetPaymentMode';
 import ArtistAccountDetails from './ArtistAccountDetails';
-import '../../styles/AddArtistForm.css';
 import CongratulationScreen from './CongratulationScreen';
+import { getEmployeeList } from '../../redux/api';
+import '../../styles/AddArtistForm.css';
+const initialState = {
+  username: '',
+  phone: '',
+  email: '',
+  address: '',
+  assignedEmployee: '',
+  appName: '',
+  accountNo: '',
+  ifscCode: '',
+  services: [],
+  upiId: '',
+};
 
 const AddArtistForm = () => {
+  const [formData, setFormData] = useState(initialState);
+  const [mode, setMode] = useState('account');
   const [page, setPage] = useState(1);
+  const [inputList, setInputList] = useState([
+    { serviceName: '', amount: '', description: '' },
+  ]);
+  const [allEmployees, setAllEmployees] = useState([]);
+  const [boolVal, setBoolVal] = useState(false);
+
+  const fetchEmployees = async () => {
+    try {
+      const { data } = await getEmployeeList();
+      setAllEmployees(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!boolVal) {
+      fetchEmployees();
+      setBoolVal(true);
+    }
+  }, [boolVal]);
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    setFormData({ ...formData, [name]: e.target.value });
+  };
+
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([
+      ...inputList,
+      { serviceName: '', amount: '', description: '' },
+    ]);
+  };
+
+  const handleNext = () => {
+    setFormData({ ...formData, services: inputList });
+    setPage(page + 1);
+  };
+
   return (
     <div className='addArtist-container'>
       {page === 1 && (
@@ -15,7 +84,9 @@ const AddArtistForm = () => {
               <label className='addArtist-inputLabel'>Full Name</label>
               <input
                 type='text'
-                name='fullName'
+                name='username'
+                value={formData.username}
+                onChange={handleChange}
                 placeholder='Full Name'
                 className='addArtist-inputField'
               />
@@ -24,7 +95,9 @@ const AddArtistForm = () => {
               <label className='addArtist-inputLabel'>Contact Number</label>
               <input
                 type='text'
-                name='contactNumber'
+                name='phone'
+                value={formData.phone}
+                onChange={handleChange}
                 placeholder='Contact Number'
                 className='addArtist-inputField'
               />
@@ -36,6 +109,8 @@ const AddArtistForm = () => {
               <input
                 type='text'
                 name='email'
+                value={formData.email}
+                onChange={handleChange}
                 placeholder='E-mail'
                 className='addArtist-inputField'
               />
@@ -45,6 +120,8 @@ const AddArtistForm = () => {
               <input
                 type='text'
                 name='address'
+                value={formData.address}
+                onChange={handleChange}
                 placeholder='Address & Pincode'
                 className='addArtist-inputField'
               />
@@ -56,43 +133,123 @@ const AddArtistForm = () => {
               <input
                 type='text'
                 name='appName'
+                value={formData.appName}
+                onChange={handleChange}
                 placeholder='App Name'
                 className='addArtist-inputField'
               />
             </div>
             <div className='addArtist-inputFieldDiv'>
               <label className='addArtist-inputLabel'>Employee Assigned</label>
-              <input
+              {/**<input
                 type='text'
                 name='employee'
                 placeholder='Employee Assigned'
                 className='addArtist-inputField'
-              />
-            </div>
-          </div>
-          <div className='addArtist-alignRow'>
-            <div className='addArtist-selectFieldDiv'>
-              <label className='addArtist-inputLabel'>Services</label>
-              <select className='addArtist-selectField' name='services'>
-                <option value='service1'>Service 1</option>
-                <option value='service2'>Service 2</option>
-                <option value='service3'>Service 3</option>
+              /> */}
+              <select
+                className='addArtist-selectField'
+                name='assignedEmployee'
+                value={formData.assignedEmployee}
+                onChange={handleChange}
+              >
+                {allEmployees?.map((employee) => (
+                  <option value={employee._id}>{employee.username}</option>
+                ))}
               </select>
             </div>
           </div>
+          {inputList.map((val, index) => (
+            <div className='addArtist-servicesDiv' key={index}>
+              <div className='addArtist-alignRow'>
+                <div className='addArtist-inputFieldDiv'>
+                  <label className='addArtist-inputLabel'>Services</label>
+                  <select
+                    className='addArtist-selectField'
+                    name='serviceName'
+                    onChange={(e) => handleInputChange(e, index)}
+                  >
+                    <option value='service1'>Service 1</option>
+                    <option value='service2'>Service 2</option>
+                    <option value='service3'>Service 3</option>
+                  </select>
+                </div>
+                <div className='addArtist-inputFieldDiv'>
+                  <label className='addArtist-inputLabel'>Amount</label>
+                  <input
+                    type='text'
+                    name='amount'
+                    value={val.amount}
+                    onChange={(e) => handleInputChange(e, index)}
+                    placeholder='Amount'
+                    className='addArtist-inputField'
+                  />
+                </div>
+              </div>
+              <div className='addArtist-alignRow'>
+                <div className='addArtist-textFieldDiv'>
+                  <label className='addArtist-inputLabel'>Description</label>
+                  <textarea
+                    className='addArtist-textField'
+                    rows='3'
+                    placeholder='Service Description'
+                    name='description'
+                    value={val.description}
+                    onChange={(e) => handleInputChange(e, index)}
+                  />
+                </div>
+              </div>
+              {inputList.length > 1 && (
+                <div className='removeBtnDiv'>
+                  <button
+                    className='removeBtn'
+                    onClick={() => handleRemoveClick(index)}
+                  >
+                    +
+                  </button>
+                </div>
+              )}
+              {index === inputList.length - 1 && (
+                <div className='addBtnDiv'>
+                  <button className='service-addBtn' onClick={handleAddClick}>
+                    + add
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
           <div className='addArtist-submitDetailDiv'>
-            <button
-              className='addArtist-submitDetailBtn'
-              onClick={() => setPage(page + 1)}
-            >
+            <button className='addArtist-submitDetailBtn' onClick={handleNext}>
               Next
             </button>
           </div>
         </div>
       )}
-      {page === 2 && <ArtistSetPaymentMode page={page} setPage={setPage} />}
-      {page === 3 && <ArtistAccountDetails page={page} setPage={setPage} />}
-      {page === 4 && <CongratulationScreen page={page} setPage={setPage} />}
+      {page === 2 && (
+        <ArtistSetPaymentMode
+          page={page}
+          setPage={setPage}
+          mode={mode}
+          setMode={setMode}
+        />
+      )}
+      {page === 3 && (
+        <ArtistAccountDetails
+          page={page}
+          setPage={setPage}
+          mode={mode}
+          formData={formData}
+          setFormData={setFormData}
+          handleChange={handleChange}
+        />
+      )}
+      {page === 4 && (
+        <CongratulationScreen
+          page={page}
+          setPage={setPage}
+          formData={formData}
+        />
+      )}
     </div>
   );
 };
