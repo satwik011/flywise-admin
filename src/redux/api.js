@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 // for live server
 const API = axios.create({
-  baseURL: 'https://fanstar-backend.herokuapp.com/',
+  baseURL: 'https://fanstar-backend.herokuapp.com',
 });
 
 API.interceptors.request.use((req) => {
@@ -19,11 +19,17 @@ export const login = (loginData) =>
 export const getArtistList = () => API.get('/api/admin/private/getallartists');
 export const createArtist = (formData) =>
   API.post('/api/admin/private/createartist', formData);
+export const getAnArtist = (id) =>
+  API.get(`/api/admin/private/getanartist/${id}`);
 
 export const getEmployeeList = () =>
   API.get('/api/admin/private/getallemployees');
+export const getAnEmployee = (id) =>
+  API.get(`/api/admin/private/getanemployee/${id}`);
 
 export const createEmployee = (formData) =>
   API.post('/api/admin/private/createemployee', formData);
 
 export const getUserList = () => API.get('/api/admin/private/getallusers');
+export const getPaymentList = () =>
+  API.get('/api/admin/private/getallpayments');

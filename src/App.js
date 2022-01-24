@@ -22,10 +22,10 @@ const App = () => {
         <NavSidebar>
           <Route path='/home' exact component={DashboardPage} />
           <Route path='/artists' exact component={ArtistPage} />
-          <Route path='/artists/details' exact component={ArtistDetails} />
+          <Route path='/artists/:id' exact component={ArtistDetails} />
           <Route path='/artists/add' exact component={AddArtistForm} />
           <Route path='/employees' exact component={EmployeePage} />
-          <Route path='/employees/details' exact component={EmployeeDetails} />
+          <Route path='/employees/:id' exact component={EmployeeDetails} />
           <Route path='/employees/add' exact component={AddEmployeeForm} />
           <Route path='/users' exact component={UserPage} />
           <Route path='/payments' exact component={PaymentPage} />

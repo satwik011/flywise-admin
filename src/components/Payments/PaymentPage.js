@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import printIcon from '../../images/printIcon.svg';
 import filterIcon from '../../images/filterIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import PaymentsTable from './PaymentsTable';
 import '../../styles/PaymentPage.css';
+import { getPaymentList } from '../../redux/api';
 
 const PaymentPage = () => {
+  const [allPayments, setAllPayments] = useState([]);
+  const [boolVal, setBoolVal] = useState(false);
+
+  const fetchPaymentList = async () => {
+    try {
+      const { data } = await getPaymentList();
+      setAllPayments(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!boolVal) {
+      fetchPaymentList();
+      setBoolVal(true);
+    }
+  }, [boolVal]);
+
+  console.log(allPayments);
+
   return (
     <div className='payment-container'>
       <div className='payment-firstSection'>
@@ -38,7 +60,7 @@ const PaymentPage = () => {
         </div>
       </div>
       <div className='payment-tableSection'>
-        <PaymentsTable />
+        <PaymentsTable allPayments={allPayments} />
       </div>
     </div>
   );

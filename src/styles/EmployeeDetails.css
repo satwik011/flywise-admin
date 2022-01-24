@@ -73,6 +73,7 @@
   font-family: Montserrat;
   font-weight: 500;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .iconBtn {
@@ -107,6 +108,7 @@
   background-color: transparent;
   padding: 3px 25px;
   letter-spacing: 0.4px;
+  cursor: pointer;
 }
 
 .block {

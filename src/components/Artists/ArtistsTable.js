@@ -1,8 +1,16 @@
 import React from 'react';
+import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 import '../../styles/ArtistsTable.css';
 
 const ArtistsTable = (props) => {
-  // const {allArtists} = props;
+  const { allArtists } = props;
+  const history = useHistory();
+
+  const goToArtist = (id) => {
+    history.push(`/artists/${id}`);
+  };
+
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
@@ -17,13 +25,21 @@ const ArtistsTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((row, i) => (
-            <tr key={i}>
-              <td>{`Darrell Williamson`}</td>
-              <td>{`Corona, Michigan`}</td>
-              <td>{`03/03/12 22:43`}</td>
-              <td>{`100`}</td>
-              <td>{`20`}</td>
+          {allArtists?.map((artist) => (
+            <tr key={artist._id}>
+              <td onClick={() => goToArtist(artist._id)}>
+                {artist.username ? artist.username : ''}
+              </td>
+              <td onClick={() => goToArtist(artist._id)}>
+                {artist.address ? artist.address : ''}
+              </td>
+              <td onClick={() => goToArtist(artist._id)}>
+                {artist.createdAt
+                  ? moment(artist.createdAt).format('DD/MM/YYYY, h:mm a')
+                  : ''}
+              </td>
+              <td onClick={() => goToArtist(artist._id)}>{`100`}</td>
+              <td onClick={() => goToArtist(artist._id)}>{`20`}</td>
               <td>
                 <button className='artist-blockBtn'>Block</button>
               </td>

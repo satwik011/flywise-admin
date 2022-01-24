@@ -2,14 +2,14 @@ import React from 'react';
 import '../../styles/ArtistsTable.css';
 
 const UsersTable = (props) => {
-  // const { allUsers } = props;
+  const { allUsers } = props;
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
         <thead>
           <tr>
-            <th>Artist</th>
-            <th>Location</th>
+            <th>Users</th>
+            <th>Phone Number</th>
             <th>Due Date</th>
             <th>Order Number</th>
             <th>Status</th>
@@ -17,13 +17,13 @@ const UsersTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((row, i) => (
-            <tr key={i}>
+          {allUsers.map((user) => (
+            <tr key={user._id}>
               <td>{`Darrell Williamson`}</td>
-              <td>{`Corona, Michigan`}</td>
+              <td>{user.phone ? user.phone : ''}</td>
               <td>{`03/03/12 22:43`}</td>
-              <td>{`100`}</td>
-              <td>{`20`}</td>
+              <td>{`#200`}</td>
+              <td>{`Pending`}</td>
               <td>
                 <button className='user-blockBtn'>Block</button>
               </td>

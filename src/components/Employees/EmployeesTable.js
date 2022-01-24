@@ -1,14 +1,22 @@
 import React from 'react';
+import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 import '../../styles/ArtistsTable.css';
 
 const EmployeesTable = (props) => {
-  // const { allEmployees } = props;
+  const { allEmployees } = props;
+  const history = useHistory();
+
+  const goToEmployee = (id) => {
+    history.push(`/employees/${id}`);
+  };
+
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
         <thead>
           <tr>
-            <th>Artist</th>
+            <th>Employees</th>
             <th>Location</th>
             <th>Start Date</th>
             <th>Total Artists</th>
@@ -17,13 +25,21 @@ const EmployeesTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((row, i) => (
-            <tr key={i}>
-              <td>{`Darrell Williamson`}</td>
-              <td>{`Corona, Michigan`}</td>
-              <td>{`03/03/12 22:43`}</td>
-              <td>{`100`}</td>
-              <td>{`20`}</td>
+          {allEmployees?.map((employee) => (
+            <tr key={employee._id}>
+              <td onClick={() => goToEmployee(employee._id)}>
+                {employee.username ? employee.username : ''}
+              </td>
+              <td onClick={() => goToEmployee(employee._id)}>
+                {employee.address ? employee.address : ''}
+              </td>
+              <td onClick={() => goToEmployee(employee._id)}>
+                {employee.createdAt
+                  ? moment(employee.createdAt).format('DD/MM/YYYY, h:mm a')
+                  : ''}
+              </td>
+              <td onClick={() => goToEmployee(employee._id)}>{`100`}</td>
+              <td onClick={() => goToEmployee(employee._id)}>{`20`}</td>
               <td>
                 <button className='artist-blockBtn'>Block</button>
               </td>

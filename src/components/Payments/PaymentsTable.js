@@ -1,7 +1,9 @@
 import React from 'react';
+import moment from 'moment';
 import '../../styles/ArtistsTable.css';
 
-const PaymentsTable = () => {
+const PaymentsTable = (props) => {
+  const { allPayments } = props;
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
@@ -16,12 +18,16 @@ const PaymentsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((row) => (
-            <tr>
-              <td>{`Darrell Williamson`}</td>
+          {allPayments?.map((payment) => (
+            <tr key={payment._id}>
+              <td>{payment._id}</td>
               <td>{`Corona, Michigan`}</td>
-              <td>{`03/03/12 22:43`}</td>
-              <td>{`100`}</td>
+              <td>
+                {payment.createdAt
+                  ? moment(payment.createdAt).format('DD/MM/YYYY, h:mm a')
+                  : ''}
+              </td>
+              <td>{`Rs. ${payment.amount}`}</td>
               <td>{`20`}</td>
               <td>
                 <button className='payment-blockBtn'>Block</button>
