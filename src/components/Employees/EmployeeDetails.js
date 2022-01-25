@@ -24,7 +24,6 @@ const EmployeeDetails = (props) => {
       const { data } = await getAnEmployee(id);
       setEmployeeData(data);
       setIsLoading(false);
-      console.log(data);
     } catch (error) {
       setIsLoading(false);
       console.log(error);

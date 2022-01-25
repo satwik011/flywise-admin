@@ -26,8 +26,6 @@ const PaymentPage = () => {
     }
   }, [boolVal]);
 
-  console.log(allPayments);
-
   return (
     <div className='payment-container'>
       <div className='payment-firstSection'>
@@ -40,12 +38,6 @@ const PaymentPage = () => {
             id='searchInput'
           />
         </div>
-        {/**<div className='artist-addArtistDiv'>
-          <button className='artist-addBtn'>
-            <img src={addIcon} alt='add' className='artist-addIcon' />
-            <span>Add artist</span>
-          </button>
-        </div> */}
         <div className='payment-printDiv'>
           <button className='payment-addBtn'>
             <img src={printIcon} alt='print' className='payment-printIcon' />
