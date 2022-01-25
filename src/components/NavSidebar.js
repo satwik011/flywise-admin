@@ -14,15 +14,20 @@ import Badge from '@mui/material/Badge';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import demoImage from '../images/demoProfile.png';
+import home from '../images/home.svg';
+import homeActive from '../images/homeActive.svg';
+import artist from '../images/artist.svg';
+import artistActive from '../images/artistActive.svg';
+import employee from '../images/employee.svg';
+import employeeActive from '../images/employeeActive.svg';
+import user from '../images/user.svg';
+import userActive from '../images/userActive.svg';
+import payment from '../images/payment.svg';
+import paymentActive from '../images/paymentActive.svg';
 import useStyles from '../styles/NavSidebar';
 
 const drawerWidth = 240;
@@ -163,7 +168,15 @@ const NavSidebar = (props) => {
               onClick={() => history.push('/home')}
             >
               <ListItemIcon>
-                <DashboardIcon className={classes.iconColor} />
+                {props.location.pathname.includes('/home') ? (
+                  <img
+                    src={homeActive}
+                    className={classes.iconColor}
+                    alt='home'
+                  />
+                ) : (
+                  <img src={home} className={classes.iconColor} alt='home' />
+                )}
               </ListItemIcon>
               <ListItemText primary='Home' />
             </ListItem>
@@ -177,7 +190,19 @@ const NavSidebar = (props) => {
               onClick={() => history.push('/artists')}
             >
               <ListItemIcon>
-                <ShoppingCartIcon className={classes.iconColor} />
+                {props.location.pathname.includes('/artists') ? (
+                  <img
+                    src={artistActive}
+                    className={classes.iconColor}
+                    alt='artist'
+                  />
+                ) : (
+                  <img
+                    src={artist}
+                    className={classes.iconColor}
+                    alt='artist'
+                  />
+                )}
               </ListItemIcon>
               <ListItemText primary='Artists' />
             </ListItem>
@@ -191,7 +216,19 @@ const NavSidebar = (props) => {
               onClick={() => history.push('/employees')}
             >
               <ListItemIcon>
-                <PeopleIcon className={classes.iconColor} />
+                {props.location.pathname.includes('/employees') ? (
+                  <img
+                    src={employeeActive}
+                    className={classes.iconColor}
+                    alt='employee'
+                  />
+                ) : (
+                  <img
+                    src={employee}
+                    className={classes.iconColor}
+                    alt='employee'
+                  />
+                )}
               </ListItemIcon>
               <ListItemText primary='Employees' />
             </ListItem>
@@ -205,7 +242,15 @@ const NavSidebar = (props) => {
               onClick={() => history.push('/users')}
             >
               <ListItemIcon>
-                <BarChartIcon className={classes.iconColor} />
+                {props.location.pathname.includes('/users') ? (
+                  <img
+                    src={userActive}
+                    className={classes.iconColor}
+                    alt='users'
+                  />
+                ) : (
+                  <img src={user} className={classes.iconColor} alt='users' />
+                )}
               </ListItemIcon>
               <ListItemText primary='Users' />
             </ListItem>
@@ -219,7 +264,19 @@ const NavSidebar = (props) => {
               onClick={() => history.push('/payments')}
             >
               <ListItemIcon>
-                <LayersIcon className={classes.iconColor} />
+                {props.location.pathname.includes('/payments') ? (
+                  <img
+                    src={paymentActive}
+                    className={classes.iconColor}
+                    alt='payments'
+                  />
+                ) : (
+                  <img
+                    src={payment}
+                    className={classes.iconColor}
+                    alt='payments'
+                  />
+                )}
               </ListItemIcon>
               <ListItemText primary='Payments ' />
             </ListItem>

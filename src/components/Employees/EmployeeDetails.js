@@ -1,11 +1,19 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import EmployeeOrdersTable from './EmployeeOrdersTable';
 import demoProfile from '../../images/demoProfile.png';
-import { getAnEmployee } from '../../redux/api';
+import {
+  getAnEmployee,
+  blockAndUnBlockEmployee,
+  deleteAnEmployee,
+  getArtistsOfAnEmployee,
+} from '../../redux/api';
 import '../../styles/EmployeeDetails.css';
 
 const EmployeeDetails = (props) => {
+  const history = useHistory();
   const [employeeData, setEmployeeData] = useState({});
+  const [linkedArtists, setLinkedArtists] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const id = props.match.params.id;
@@ -23,12 +31,40 @@ const EmployeeDetails = (props) => {
     }
   };
 
+  const fetchArtists = async (id) => {
+    try {
+      const { data } = await getArtistsOfAnEmployee(id);
+      setLinkedArtists(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (!boolVal) {
       fetchEmployee(id);
+      fetchArtists(id);
       setBoolVal(true);
     }
   }, [boolVal, id]);
+
+  const blockOrUnblock = async () => {
+    try {
+      await blockAndUnBlockEmployee(id);
+      fetchEmployee(id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteEmployee = async () => {
+    try {
+      await deleteAnEmployee(id);
+      history.push('/employees');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='employeeDetails-container'>
@@ -62,10 +98,16 @@ const EmployeeDetails = (props) => {
             </div>
             <div className='employeeDetails-rightDiv'>
               <div className='employeeDetails-rightBtnDiv'>
-                <button className='employeeDetails-rightBtn block'>
-                  Block
+                <button
+                  className='employeeDetails-rightBtn block'
+                  onClick={blockOrUnblock}
+                >
+                  {employeeData.blocked ? 'Unblock' : 'Block'}
                 </button>
-                <button className='employeeDetails-rightBtn delete'>
+                <button
+                  className='employeeDetails-rightBtn delete'
+                  onClick={deleteEmployee}
+                >
                   Delete Account
                 </button>
               </div>
@@ -100,7 +142,7 @@ const EmployeeDetails = (props) => {
             </div>
           </div>
           <div className='employeeDetails-tableSection'>
-            <EmployeeOrdersTable />
+            <EmployeeOrdersTable linkedArtists={linkedArtists} />
           </div>
         </Fragment>
       )}

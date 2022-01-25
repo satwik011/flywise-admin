@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory as createHistory } from 'history';
 import LoginPage from './components/LoginPage';
-import DashboardPage from './components/DashboardPage';
+import DashboardPage from './components/Dashboard/DashboardPage';
 import NavSidebar from './components/NavSidebar';
 import ArtistPage from './components/Artists/ArtistPage';
 import UserPage from './components/Users/UserPage';

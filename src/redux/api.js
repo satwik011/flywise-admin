@@ -16,11 +16,26 @@ API.interceptors.request.use((req) => {
 export const login = (loginData) =>
   API.post('/api/admin/public/login', loginData);
 
-export const getArtistList = () => API.get('/api/admin/private/getallartists');
+export const getArtistList = () =>
+  API.get('/api/admin/private/getlistofartists');
 export const createArtist = (formData) =>
   API.post('/api/admin/private/createartist', formData);
 export const getAnArtist = (id) =>
   API.get(`/api/admin/private/getanartist/${id}`);
+export const getArtistsOfAnEmployee = (id) =>
+  API.get(`/api/admin/private/getartistsofanemployee/${id}`);
+
+export const totalAndPendingOrdersForArtist = (id) =>
+  API.get(`/api/admin/private/getordersofartist/${id}`);
+
+export const allPaymentForArtist = (id) =>
+  API.get(`/api/admin/private/getpayments/${id}`);
+
+export const blockAndUnBlockArtist = (id) =>
+  API.put('/api/admin/private/blockunblockartist', { artistId: id });
+
+export const deleteAnArtist = (id) =>
+  API.delete(`/api/admin/private/deleteanartist/${id}`);
 
 export const getEmployeeList = () =>
   API.get('/api/admin/private/getallemployees');
@@ -29,6 +44,12 @@ export const getAnEmployee = (id) =>
 
 export const createEmployee = (formData) =>
   API.post('/api/admin/private/createemployee', formData);
+
+export const blockAndUnBlockEmployee = (id) =>
+  API.put('/api/admin/private/blockunblockemployee', { employeeId: id });
+
+export const deleteAnEmployee = (id) =>
+  API.delete(`/api/admin/private/deleteanemployee/${id}`);
 
 export const getUserList = () => API.get('/api/admin/private/getallusers');
 export const getPaymentList = () =>

@@ -6,11 +6,27 @@ const EmployeePaymentMode = (props) => {
   const { page, setPage, mode, setMode } = props;
   return (
     <div className='employee-setPaymentContainer'>
+      <div className='employee-commission'>
+        <button
+          className='employee-backBtnTick'
+          onClick={() => setPage(page - 1)}
+        >
+          <img src={backTick} alt='back' className='backBtnIcon' />
+        </button>
+        <div className='employee-setPaymentHeader'>
+          <h3 className='employee-heading'>Add comission for salesperson</h3>
+        </div>
+        <input
+          type='text'
+          className='employee-cutInput'
+          placeholder="Employee's commission"
+        />
+      </div>
       <div className='employee-setPayment'>
         <div className='employee-setPaymentHeader'>
-          <button className='backBtnTick' onClick={() => setPage(page - 1)}>
+          {/**<button className='backBtnTick' onClick={() => setPage(page - 1)}>
             <img src={backTick} alt='back' className='backBtnIcon' />
-          </button>
+          </button> */}
           <h1 className='employee-setPaymentHeading'>Setup payment options</h1>
         </div>
         <div className='employee-paymentOptionsDiv'>

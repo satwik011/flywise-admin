@@ -66,7 +66,10 @@ const ArtistPage = () => {
         </div>
       </div>
       <div className='artist-tableSection'>
-        <ArtistsTable allArtists={allArtists} />
+        <ArtistsTable
+          allArtists={allArtists}
+          fetchArtistList={fetchArtistList}
+        />
       </div>
     </div>
   );

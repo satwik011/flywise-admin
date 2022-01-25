@@ -1,14 +1,24 @@
 import React from 'react';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import { blockAndUnBlockEmployee } from '../../redux/api';
 import '../../styles/ArtistsTable.css';
 
 const EmployeesTable = (props) => {
-  const { allEmployees } = props;
+  const { allEmployees, fetchEmployeeList } = props;
   const history = useHistory();
 
   const goToEmployee = (id) => {
     history.push(`/employees/detail/${id}`);
+  };
+
+  const blockOrUnblock = async (id) => {
+    try {
+      await blockAndUnBlockEmployee(id);
+      fetchEmployeeList();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -27,21 +37,32 @@ const EmployeesTable = (props) => {
         <tbody>
           {allEmployees?.map((employee) => (
             <tr key={employee._id}>
-              <td onClick={() => goToEmployee(employee._id)}>
+              <td onClick={() => goToEmployee(employee._id)} className='cursor'>
                 {employee.username ? employee.username : ''}
               </td>
-              <td onClick={() => goToEmployee(employee._id)}>
+              <td onClick={() => goToEmployee(employee._id)} className='cursor'>
                 {employee.address ? employee.address : ''}
               </td>
-              <td onClick={() => goToEmployee(employee._id)}>
+              <td onClick={() => goToEmployee(employee._id)} className='cursor'>
                 {employee.createdAt
                   ? moment(employee.createdAt).format('DD/MM/YYYY, h:mm a')
                   : ''}
               </td>
-              <td onClick={() => goToEmployee(employee._id)}>{`100`}</td>
-              <td onClick={() => goToEmployee(employee._id)}>{`20`}</td>
+              <td
+                onClick={() => goToEmployee(employee._id)}
+                className='cursor'
+              >{`100`}</td>
+              <td
+                onClick={() => goToEmployee(employee._id)}
+                className='cursor'
+              >{`20`}</td>
               <td>
-                <button className='artist-blockBtn'>Block</button>
+                <button
+                  className='artist-blockBtn'
+                  onClick={() => blockOrUnblock(employee._id)}
+                >
+                  {!employee.blocked ? 'Block' : 'Unblock'}
+                </button>
               </td>
             </tr>
           ))}

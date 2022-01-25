@@ -13,7 +13,9 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
   },
   iconColor: {
-    color: '#C4C4C4',
+    // color: '#C4C4C4',
+    height: '22px',
+    width: '22px',
   },
   closeDrawer: {
     color: '#fff',

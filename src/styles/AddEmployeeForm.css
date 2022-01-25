@@ -98,14 +98,27 @@
 /* Setup Payment Options*/
 
 .employee-setPaymentContainer {
-  width: 40%;
-  margin-left: 10%;
-  margin-right: auto;
+  width: 50%;
+  margin: auto;
   text-align: left;
 }
 
 .employee-setPayment {
-  margin-top: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.employee-commission {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.employee-heading {
+  font-family: Montserrat;
+  font-weight: normal;
+  font-size: 20px;
+  color: #000000;
 }
 
 .employee-setPaymentHeader {
@@ -124,7 +137,7 @@
 }
 
 .employee-paymentOptionsDiv {
-  margin-top: 2rem;
+  margin-top: 0rem;
 }
 
 .employee-paymentOption {
@@ -162,7 +175,7 @@ input[type='radio']:checked:after {
 }
 
 .employee-setPaymentBtn {
-  width: 80%;
+  width: 50%;
   margin: auto;
   border: none;
   outline: none;
@@ -179,14 +192,31 @@ input[type='radio']:checked:after {
   cursor: pointer;
 }
 
+.employee-cutInput {
+  border: 0.5px solid #155b89;
+  box-sizing: border-box;
+  width: 50%;
+  border-radius: 5px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  color: #a4a5a9;
+  background-color: transparent;
+  padding: 10px 15px;
+  outline: none;
+}
+
 /***** backIcon Style   *****/
 
-.backBtnTick {
+.employee-backBtnTick {
   background-color: transparent;
   outline: none;
   border: none;
   cursor: pointer;
   padding-top: 5px;
+  position: absolute;
+  top: 15px;
+  left: -20%;
 }
 
 .backBtnIcon {

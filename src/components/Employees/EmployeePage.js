@@ -66,7 +66,10 @@ const EmployeePage = () => {
         </div>
       </div>
       <div className='employee-tableSection'>
-        <EmployeesTable allEmployees={allEmployees} />
+        <EmployeesTable
+          allEmployees={allEmployees}
+          fetchEmployeeList={fetchEmployeeList}
+        />
       </div>
     </div>
   );
