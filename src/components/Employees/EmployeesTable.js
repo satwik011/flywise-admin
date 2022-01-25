@@ -8,7 +8,7 @@ const EmployeesTable = (props) => {
   const history = useHistory();
 
   const goToEmployee = (id) => {
-    history.push(`/employees/${id}`);
+    history.push(`/employees/detail/${id}`);
   };
 
   return (

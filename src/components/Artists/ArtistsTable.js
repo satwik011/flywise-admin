@@ -8,7 +8,7 @@ const ArtistsTable = (props) => {
   const history = useHistory();
 
   const goToArtist = (id) => {
-    history.push(`/artists/${id}`);
+    history.push(`/artists/detail/${id}`);
   };
 
   return (
