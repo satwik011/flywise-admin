@@ -21,7 +21,9 @@ const PaymentsTable = (props) => {
           {allPayments?.map((payment) => (
             <tr key={payment._id}>
               <td>{payment._id}</td>
-              <td>{payment.artistId?.username}</td>
+              <td style={{ textTransform: 'capitalize' }}>
+                {payment.artistId?.username}
+              </td>
               <td>
                 {payment.createdAt
                   ? moment(payment.createdAt).format('DD/MM/YYYY, h:mm a')
@@ -29,9 +31,9 @@ const PaymentsTable = (props) => {
               </td>
               <td>{`Rs. ${payment.amount}`}</td>
               <td>{`20`}</td>
-              <td>
+              <td style={{ textTransform: 'capitalize' }}>
                 {/**<button className='payment-blockBtn'>Block</button> */}
-                {payment.status === 'completed' ? 'Completed' : 'Pending'}
+                {payment.status}
               </td>
             </tr>
           ))}

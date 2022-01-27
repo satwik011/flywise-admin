@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import printIcon from '../../images/printIcon.svg';
+// import printIcon from '../../images/printIcon.svg';
 import filterIcon from '../../images/filterIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import UsersTable from './UsersTable';
@@ -35,7 +35,7 @@ const UserPage = () => {
           <img src={searchIcon} alt='search' className='searchIcon' />
           <input
             type='text'
-            placeholder='Ex. Order No, User'
+            placeholder='Ex. Users, Phone Number'
             className='user-searchInput'
             id='searchInput'
           />
@@ -46,12 +46,12 @@ const UserPage = () => {
             <span>Add artist</span>
           </button>
         </div> */}
-        <div className='user-printDiv'>
+        {/**<div className='user-printDiv'>
           <button className='user-addBtn'>
             <img src={printIcon} alt='print' className='user-printIcon' />
             <span>Print</span>
           </button>
-        </div>
+        </div> */}
         <div className='user-filterDiv'>
           <button className='user-filterBtn'>
             <img src={filterIcon} alt='print' className='user-filterIcon' />

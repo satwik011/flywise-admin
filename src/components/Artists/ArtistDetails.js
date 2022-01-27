@@ -7,6 +7,7 @@ import {
   deleteAnArtist,
   totalAndPendingOrdersForArtist,
   allPaymentForArtist,
+  EditArtist,
 } from '../../redux/api';
 import artistProfile from '../../images/artistProfile.png';
 import editIcon from '../../images/editIcon.svg';
@@ -115,6 +116,16 @@ const ArtistDetails = (props) => {
     }
   };
 
+  const handleEdit = async () => {
+    try {
+      const { data } = await EditArtist(id);
+      window.localStorage.setItem('fanstarToken', data);
+      window.open('https://fanstar.netlify.app/artist/landing', '_blank');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='artistDetails-container'>
       {isLoading ? (
@@ -144,7 +155,10 @@ const ArtistDetails = (props) => {
                   {artistData.email ? artistData.email : ''}
                 </p>
                 <div className='artistDetails-leftBtnDiv'>
-                  <button className='artistDetails-leftBtns'>
+                  <button
+                    className='artistDetails-leftBtns'
+                    onClick={handleEdit}
+                  >
                     Edit
                     <img src={editIcon} alt='edit' className='iconBtn' />
                   </button>

@@ -16,6 +16,11 @@ API.interceptors.request.use((req) => {
 export const login = (loginData) =>
   API.post('/api/admin/public/login', loginData);
 
+export const appVisits = () => API.get('/api/admin/private/gettotalappvisits');
+export const totalSubscriptions = () =>
+  API.get('/api/admin/private/gettotalsubscribers');
+
+// Artists
 export const getArtistList = () =>
   API.get('/api/admin/private/getlistofartists');
 export const createArtist = (formData) =>
@@ -37,8 +42,12 @@ export const blockAndUnBlockArtist = (id) =>
 export const deleteAnArtist = (id) =>
   API.delete(`/api/admin/private/deleteanartist/${id}`);
 
+export const EditArtist = (id) =>
+  API.get(`/api/admin/private/generatetokenofanartist/${id}`);
+
+// Employee
 export const getEmployeeList = () =>
-  API.get('/api/admin/private/getallemployees');
+  API.get('/api/admin/private/getlistofemployees');
 export const getAnEmployee = (id) =>
   API.get(`/api/admin/private/getanemployee/${id}`);
 

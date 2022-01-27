@@ -38,6 +38,7 @@ const ArtistsTable = (props) => {
           {allArtists?.map((artist) => (
             <tr key={artist.artistId}>
               <td
+                style={{ textTransform: 'capitalize' }}
                 onClick={() => goToArtist(artist.artistId)}
                 className='cursor'
               >

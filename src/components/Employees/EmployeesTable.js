@@ -36,30 +36,41 @@ const EmployeesTable = (props) => {
         </thead>
         <tbody>
           {allEmployees?.map((employee) => (
-            <tr key={employee._id}>
-              <td onClick={() => goToEmployee(employee._id)} className='cursor'>
-                {employee.username ? employee.username : ''}
+            <tr key={employee.employeeId}>
+              <td
+                onClick={() => goToEmployee(employee.employeeId)}
+                className='cursor'
+              >
+                {employee.employeeName ? employee.employeeName : ''}
               </td>
-              <td onClick={() => goToEmployee(employee._id)} className='cursor'>
+              <td
+                onClick={() => goToEmployee(employee.employeeId)}
+                className='cursor'
+              >
                 {employee.address ? employee.address : ''}
               </td>
-              <td onClick={() => goToEmployee(employee._id)} className='cursor'>
-                {employee.createdAt
-                  ? moment(employee.createdAt).format('DD/MM/YYYY, h:mm a')
+              <td
+                onClick={() => goToEmployee(employee.employeeId)}
+                className='cursor'
+              >
+                {employee.startDate
+                  ? moment(employee.startDate).format('DD/MM/YYYY, h:mm a')
                   : ''}
               </td>
               <td
-                onClick={() => goToEmployee(employee._id)}
+                onClick={() => goToEmployee(employee.employeeId)}
                 className='cursor'
-              >{`100`}</td>
+              >
+                {employee.totalArtists}
+              </td>
               <td
-                onClick={() => goToEmployee(employee._id)}
+                onClick={() => goToEmployee(employee.employeeId)}
                 className='cursor'
               >{`20`}</td>
               <td>
                 <button
                   className='artist-blockBtn'
-                  onClick={() => blockOrUnblock(employee._id)}
+                  onClick={() => blockOrUnblock(employee.employeeId)}
                 >
                   {!employee.blocked ? 'Block' : 'Unblock'}
                 </button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import addIcon from '../../images/addIcon.svg';
-import printIcon from '../../images/printIcon.svg';
+// import printIcon from '../../images/printIcon.svg';
 import filterIcon from '../../images/filterIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import ArtistsTable from './ArtistsTable';
@@ -38,7 +38,7 @@ const ArtistPage = () => {
           <img src={searchIcon} alt='search' className='searchIcon' />
           <input
             type='text'
-            placeholder='Ex. Order No, Artist'
+            placeholder='Ex. Artist'
             className='artist-searchInput'
             id='searchInput'
           />
@@ -52,12 +52,12 @@ const ArtistPage = () => {
             <span>Add artist</span>
           </button>
         </div>
-        <div className='artist-printDiv'>
+        {/**<div className='artist-printDiv'>
           <button className='artist-addBtn'>
             <img src={printIcon} alt='print' className='artist-printIcon' />
             <span>Print</span>
           </button>
-        </div>
+        </div> */}
         <div className='artist-filterDiv'>
           <button className='artist-filterBtn'>
             <img src={filterIcon} alt='print' className='artist-filterIcon' />

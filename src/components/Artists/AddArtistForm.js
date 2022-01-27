@@ -154,7 +154,9 @@ const AddArtistForm = () => {
                 onChange={handleChange}
               >
                 {allEmployees?.map((employee) => (
-                  <option value={employee._id}>{employee.username}</option>
+                  <option value={employee.employeeId}>
+                    {employee.employeeName}
+                  </option>
                 ))}
               </select>
             </div>
