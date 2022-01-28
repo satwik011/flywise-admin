@@ -9,7 +9,7 @@ import {
   allPaymentForArtist,
   EditArtist,
 } from '../../redux/api';
-import artistProfile from '../../images/artistProfile.png';
+// import artistProfile from '../../images/artistProfile.png';
 import editIcon from '../../images/editIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 import '../../styles/ArtistDetails.css';
@@ -119,8 +119,8 @@ const ArtistDetails = (props) => {
   const handleEdit = async () => {
     try {
       const { data } = await EditArtist(id);
-      window.localStorage.setItem('fanstarToken', data);
-      window.open('https://fanstar.netlify.app/artist/landing', '_blank');
+      // window.localStorage.setItem('fanstarToken', data);
+      window.open(`http://localhost:3001/artist/landing/${data}`, '_blank');
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +136,7 @@ const ArtistDetails = (props) => {
             <div className='artistDetails-leftDiv'>
               <div className='artistDetails-imageDiv'>
                 <img
-                  src={artistProfile}
+                  src={artistData.profilePhoto}
                   alt='profilePic'
                   className='artistDetails-image'
                 />

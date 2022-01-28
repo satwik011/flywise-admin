@@ -21,8 +21,8 @@ export const totalSubscriptions = () =>
   API.get('/api/admin/private/gettotalsubscribers');
 
 // Artists
-export const getArtistList = () =>
-  API.get('/api/admin/private/getlistofartists');
+export const getArtistList = (searchInput) =>
+  API.post('/api/admin/private/getlistofartists', { field: searchInput });
 export const createArtist = (formData) =>
   API.post('/api/admin/private/createartist', formData);
 export const getAnArtist = (id) =>
@@ -46,8 +46,8 @@ export const EditArtist = (id) =>
   API.get(`/api/admin/private/generatetokenofanartist/${id}`);
 
 // Employee
-export const getEmployeeList = () =>
-  API.get('/api/admin/private/getlistofemployees');
+export const getEmployeeList = (searchInput) =>
+  API.post('/api/admin/private/getlistofemployees', { field: searchInput });
 export const getAnEmployee = (id) =>
   API.get(`/api/admin/private/getanemployee/${id}`);
 
@@ -61,5 +61,5 @@ export const deleteAnEmployee = (id) =>
   API.delete(`/api/admin/private/deleteanemployee/${id}`);
 
 export const getUserList = () => API.get('/api/admin/private/getallusers');
-export const getPaymentList = () =>
-  API.get('/api/admin/private/getallpayments');
+export const getPaymentList = (searchInput) =>
+  API.post('/api/admin/private/getallpayments', { field: searchInput });

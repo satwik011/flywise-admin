@@ -8,11 +8,12 @@ import { getPaymentList } from '../../redux/api';
 
 const PaymentPage = () => {
   const [allPayments, setAllPayments] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   const [boolVal, setBoolVal] = useState(false);
 
-  const fetchPaymentList = async () => {
+  const fetchPaymentList = async (searchInput) => {
     try {
-      const { data } = await getPaymentList();
+      const { data } = await getPaymentList(searchInput);
       setAllPayments(data);
     } catch (error) {
       console.log(error);
@@ -21,10 +22,10 @@ const PaymentPage = () => {
 
   useEffect(() => {
     if (!boolVal) {
-      fetchPaymentList();
+      fetchPaymentList(searchInput);
       setBoolVal(true);
     }
-  }, [boolVal]);
+  }, [boolVal, searchInput]);
 
   return (
     <div className='payment-container'>
@@ -36,6 +37,10 @@ const PaymentPage = () => {
             placeholder='Ex. Transaction ID, Credited to'
             className='payment-searchInput'
             id='searchInput'
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) =>
+              e.key === 'Enter' && fetchPaymentList(searchInput)
+            }
           />
         </div>
         <div className='payment-printDiv'>

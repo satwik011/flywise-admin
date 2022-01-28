@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import EmployeeOrdersTable from './EmployeeOrdersTable';
-import demoProfile from '../../images/demoProfile.png';
+// import demoProfile from '../../images/demoProfile.png';
 import {
   getAnEmployee,
   blockAndUnBlockEmployee,
@@ -75,7 +75,7 @@ const EmployeeDetails = (props) => {
             <div className='employeeDetails-leftDiv'>
               <div className='employeeDetails-imageDiv'>
                 <img
-                  src={demoProfile}
+                  src={employeeData.profilePhoto}
                   alt='profilePic'
                   className='employeeDetails-image'
                 />

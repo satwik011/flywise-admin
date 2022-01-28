@@ -13,11 +13,12 @@ import '../../styles/ArtistPage.css';
 const ArtistPage = () => {
   const history = useHistory();
   const [allArtists, setAllArtists] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   const [boolVal, setBoolVal] = useState(false);
 
-  const fetchArtistList = async () => {
+  const fetchArtistList = async (searchInput) => {
     try {
-      const { data } = await getArtistList();
+      const { data } = await getArtistList(searchInput);
       setAllArtists(data);
     } catch (error) {
       console.log(error);
@@ -26,10 +27,10 @@ const ArtistPage = () => {
 
   useEffect(() => {
     if (!boolVal) {
-      fetchArtistList();
+      fetchArtistList(searchInput);
       setBoolVal(true);
     }
-  }, [boolVal]);
+  }, [boolVal, searchInput]);
 
   return (
     <div className='artist-container'>
@@ -41,6 +42,9 @@ const ArtistPage = () => {
             placeholder='Ex. Artist'
             className='artist-searchInput'
             id='searchInput'
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && fetchArtistList(searchInput)}
           />
         </div>
         <div className='artist-addArtistDiv'>
@@ -52,12 +56,6 @@ const ArtistPage = () => {
             <span>Add artist</span>
           </button>
         </div>
-        {/**<div className='artist-printDiv'>
-          <button className='artist-addBtn'>
-            <img src={printIcon} alt='print' className='artist-printIcon' />
-            <span>Print</span>
-          </button>
-        </div> */}
         <div className='artist-filterDiv'>
           <button className='artist-filterBtn'>
             <img src={filterIcon} alt='print' className='artist-filterIcon' />

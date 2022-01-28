@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -17,7 +18,6 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import demoImage from '../images/demoProfile.png';
 import home from '../images/home.svg';
 import homeActive from '../images/homeActive.svg';
 import artist from '../images/artist.svg';
@@ -95,6 +95,11 @@ const NavSidebar = (props) => {
   };
   const history = useHistory();
 
+  const handleLogout = () => {
+    Cookies.remove('fanstarAdmin');
+    history.push('/');
+  };
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -131,12 +136,10 @@ const NavSidebar = (props) => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <div className={classes.profileImgDiv}>
-              <img
-                src={demoImage}
-                alt='profile'
-                className={classes.profileImg}
-              />
+            <div className={classes.logoutBtnDiv}>
+              <button className={classes.logoutBtn} onClick={handleLogout}>
+                Log out
+              </button>
             </div>
           </Toolbar>
         </AppBar>

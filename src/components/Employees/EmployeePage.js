@@ -13,11 +13,12 @@ import '../../styles/EmployeePage.css';
 const EmployeePage = () => {
   const history = useHistory();
   const [allEmployees, setAllEmployees] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   const [boolVal, setBoolVal] = useState(false);
 
-  const fetchEmployeeList = async () => {
+  const fetchEmployeeList = async (searchInput) => {
     try {
-      const { data } = await getEmployeeList();
+      const { data } = await getEmployeeList(searchInput);
       setAllEmployees(data);
     } catch (error) {
       console.log(error);
@@ -26,10 +27,10 @@ const EmployeePage = () => {
 
   useEffect(() => {
     if (!boolVal) {
-      fetchEmployeeList();
+      fetchEmployeeList(searchInput);
       setBoolVal(true);
     }
-  }, [boolVal]);
+  }, [boolVal, searchInput]);
 
   return (
     <div className='employee-container'>
@@ -41,6 +42,10 @@ const EmployeePage = () => {
             placeholder='Ex. Employee'
             className='employee-searchInput'
             id='searchInput'
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) =>
+              e.key === 'Enter' && fetchEmployeeList(searchInput)
+            }
           />
         </div>
         <div className='employee-addEmployeeDiv'>

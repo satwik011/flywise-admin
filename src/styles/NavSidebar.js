@@ -47,6 +47,24 @@ export default makeStyles((theme) => ({
     width: '100%',
     objectFit: 'cover',
   },
+  logoutBtnDiv: {
+    marginLeft: '25px',
+    marginRight: '10px',
+  },
+  logoutBtn: {
+    padding: '8px 15px',
+    outline: 'none',
+    border: '1px solid #155B89',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    color: '#155B89',
+    fontFamily: 'Montserrat',
+    fontWeight: '500',
+    fontSize: '15px',
+    boxShadow:
+      '0px 3px 1px -2px rgb(0 0 0 / 20%),0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)',
+    cursor: 'pointer',
+  },
   navLink: {
     textDecoration: 'none',
   },
