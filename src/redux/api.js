@@ -60,6 +60,9 @@ export const blockAndUnBlockEmployee = (id) =>
 export const deleteAnEmployee = (id) =>
   API.delete(`/api/admin/private/deleteanemployee/${id}`);
 
+export const allPaymentForEmployee = (id) =>
+  API.get(`/api/admin/private/getpaymentsofartistsofemployee/${id}`);
+
 export const getUserList = () => API.get('/api/admin/private/getallusers');
 export const getPaymentList = (searchInput) =>
   API.post('/api/admin/private/getallpayments', { field: searchInput });

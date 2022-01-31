@@ -7,6 +7,7 @@ import {
   blockAndUnBlockEmployee,
   deleteAnEmployee,
   getArtistsOfAnEmployee,
+  allPaymentForEmployee,
 } from '../../redux/api';
 import '../../styles/EmployeeDetails.css';
 
@@ -14,9 +15,61 @@ const EmployeeDetails = (props) => {
   const history = useHistory();
   const [employeeData, setEmployeeData] = useState({});
   const [linkedArtists, setLinkedArtists] = useState([]);
+  const [paymentList, setPaymentList] = useState([]);
+  const [totalArtist, setTotalArtist] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [boolVal, setBoolVal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const id = props.match.params.id;
+
+  const fetchTotalIncome = async (id) => {
+    try {
+      const { data } = await allPaymentForEmployee(id);
+      setPaymentList(data);
+      let totalIncome = 0;
+      let totalOrder = 0;
+      data.forEach((artist) => {
+        if (artist?.paymentsOfArtist?.length > 0) {
+          totalOrder += artist.paymentsOfArtist.length;
+          artist.paymentsOfArtist.forEach((d) => {
+            totalIncome += parseInt(d.amount);
+          });
+        }
+      });
+      setTotalOrders(totalOrder);
+      setTotalIncome(totalIncome);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchWeeklyIncome = async (id) => {
+    try {
+      const { data } = await allPaymentForEmployee(id);
+      let today = new Date();
+      let before = new Date(today);
+      before.setDate(today.getDate() - 6);
+      let totalIncome = 0;
+
+      data.forEach((artist) => {
+        if (artist?.paymentsOfArtist?.length > 0) {
+          artist.paymentsOfArtist.forEach((d) => {
+            if (
+              d.status === 'completed' &&
+              new Date(d.createdAt).getTime() >= before
+            ) {
+              totalIncome += parseInt(d.amount);
+            }
+          });
+        }
+      });
+      setWeeklyIncome(totalIncome);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const fetchEmployee = async (id) => {
     setIsLoading(true);
@@ -34,6 +87,7 @@ const EmployeeDetails = (props) => {
     try {
       const { data } = await getArtistsOfAnEmployee(id);
       setLinkedArtists(data);
+      setTotalArtist(data.length);
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +95,8 @@ const EmployeeDetails = (props) => {
 
   useEffect(() => {
     if (!boolVal) {
+      fetchTotalIncome(id);
+      fetchWeeklyIncome(id);
       fetchEmployee(id);
       fetchArtists(id);
       setBoolVal(true);
@@ -119,7 +175,7 @@ const EmployeeDetails = (props) => {
                 <h3 className='employeeDetails-incomeCardTitle'>
                   Total Income
                 </h3>
-                <p className='employeeDetails-income'>Rs 25000/-</p>
+                <p className='employeeDetails-income'>{`Rs ${totalIncome}/-`}</p>
               </div>
             </div>
             <div className='employeeDetails-incomeCardDiv'>
@@ -128,20 +184,24 @@ const EmployeeDetails = (props) => {
                 <h3 className='employeeDetails-incomeCardTitle'>
                   Weekly Income
                 </h3>
-                <p className='employeeDetails-income'>Rs 25000/-</p>
+                <p className='employeeDetails-income'>{`Rs ${weeklyIncome}/-`}</p>
               </div>
             </div>
             <div className='employeeDetails-ordersDiv'>
               <h4 className='employeeDetails-orderTitle'>Total Artists</h4>
-              <p className='employeeDetails-order'>100</p>
+              <p className='employeeDetails-order'>{totalArtist}</p>
             </div>
             <div className='employeeDetails-ordersDiv'>
               <h4 className='employeeDetails-orderTitle'>Total Orders</h4>
-              <p className='employeeDetails-order'>80</p>
+              <p className='employeeDetails-order'>{totalOrders}</p>
             </div>
           </div>
           <div className='employeeDetails-tableSection'>
-            <EmployeeOrdersTable linkedArtists={linkedArtists} />
+            <EmployeeOrdersTable
+              linkedArtists={linkedArtists}
+              paymentList={paymentList}
+              setBoolVal={setBoolVal}
+            />
           </div>
         </Fragment>
       )}

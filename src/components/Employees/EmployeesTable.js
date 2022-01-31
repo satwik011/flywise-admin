@@ -30,7 +30,7 @@ const EmployeesTable = (props) => {
             <th>Location</th>
             <th>Start Date</th>
             <th>Total Artists</th>
-            <th>Pending Orders</th>
+            {/**<th>Pending Orders</th> */}
             <th>Action</th>
           </tr>
         </thead>
@@ -63,10 +63,10 @@ const EmployeesTable = (props) => {
               >
                 {employee.totalArtists}
               </td>
-              <td
+              {/**<td
                 onClick={() => goToEmployee(employee.employeeId)}
                 className='cursor'
-              >{`20`}</td>
+              >{`20`}</td> */}
               <td>
                 <button
                   className='artist-blockBtn'

@@ -21,6 +21,7 @@ const ArtistDetails = (props) => {
     totalOrders: 0,
     pendingOrders: 0,
   });
+  const [paymentList, setPaymentList] = useState([]);
   const [totalIncome, setTotalIncome] = useState(0);
   const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [boolVal, setBoolVal] = useState(false);
@@ -54,6 +55,8 @@ const ArtistDetails = (props) => {
   const fetchTotalIncome = async (id) => {
     try {
       const { data } = await allPaymentForArtist(id);
+      // console.log(data);
+      setPaymentList(data);
       let total = 0;
       data.forEach((d) => {
         if (d.status === 'completed') {
@@ -211,7 +214,7 @@ const ArtistDetails = (props) => {
             </div>
           </div>
           <div className='artistDetails-tableSection'>
-            <ArtistOrdersTable />
+            <ArtistOrdersTable paymentList={paymentList} />
           </div>
         </Fragment>
       )}
