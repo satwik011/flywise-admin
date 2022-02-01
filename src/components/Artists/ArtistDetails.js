@@ -123,7 +123,10 @@ const ArtistDetails = (props) => {
     try {
       const { data } = await EditArtist(id);
       // window.localStorage.setItem('fanstarToken', data);
-      window.open(`http://localhost:3001/artist/landing/${data}`, '_blank');
+      window.open(
+        `https://fanstar-app.netlify.app/artist/landing/${data}`,
+        '_blank'
+      );
     } catch (error) {
       console.log(error);
     }
