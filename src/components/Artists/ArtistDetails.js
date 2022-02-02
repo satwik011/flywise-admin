@@ -63,7 +63,7 @@ const ArtistDetails = (props) => {
           total += parseInt(d.amount);
         }
       });
-      setTotalIncome(total);
+      setTotalIncome(total * 0.7);
     } catch (err) {
       console.log(err);
     }
@@ -85,7 +85,7 @@ const ArtistDetails = (props) => {
           total += parseInt(d.amount);
         }
       });
-      setWeeklyIncome(total);
+      setWeeklyIncome(total * 0.7);
     } catch (err) {
       console.log(err);
     }
