@@ -12,6 +12,7 @@ import AddEmployeeForm from './components/Employees/AddEmployeeForm';
 import PaymentPage from './components/Payments/PaymentPage';
 import ArtistDetails from './components/Artists/ArtistDetails';
 import EmployeeDetails from './components/Employees/EmployeeDetails';
+import ArtistPayment from './components/Artists/ArtistPayment';
 
 export const history = createHistory();
 const App = () => {
@@ -24,6 +25,11 @@ const App = () => {
           <Route path='/artists' exact component={ArtistPage} />
           <Route path='/artists/add' exact component={AddArtistForm} />
           <Route path='/artists/detail/:id' exact component={ArtistDetails} />
+          <Route
+            path='/artists/detail/:id/pay'
+            exact
+            component={ArtistPayment}
+          />
           <Route path='/employees' exact component={EmployeePage} />
           <Route path='/employees/add' exact component={AddEmployeeForm} />
           <Route

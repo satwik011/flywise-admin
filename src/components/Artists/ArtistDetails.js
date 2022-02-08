@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import ArtistOrdersTable from './ArtistOrdersTable';
 import {
   getAnArtist,
@@ -8,8 +9,9 @@ import {
   totalAndPendingOrdersForArtist,
   allPaymentForArtist,
   EditArtist,
+  fetchWithdraws,
 } from '../../redux/api';
-// import artistProfile from '../../images/artistProfile.png';
+import paymentIcon from '../../images/paymentIcon.svg';
 import editIcon from '../../images/editIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 import '../../styles/ArtistDetails.css';
@@ -22,6 +24,9 @@ const ArtistDetails = (props) => {
     pendingOrders: 0,
   });
   const [paymentList, setPaymentList] = useState([]);
+  const [pendingWithdraw, setPendingWithdraw] = useState([]);
+  const [pendingAmount, setPendingAmount] = useState(0);
+  const [paidAmount, setPaidAmount] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
   const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [boolVal, setBoolVal] = useState(false);
@@ -33,6 +38,7 @@ const ArtistDetails = (props) => {
     try {
       const { data } = await getAnArtist(id);
       setArtistData(data);
+      setPaidAmount(parseInt(data.paid));
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -55,14 +61,16 @@ const ArtistDetails = (props) => {
   const fetchTotalIncome = async (id) => {
     try {
       const { data } = await allPaymentForArtist(id);
-      // console.log(data);
       setPaymentList(data);
-      let total = 0;
+      let total = 0,
+        pending = 0;
       data.forEach((d) => {
-        if (d.status === 'completed') {
-          total += parseInt(d.amount);
+        if (d.status === 'pending') {
+          pending += parseInt(d.amount);
         }
+        total += parseInt(d.amount);
       });
+      setPendingAmount(pending * 0.7);
       setTotalIncome(total * 0.7);
     } catch (err) {
       console.log(err);
@@ -78,10 +86,7 @@ const ArtistDetails = (props) => {
       before.setDate(today.getDate() - 6);
       let total = 0;
       data.forEach((d) => {
-        if (
-          d.status === 'completed' &&
-          new Date(d.createdAt).getTime() >= before
-        ) {
+        if (new Date(d.createdAt).getTime() >= before) {
           total += parseInt(d.amount);
         }
       });
@@ -91,9 +96,25 @@ const ArtistDetails = (props) => {
     }
   };
 
+  const pendingWithdrawList = async (id) => {
+    try {
+      const { data } = await fetchWithdraws(id);
+      let temp = [];
+      data.forEach((d) => {
+        if (d.status === 'pending') {
+          temp.push(d);
+        }
+      });
+      setPendingWithdraw(temp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (!boolVal) {
       fetchArtist(id);
+      pendingWithdrawList(id);
       fetchTotalOrdersAndPending(id);
       fetchTotalIncome(id);
       fetchWeeklyIncome(id);
@@ -168,15 +189,46 @@ const ArtistDetails = (props) => {
                     Edit
                     <img src={editIcon} alt='edit' className='iconBtn' />
                   </button>
-                  <button className='artistDetails-leftBtns'>
-                    Share
-                    <img src={shareIcon} alt='edit' className='iconBtn' />
-                  </button>
+                  <CopyToClipboard
+                    text={`baseurl/artist/${id}`}
+                    onCopy={() => alert('Artist link copied!')}
+                  >
+                    <button className='artistDetails-leftBtns'>
+                      Share
+                      <img src={shareIcon} alt='edit' className='iconBtn' />
+                    </button>
+                  </CopyToClipboard>
                 </div>
               </div>
             </div>
             <div className='artistDetails-rightDiv'>
               <div className='artistDetails-rightBtnDiv'>
+                {pendingWithdraw.length > 0 && (
+                  <button
+                    className='artistDetails-rightBtn block paymentBtn'
+                    onClick={() =>
+                      history.push({
+                        pathname: `/artists/detail/${id}/pay`,
+                        state: {
+                          requests: pendingWithdraw,
+                          artistName: artistData.username,
+                        },
+                      })
+                    }
+                  >
+                    <img
+                      src={paymentIcon}
+                      alt='payment'
+                      className='paymentIcon'
+                    />
+                    <span>Payment</span>
+                    {pendingWithdraw.length > 0 && (
+                      <span className='notification'>
+                        {pendingWithdraw.length}
+                      </span>
+                    )}
+                  </button>
+                )}
                 <button
                   className='artistDetails-rightBtn block'
                   onClick={blockOrUnblock}
@@ -189,6 +241,18 @@ const ArtistDetails = (props) => {
                 >
                   Delete Account
                 </button>
+              </div>
+              <div className='artist-orderDetailDiv'>
+                <div className='artistDetails-ordersDiv'>
+                  <h4 className='artistDetails-orderTitle'>Total Orders</h4>
+                  <p className='artistDetails-order'>{orderData.totalOrders}</p>
+                </div>
+                <div className='artistDetails-ordersDiv'>
+                  <h4 className='artistDetails-orderTitle'>Pending Orders</h4>
+                  <p className='artistDetails-order'>
+                    {orderData.pendingOrders}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -207,13 +271,18 @@ const ArtistDetails = (props) => {
                 <p className='artistDetails-income'>{`Rs ${weeklyIncome}/-`}</p>
               </div>
             </div>
-            <div className='artistDetails-ordersDiv'>
-              <h4 className='artistDetails-orderTitle'>Total Orders</h4>
-              <p className='artistDetails-order'>{orderData.totalOrders}</p>
-            </div>
-            <div className='artistDetails-ordersDiv'>
-              <h4 className='artistDetails-orderTitle'>Pending Orders</h4>
-              <p className='artistDetails-order'>{orderData.pendingOrders}</p>
+            <div className='artistDetails-incomeCardDiv'>
+              <p className='artistDetails-incomeCardLabel'>
+                Withdrawable Balance
+              </p>
+              <div className='artistDetails-incomeCard'>
+                <h3 className='artistDetails-incomeCardTitle'>
+                  Withdrawable Balance
+                </h3>
+                <p className='artistDetails-income'>{`Rs ${
+                  totalIncome - pendingAmount - paidAmount
+                }/-`}</p>
+              </div>
             </div>
           </div>
           <div className='artistDetails-tableSection'>

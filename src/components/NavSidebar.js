@@ -11,13 +11,11 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import home from '../images/home.svg';
 import homeActive from '../images/homeActive.svg';
 import artist from '../images/artist.svg';
@@ -131,11 +129,6 @@ const NavSidebar = (props) => {
             >
               {/**Dashboard */}
             </Typography>
-            <IconButton color='inherit'>
-              <Badge badgeContent={4} color='secondary'>
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <div className={classes.logoutBtnDiv}>
               <button className={classes.logoutBtn} onClick={handleLogout}>
                 Log out

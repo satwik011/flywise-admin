@@ -45,6 +45,12 @@ export const deleteAnArtist = (id) =>
 export const EditArtist = (id) =>
   API.get(`/api/admin/private/generatetokenofanartist/${id}`);
 
+export const fetchWithdraws = (id) =>
+  API.get(`/api/admin/private/getwithdrawals/${id}`);
+
+export const payToArtist = (formData) =>
+  API.put(`/api/admin/private/updateanartistbalance/`, formData);
+
 // Employee
 export const getEmployeeList = (searchInput) =>
   API.post('/api/admin/private/getlistofemployees', { field: searchInput });

@@ -87,10 +87,10 @@
 
 .artistDetails-rightDiv {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 40%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  min-width: 50%;
 }
 
 .artistDetails-rightBtnDiv {
@@ -99,7 +99,7 @@
   justify-content: flex-end;
   align-items: center;
   width: 90%;
-  margin-right: auto;
+  margin: auto;
 }
 .artistDetails-rightBtn {
   box-sizing: border-box;
@@ -111,6 +111,45 @@
   padding: 3px 25px;
   letter-spacing: 0.4px;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.artist-orderDetailDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin-left: auto;
+  margin-top: 2rem;
+}
+
+.paymentIcon {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.paymentBtn {
+  position: relative;
+}
+
+.notification {
+  position: absolute;
+  left: 3%;
+  top: -35%;
+  height: 18px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  font-size: 12px;
 }
 
 .block {
@@ -182,7 +221,7 @@
 }
 
 .artistDetails-ordersDiv {
-  width: 15%;
+  width: 45%;
 }
 
 .artistDetails-orderTitle {
