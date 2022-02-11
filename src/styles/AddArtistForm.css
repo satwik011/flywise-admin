@@ -160,6 +160,48 @@
   text-align: left;
 }
 
+.artist-setCommissionDiv {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.artist-setCommissionHead {
+  font-family: Montserrat;
+  font-weight: normal;
+  font-size: 20px;
+  color: #000000;
+}
+
+.artist-commissionInputDiv {
+  width: 100%;
+  /* margin-right: auto; */
+}
+
+.artist-commissionInput {
+  border: 0.5px solid #155b89;
+  box-sizing: border-box;
+  width: 70%;
+  border-radius: 5px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  color: #a4a5a9;
+  background-color: transparent;
+  padding: 10px 15px;
+  outline: none;
+}
+
+.artist-commissionInput::placeholder {
+}
+
+.artist-commissionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
 .artist-setPayment {
   margin-top: 5rem;
 }
@@ -276,6 +318,7 @@ input[type='radio']:checked:after {
 
 .artist-accountFormDiv {
   margin-top: 2rem;
+  margin-bottom: 2rem;
   width: 100%;
 }
 

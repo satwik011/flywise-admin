@@ -15,6 +15,7 @@ const initialState = {
   ifscCode: '',
   services: [],
   upiId: '',
+  commission: '',
 };
 
 const AddArtistForm = () => {
@@ -233,6 +234,8 @@ const AddArtistForm = () => {
           setPage={setPage}
           mode={mode}
           setMode={setMode}
+          formData={formData}
+          setFormData={setFormData}
         />
       )}
       {page === 3 && (

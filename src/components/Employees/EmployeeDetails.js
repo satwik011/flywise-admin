@@ -39,7 +39,7 @@ const EmployeeDetails = (props) => {
         }
       });
       setTotalOrders(totalOrder);
-      setTotalIncome(totalIncome * 0.7);
+      setTotalIncome(totalIncome);
     } catch (err) {
       console.log(err);
     }
@@ -65,7 +65,7 @@ const EmployeeDetails = (props) => {
           });
         }
       });
-      setWeeklyIncome(totalIncome * 0.7);
+      setWeeklyIncome(totalIncome);
     } catch (err) {
       console.log(err);
     }

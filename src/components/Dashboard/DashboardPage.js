@@ -33,7 +33,7 @@ const DashboardPage = () => {
     <div className='dashboard-container'>
       <div className='dashboard-cards'>
         <DashboardIncome paymentList={paymentList} />
-        <DashboardGraph />
+        {/**<DashboardGraph /> */}
       </div>
       <div className='dashboard-firstSection'>
         <div className='dashboard-searchDiv'>

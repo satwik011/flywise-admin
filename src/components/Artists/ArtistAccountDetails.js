@@ -90,6 +90,17 @@ const ArtistAccountDetails = (props) => {
                 className='artist-accountInput'
               />
             </div>
+            <div className='artist-accountInputDiv'>
+              <label className='artist-accountInputLabel'>UPI Id</label>
+              <input
+                type='text'
+                name='upiId'
+                value={formData.upiId}
+                onChange={handleChange}
+                placeholder='UPI Id'
+                className='artist-accountInput'
+              />
+            </div>
             <div className='artist-submitAccountDiv'>
               <button className='artist-submitAccount' onClick={handleNext}>
                 Next

@@ -32,10 +32,7 @@ const DashboardIncome = (props) => {
       before.setDate(today.getDate() - 6);
       let total = 0;
       data.forEach((d) => {
-        if (
-          d.status === 'completed' &&
-          new Date(d.createdAt).getTime() >= before
-        ) {
+        if (new Date(d.createdAt).getTime() >= before) {
           total += parseInt(d.amount);
         }
       });

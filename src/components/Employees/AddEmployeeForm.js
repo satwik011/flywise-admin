@@ -93,6 +93,8 @@ const AddEmployeeForm = () => {
           setPage={setPage}
           mode={mode}
           setMode={setMode}
+          formData={formData}
+          setFormData={setFormData}
         />
       )}
       {page === 3 && (

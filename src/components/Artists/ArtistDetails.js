@@ -9,9 +9,8 @@ import {
   totalAndPendingOrdersForArtist,
   allPaymentForArtist,
   EditArtist,
-  fetchWithdraws,
 } from '../../redux/api';
-import paymentIcon from '../../images/paymentIcon.svg';
+// import paymentIcon from '../../images/paymentIcon.svg';
 import editIcon from '../../images/editIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 import '../../styles/ArtistDetails.css';
@@ -19,12 +18,12 @@ import '../../styles/ArtistDetails.css';
 const ArtistDetails = (props) => {
   const history = useHistory();
   const [artistData, setArtistData] = useState({});
+  // const [artistCommission, setArtistCommission] = useState(0);
   const [orderData, setOrderData] = useState({
     totalOrders: 0,
     pendingOrders: 0,
   });
   const [paymentList, setPaymentList] = useState([]);
-  const [pendingWithdraw, setPendingWithdraw] = useState([]);
   const [pendingAmount, setPendingAmount] = useState(0);
   const [paidAmount, setPaidAmount] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
@@ -38,7 +37,10 @@ const ArtistDetails = (props) => {
     try {
       const { data } = await getAnArtist(id);
       setArtistData(data);
+      // setArtistCommission(parseInt(data.commission) / 100);
       setPaidAmount(parseInt(data.paid));
+      fetchTotalIncome(parseInt(data.commission) / 100);
+      fetchWeeklyIncome(parseInt(data.commission) / 100);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -58,7 +60,7 @@ const ArtistDetails = (props) => {
     }
   };
 
-  const fetchTotalIncome = async (id) => {
+  const fetchTotalIncome = async (comm) => {
     try {
       const { data } = await allPaymentForArtist(id);
       setPaymentList(data);
@@ -70,14 +72,14 @@ const ArtistDetails = (props) => {
         }
         total += parseInt(d.amount);
       });
-      setPendingAmount(pending * 0.7);
-      setTotalIncome(total * 0.7);
+      setPendingAmount(pending * comm);
+      setTotalIncome(total * comm);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const fetchWeeklyIncome = async (id) => {
+  const fetchWeeklyIncome = async (comm) => {
     try {
       const { data } = await allPaymentForArtist(id);
       let today = new Date();
@@ -90,34 +92,16 @@ const ArtistDetails = (props) => {
           total += parseInt(d.amount);
         }
       });
-      setWeeklyIncome(total * 0.7);
+      setWeeklyIncome(total * comm);
     } catch (err) {
       console.log(err);
-    }
-  };
-
-  const pendingWithdrawList = async (id) => {
-    try {
-      const { data } = await fetchWithdraws(id);
-      let temp = [];
-      data.forEach((d) => {
-        if (d.status === 'pending') {
-          temp.push(d);
-        }
-      });
-      setPendingWithdraw(temp);
-    } catch (error) {
-      console.log(error);
     }
   };
 
   useEffect(() => {
     if (!boolVal) {
       fetchArtist(id);
-      pendingWithdrawList(id);
       fetchTotalOrdersAndPending(id);
-      fetchTotalIncome(id);
-      fetchWeeklyIncome(id);
       setBoolVal(true);
     }
   }, [boolVal, id]);
@@ -203,7 +187,7 @@ const ArtistDetails = (props) => {
             </div>
             <div className='artistDetails-rightDiv'>
               <div className='artistDetails-rightBtnDiv'>
-                {pendingWithdraw.length > 0 && (
+                {/**pendingWithdraw.length > 0 && (
                   <button
                     className='artistDetails-rightBtn block paymentBtn'
                     onClick={() =>
@@ -228,7 +212,7 @@ const ArtistDetails = (props) => {
                       </span>
                     )}
                   </button>
-                )}
+                ) */}
                 <button
                   className='artistDetails-rightBtn block'
                   onClick={blockOrUnblock}

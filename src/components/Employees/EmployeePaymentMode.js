@@ -14,7 +14,7 @@ const EmployeePaymentMode = (props) => {
           <img src={backTick} alt='back' className='backBtnIcon' />
         </button>
         <div className='employee-setPaymentHeader'>
-          <h3 className='employee-heading'>Add comission for salesperson</h3>
+          <h3 className='employee-heading'>Add comission for employee</h3>
         </div>
         <input
           type='text'

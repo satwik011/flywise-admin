@@ -96,6 +96,17 @@ const EmployeeAccountDetails = (props) => {
                 className='employee-accountInput'
               />
             </div>
+            <div className='employee-accountInputDiv'>
+              <label className='employee-accountInputLabel'>UPI ID</label>
+              <input
+                type='text'
+                name='upiId'
+                value={formData.upiId}
+                onChange={handleChange}
+                placeholder='UPI ID'
+                className='employee-accountInput'
+              />
+            </div>
             <div className='employee-submitAccountDiv'>
               <button className='employee-submitAccount' onClick={handleNext}>
                 Next
