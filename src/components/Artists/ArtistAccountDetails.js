@@ -16,7 +16,21 @@ const ArtistAccountDetails = (props) => {
   const handleNext = () => {
     if (mode === 'account') {
       if (formData.accountNo === confirmAccount) {
-        handleSubmit();
+        if (
+          formData.username &&
+          formData.phone &&
+          formData.email &&
+          formData.address &&
+          formData.assignedEmployee &&
+          formData.appName &&
+          formData.services.length > 0 &&
+          (formData.upiId || (formData.accountNo && formData.ifscCode)) &&
+          formData.commission
+        ) {
+          handleSubmit();
+        } else {
+          alert('All fields are required');
+        }
       } else {
         alert('Account number and confirm account number are different');
       }
@@ -28,7 +42,7 @@ const ArtistAccountDetails = (props) => {
   const handleSubmit = async () => {
     try {
       const { data } = await createArtist(formData);
-      console.log(data);
+      // console.log(data);
       setPage(page + 1);
     } catch (error) {
       console.log(error);

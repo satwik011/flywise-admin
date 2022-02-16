@@ -36,6 +36,7 @@ const ArtistDetails = (props) => {
     setIsLoading(true);
     try {
       const { data } = await getAnArtist(id);
+      // console.log(data);
       setArtistData(data);
       // setArtistCommission(parseInt(data.commission) / 100);
       setPaidAmount(parseInt(data.paid));
@@ -174,7 +175,13 @@ const ArtistDetails = (props) => {
                     <img src={editIcon} alt='edit' className='iconBtn' />
                   </button>
                   <CopyToClipboard
-                    text={`baseurl/artist/${id}`}
+                    text={
+                      artistData.appName
+                        ? `https://fanstar-app.netlify.app/artist/${artistData.appName
+                            .split(' ')
+                            .join('-')}/${id}`
+                        : 'undefined'
+                    }
                     onCopy={() => alert('Artist link copied!')}
                   >
                     <button className='artistDetails-leftBtns'>

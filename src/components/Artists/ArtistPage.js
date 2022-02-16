@@ -19,6 +19,7 @@ const ArtistPage = () => {
   const fetchArtistList = async (searchInput) => {
     try {
       const { data } = await getArtistList(searchInput);
+      // console.log(data);
       setAllArtists(data);
     } catch (error) {
       console.log(error);
