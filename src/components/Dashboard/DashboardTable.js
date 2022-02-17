@@ -1,9 +1,10 @@
+import moment from 'moment';
 import React from 'react';
 import '../../styles/ArtistsTable.css';
 
 const DashboardTable = (props) => {
   const { paymentList } = props;
-
+  console.log(paymentList);
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
@@ -13,8 +14,8 @@ const DashboardTable = (props) => {
             <th>Status</th>
             <th>Artist</th>
             {/**<th>Location</th> */}
-            <th>Start Date</th>
-            <th>Due Date</th>
+            <th>Order Date</th>
+            {/**<th>Due Date</th> */}
           </tr>
         </thead>
         <tbody>
@@ -26,8 +27,12 @@ const DashboardTable = (props) => {
                 {payment?.artistId?.username}
               </td>
               {/**<td>{`Corona, Michigan`}</td> */}
-              <td>{`03/03/12 22:43`}</td>
-              <td>{`01/22/15 17:15`}</td>
+              <td>
+                {payment.createdAt
+                  ? moment(payment.createdAt).format('MMMM Do YYYY, h:mm a')
+                  : ''}
+              </td>
+              {/**<td>{`01/22/15 17:15`}</td> */}
             </tr>
           ))}
         </tbody>

@@ -13,7 +13,7 @@ const PaymentsTable = (props) => {
             <th>Credited to</th>
             <th>Date</th>
             <th>Amount</th>
-            <th>Type</th>
+            {/**<th>Type</th> */}
             <th>Status</th>
           </tr>
         </thead>
@@ -30,7 +30,7 @@ const PaymentsTable = (props) => {
                   : ''}
               </td>
               <td>{`Rs. ${payment.amount}`}</td>
-              <td>{`20`}</td>
+              {/**<td>{`20`}</td> */}
               <td style={{ textTransform: 'capitalize' }}>
                 {/**<button className='payment-blockBtn'>Block</button> */}
                 {payment.status}

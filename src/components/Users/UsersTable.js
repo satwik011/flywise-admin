@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import '../../styles/ArtistsTable.css';
 
 const UsersTable = (props) => {
@@ -8,22 +9,28 @@ const UsersTable = (props) => {
       <table className='fl-table'>
         <thead>
           <tr>
-            <th>Users</th>
+            <th>User Name</th>
             <th>Phone Number</th>
-            <th>Due Date</th>
-            <th>Order Number</th>
-            <th>Status</th>
+            <th>Email</th>
+            <th>Instagram</th>
+            <th>Created At</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {allUsers.map((user) => (
             <tr key={user._id}>
-              <td>{`Darrell Williamson`}</td>
-              <td>{user.phone ? user.phone : ''}</td>
-              <td>{`03/03/12 22:43`}</td>
-              <td>{`#200`}</td>
-              <td>{`Pending`}</td>
+              <td>{user.username ? user.username : 'NA'}</td>
+              <td>{user.phone ? user.phone : 'NA'}</td>
+              <td>{user.email ? user.email : 'NA'}</td>
+              <td>{user.insta ? user.insta : 'NA'}</td>
+              <td>
+                {' '}
+                {user?.createdAt
+                  ? moment(user?.createdAt).format('MMMM Do YYYY')
+                  : ''}
+              </td>
+              {/**<td>{`Pending`}</td> */}
               <td>
                 <button className='user-blockBtn'>Block</button>
               </td>
