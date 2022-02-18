@@ -32,6 +32,7 @@ const AddArtistForm = () => {
     try {
       const { data } = await getEmployeeList();
       setAllEmployees(data);
+      setFormData({ ...formData, assignedEmployee: data[0].employeeId });
     } catch (error) {
       console.log(error);
     }
@@ -167,7 +168,15 @@ const AddArtistForm = () => {
               <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>Services</label>
-                  <select
+                  <input
+                    type='text'
+                    name='serviceName'
+                    value={formData.serviceName}
+                    onChange={handleChange}
+                    placeholder='Service name'
+                    className='addArtist-inputField'
+                  />
+                  {/**<select
                     className='addArtist-selectField'
                     name='serviceName'
                     onChange={(e) => handleInputChange(e, index)}
@@ -175,7 +184,7 @@ const AddArtistForm = () => {
                     <option value='service1'>Service 1</option>
                     <option value='service2'>Service 2</option>
                     <option value='service3'>Service 3</option>
-                  </select>
+                  </select> */}
                 </div>
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>Amount</label>
