@@ -11,6 +11,7 @@ const PaymentsTable = (props) => {
           <tr>
             <th>Transaction ID</th>
             <th>Credited to</th>
+            <th>Phone no.</th>
             <th>Date</th>
             <th>Amount</th>
             {/**<th>Type</th> */}
@@ -24,6 +25,7 @@ const PaymentsTable = (props) => {
               <td style={{ textTransform: 'capitalize' }}>
                 {payment.artistId?.username}
               </td>
+              <td>{payment.artistId?.phone}</td>
               <td>
                 {payment.createdAt
                   ? moment(payment.createdAt).format('DD/MM/YYYY, h:mm a')

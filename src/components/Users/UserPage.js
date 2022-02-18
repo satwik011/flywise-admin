@@ -60,7 +60,7 @@ const UserPage = () => {
         </div>
       </div>
       <div className='user-tableSection'>
-        <UsersTable allUsers={allUsers} />
+        <UsersTable allUsers={allUsers} fetchUserList={fetchUserList} />
       </div>
     </div>
   );

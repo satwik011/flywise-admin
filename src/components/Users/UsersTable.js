@@ -1,9 +1,21 @@
 import React from 'react';
 import moment from 'moment';
+import { blockUnblockUser } from '../../redux/api';
 import '../../styles/ArtistsTable.css';
 
 const UsersTable = (props) => {
-  const { allUsers } = props;
+  const { allUsers, fetchUserList } = props;
+
+  const handleBlock = async (id) => {
+    try {
+      const { data } = await blockUnblockUser(id);
+      console.log(data);
+      fetchUserList();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
@@ -32,7 +44,12 @@ const UsersTable = (props) => {
               </td>
               {/**<td>{`Pending`}</td> */}
               <td>
-                <button className='user-blockBtn'>Block</button>
+                <button
+                  className='user-blockBtn'
+                  onClick={() => handleBlock(user._id)}
+                >
+                  {user?.blocked ? 'Unblock' : 'Block'}
+                </button>
               </td>
             </tr>
           ))}

@@ -72,3 +72,7 @@ export const allPaymentForEmployee = (id) =>
 export const getUserList = () => API.get('/api/admin/private/getallusers');
 export const getPaymentList = (searchInput) =>
   API.post('/api/admin/private/getallpayments', { field: searchInput });
+export const blockUnblockUser = (id) =>
+  API.put('/api/admin/private/blockunblockuser', {
+    userId: id,
+  });
