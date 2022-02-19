@@ -19,13 +19,8 @@ const ArtistAccountDetails = (props) => {
         if (
           formData.username &&
           formData.phone &&
-          formData.email &&
-          formData.address &&
           formData.assignedEmployee &&
-          formData.appName &&
-          formData.services.length > 0 &&
-          (formData.upiId || (formData.accountNo && formData.ifscCode)) &&
-          formData.commission
+          formData.appName
         ) {
           handleSubmit();
         } else {
