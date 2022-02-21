@@ -159,11 +159,13 @@ const AddArtistForm = () => {
                 value={formData.assignedEmployee}
                 onChange={handleChange}
               >
-                <option value='6213c73e2d17e52c165d6c80' selected>
-                  No Employee
-                </option>
                 {allEmployees?.map((employee) => (
-                  <option value={employee.employeeId}>
+                  <option
+                    value={employee.employeeId}
+                    selected={
+                      employee.employeeId === '6213c73e2d17e52c165d6c80'
+                    }
+                  >
                     {employee.employeeName}
                   </option>
                 ))}
