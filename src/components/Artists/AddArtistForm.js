@@ -104,7 +104,7 @@ const AddArtistForm = () => {
                 name='phone'
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder='Contact Number'
+                placeholder='Contact Number (10-digit)'
                 className='addArtist-inputField'
               />
             </div>
@@ -181,7 +181,7 @@ const AddArtistForm = () => {
                     type='text'
                     name='serviceName'
                     value={formData.serviceName}
-                    onChange={handleChange}
+                    onChange={(e) => handleInputChange(e, index)}
                     placeholder='Service name'
                     className='addArtist-inputField'
                   />
