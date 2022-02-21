@@ -10,7 +10,7 @@ const initialState = {
   phone: '',
   email: '',
   address: '',
-  assignedEmployee: '',
+  assignedEmployee: '6213c73e2d17e52c165d6c80',
   appName: '',
   accountNo: '',
   ifscCode: '',
