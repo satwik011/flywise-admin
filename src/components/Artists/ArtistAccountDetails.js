@@ -16,12 +16,7 @@ const ArtistAccountDetails = (props) => {
   const handleNext = () => {
     if (mode === 'account') {
       if (formData.accountNo === confirmAccount) {
-        if (
-          formData.username &&
-          formData.phone &&
-          formData.assignedEmployee &&
-          formData.appName
-        ) {
+        if (formData.username && formData.phone && formData.appName) {
           handleSubmit();
         } else {
           alert('All fields are required');

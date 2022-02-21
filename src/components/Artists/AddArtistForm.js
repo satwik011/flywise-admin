@@ -4,6 +4,7 @@ import ArtistAccountDetails from './ArtistAccountDetails';
 import CongratulationScreen from './CongratulationScreen';
 import { getEmployeeList } from '../../redux/api';
 import '../../styles/AddArtistForm.css';
+
 const initialState = {
   username: '',
   phone: '',
@@ -32,7 +33,10 @@ const AddArtistForm = () => {
     try {
       const { data } = await getEmployeeList();
       setAllEmployees(data);
-      setFormData({ ...formData, assignedEmployee: data[0].employeeId });
+      setFormData({
+        ...formData,
+        assignedEmployee: '6213c73e2d17e52c165d6c80',
+      });
     } catch (error) {
       console.log(error);
     }
@@ -155,6 +159,9 @@ const AddArtistForm = () => {
                 value={formData.assignedEmployee}
                 onChange={handleChange}
               >
+                <option value='6213c73e2d17e52c165d6c80' selected>
+                  No Employee
+                </option>
                 {allEmployees?.map((employee) => (
                   <option value={employee.employeeId}>
                     {employee.employeeName}
