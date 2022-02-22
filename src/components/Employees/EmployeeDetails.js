@@ -153,18 +153,23 @@ const EmployeeDetails = (props) => {
             </div>
             <div className='employeeDetails-rightDiv'>
               <div className='employeeDetails-rightBtnDiv'>
-                <button
-                  className='employeeDetails-rightBtn block'
-                  onClick={blockOrUnblock}
-                >
-                  {employeeData.blocked ? 'Unblock' : 'Block'}
-                </button>
-                <button
-                  className='employeeDetails-rightBtn delete'
-                  onClick={deleteEmployee}
-                >
-                  Delete Account
-                </button>
+                {id !== '6213c73e2d17e52c165d6c80' && (
+                  <button
+                    className='employeeDetails-rightBtn block'
+                    onClick={blockOrUnblock}
+                  >
+                    {employeeData.blocked ? 'Unblock' : 'Block'}
+                  </button>
+                )}
+
+                {id !== '6213c73e2d17e52c165d6c80' && (
+                  <button
+                    className='employeeDetails-rightBtn delete'
+                    onClick={deleteEmployee}
+                  >
+                    Delete Account
+                  </button>
+                )}
               </div>
             </div>
           </div>

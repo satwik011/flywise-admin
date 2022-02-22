@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 // for live server
 const API = axios.create({
-  baseURL: 'https://fanstar-backend.herokuapp.com',
+  baseURL: 'https://fanstar-backend-uiwtg.ondigitalocean.app/',
 });
 
 API.interceptors.request.use((req) => {
