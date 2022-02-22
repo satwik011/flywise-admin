@@ -11,7 +11,9 @@ const ArtistSetPaymentMode = (props) => {
           <button className='backBtnTick' onClick={() => setPage(page - 1)}>
             <img src={backTick} alt='back' className='backBtnIcon' />
           </button>
-          <h3 className='artist-setCommissionHead'>Add comission for artist</h3>
+          <h3 className='artist-setCommissionHead'>
+            Add comission for artist *
+          </h3>
         </div>
         <div className='artist-commissionInputDiv'>
           <input

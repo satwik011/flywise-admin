@@ -96,7 +96,7 @@ const AddArtistForm = () => {
             <div className='addArtist-personalDetails'>
               <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>Full Name</label>
+                  <label className='addArtist-inputLabel'>Full Name*</label>
                   <input
                     type='text'
                     name='username'
@@ -107,7 +107,9 @@ const AddArtistForm = () => {
                   />
                 </div>
                 <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>Contact Number</label>
+                  <label className='addArtist-inputLabel'>
+                    Contact Number*
+                  </label>
                   <input
                     type='text'
                     name='phone'
@@ -144,7 +146,7 @@ const AddArtistForm = () => {
               </div>
               <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>App Name</label>
+                  <label className='addArtist-inputLabel'>App Name*</label>
                   <input
                     type='text'
                     name='appName'

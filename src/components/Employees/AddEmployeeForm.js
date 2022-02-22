@@ -31,7 +31,7 @@ const AddEmployeeForm = () => {
         <div className='addEmployee-personalDetails'>
           <div className='addEmployee-alignRow'>
             <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Full Name</label>
+              <label className='addEmployee-inputLabel'>Full Name*</label>
               <input
                 type='text'
                 name='username'
@@ -42,7 +42,7 @@ const AddEmployeeForm = () => {
               />
             </div>
             <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Contact Number</label>
+              <label className='addEmployee-inputLabel'>Contact Number*</label>
               <input
                 type='text'
                 name='phone'
