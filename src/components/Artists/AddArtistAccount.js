@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getArtistList } from '../../redux/api';
 import backTick from '../../images/backTick.png';
-import { Fragment } from 'react';
 import LoadingPage from '../utils/LoadingPage';
+import ArtistAccountDetails from './ArtistAccountDetails';
+import CongratulationScreen from './CongratulationScreen';
 
 const initialState = {
   accountNo: '',
@@ -12,10 +14,12 @@ const initialState = {
 };
 
 const AddArtistAccount = () => {
+  const history = useHistory();
   const [page, setPage] = useState(1);
   const [mode, setMode] = useState('account');
   const [artistList, setArtistList] = useState([]);
   const [formData, setFormData] = useState(initialState);
+  const [confirmAccount, setConfirmAccount] = useState('');
   const [loading, setLoading] = useState(false);
   const [boolVal, setBoolVal] = useState(false);
 
@@ -23,7 +27,7 @@ const AddArtistAccount = () => {
     setLoading(true);
     try {
       const { data } = await getArtistList();
-      console.log(data);
+      // console.log(data);
       setArtistList(data);
       setLoading(false);
     } catch (error) {
@@ -45,6 +49,19 @@ const AddArtistAccount = () => {
     setFormData({ ...formData, [name]: e.target.value });
   };
 
+  const handlePrevious = () => {
+    setPage(page - 1);
+  };
+
+  const handleNext = async () => {
+    console.log(formData);
+    if (formData.accountNo === confirmAccount) {
+      alert('Added');
+    } else {
+      alert('Account number and confirm account number are not matching');
+    }
+  };
+
   return (
     <div className='addArtist-container '>
       <Fragment>
@@ -54,7 +71,7 @@ const AddArtistAccount = () => {
               <div className='artist-commissionHeader'>
                 <button
                   className='backBtnTick'
-                  onClick={() => setPage(page - 1)}
+                  onClick={() => history.push('/artists')}
                 >
                   <img src={backTick} alt='back' className='backBtnIcon' />
                 </button>
@@ -110,12 +127,136 @@ const AddArtistAccount = () => {
               <div className='artist-setPaymentBtnDiv'>
                 <button
                   className='artist-setPaymentBtn'
-                  onClick={() => setPage(page + 1)}
+                  onClick={() => {
+                    if (formData.artistId !== '') {
+                      setPage(page + 1);
+                    } else {
+                      alert('Please select artist');
+                    }
+                  }}
                 >
                   Next
                 </button>
               </div>
             </div>
+          </div>
+        )}
+        {page === 2 && (
+          <div style={{ width: '50%', margin: 'auto' }}>
+            {mode === 'account' ? (
+              <Fragment>
+                <div className='artist-accountDetailHeader'>
+                  <button className='backBtnTick' onClick={handlePrevious}>
+                    <img src={backTick} alt='back' className='backBtnIcon' />
+                  </button>
+                  <h1 className='artist-accountDetailHeading'>
+                    Add Payment Account
+                  </h1>
+                </div>
+                <div className='artist-accountFormDiv'>
+                  <div className='artist-accountInputDiv'>
+                    <label className='artist-accountInputLabel'>NAME</label>
+                    <input
+                      type='text'
+                      name='accountHolderName'
+                      placeholder='Account holder name'
+                      className='artist-accountInput'
+                    />
+                  </div>
+                  <div className='artist-accountInputDiv'>
+                    <label className='artist-accountInputLabel'>
+                      ACCOUNT NO
+                    </label>
+                    <input
+                      type='text'
+                      name='accountNo'
+                      value={formData.accountNo}
+                      onChange={handleChange}
+                      placeholder='Account number'
+                      className='artist-accountInput'
+                    />
+                  </div>
+                  <div className='artist-accountInputDiv'>
+                    <label className='artist-accountInputLabel'>
+                      CONFIRM ACCOUNT NO
+                    </label>
+                    <input
+                      type='text'
+                      name='confirmAccount'
+                      value={confirmAccount}
+                      onChange={(e) => setConfirmAccount(e.target.value)}
+                      placeholder='Confirm account number'
+                      className='artist-accountInput'
+                    />
+                  </div>
+                  <div className='artist-accountInputDiv'>
+                    <label className='artist-accountInputLabel'>
+                      IFSC Code
+                    </label>
+                    <input
+                      type='text'
+                      name='ifscCode'
+                      value={formData.ifscCode}
+                      onChange={handleChange}
+                      placeholder='IFSC code'
+                      className='artist-accountInput'
+                    />
+                  </div>
+                  <div className='artist-accountInputDiv'>
+                    <label className='artist-accountInputLabel'>UPI Id</label>
+                    <input
+                      type='text'
+                      name='upiId'
+                      value={formData.upiId}
+                      onChange={handleChange}
+                      placeholder='UPI Id'
+                      className='artist-accountInput'
+                    />
+                  </div>
+                  <div className='artist-submitAccountDiv'>
+                    <button
+                      className='artist-submitAccount'
+                      onClick={handleNext}
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <div className='artist-accountDetailHeader'>
+                  <button
+                    className='backBtnTick'
+                    onClick={() => setPage(page - 1)}
+                  >
+                    <img src={backTick} alt='back' className='backBtnIcon' />
+                  </button>
+                  <h1 className='artist-accountDetailHeading'>Add UPI ID</h1>
+                </div>
+                <div className='artist-accountFormDiv'>
+                  <div className='artist-accountInputDiv'>
+                    <label className='artist-accountInputLabel'>UPI ID</label>
+                    <input
+                      type='text'
+                      name='upiId'
+                      value={formData.upiId}
+                      placeholder='UPI ID'
+                      onChange={handleChange}
+                      className='artist-accountInput'
+                    />
+                  </div>
+                  <div className='artist-submitAccountDiv'>
+                    <button
+                      className='artist-submitAccount'
+                      onClick={handleNext}
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </Fragment>
+            )}
           </div>
         )}
       </Fragment>

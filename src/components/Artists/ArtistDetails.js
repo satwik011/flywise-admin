@@ -174,7 +174,7 @@ const ArtistDetails = (props) => {
                   <CopyToClipboard
                     text={
                       artistData.appName
-                        ? `https://fanstar-app.netlify.app/artist/${artistData.appName
+                        ? `https://fanstar.app/artist/${artistData.appName
                             .split(' ')
                             .join('-')}/${id}`
                         : 'undefined'

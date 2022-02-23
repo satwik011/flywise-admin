@@ -25,11 +25,11 @@ const App = () => {
           <Route path='/home' exact component={DashboardPage} />
           <Route path='/artists' exact component={ArtistPage} />
           <Route path='/artists/add' exact component={AddArtistForm} />
-          {/* <Route
+          <Route
             path='/artists/addaccount'
             exact
             component={AddArtistAccount}
-          /> */}
+          />
           <Route path='/artists/detail/:id' exact component={ArtistDetails} />
           <Route
             path='/artists/detail/:id/pay'
