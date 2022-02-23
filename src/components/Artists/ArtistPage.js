@@ -66,14 +66,13 @@ const ArtistPage = () => {
                 <span>Add artist</span>
               </button>
             </div>
-            <div className='artist-filterDiv'>
-              <button className='artist-filterBtn'>
-                <img
-                  src={filterIcon}
-                  alt='print'
-                  className='artist-filterIcon'
-                />
-                <span>Filter</span>
+            <div className='artist-addArtistDiv'>
+              <button
+                className='artist-addBtn'
+                onClick={() => history.push('/artists/addaccount')}
+              >
+                <img src={addIcon} alt='add' className='artist-addIcon' />
+                <span>Add Account</span>
               </button>
             </div>
           </div>

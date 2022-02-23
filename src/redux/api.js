@@ -21,7 +21,7 @@ export const totalSubscriptions = () =>
   API.get('/api/admin/private/gettotalsubscribers');
 
 // Artists
-export const getArtistList = (searchInput) =>
+export const getArtistList = (searchInput = '') =>
   API.post('/api/admin/private/getlistofartists', { field: searchInput });
 export const createArtist = (formData) =>
   API.post('/api/admin/private/createartist', formData);

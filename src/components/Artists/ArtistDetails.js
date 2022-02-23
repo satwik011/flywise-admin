@@ -129,10 +129,7 @@ const ArtistDetails = (props) => {
     try {
       const { data } = await EditArtist(id);
       // window.localStorage.setItem('fanstarToken', data);
-      window.open(
-        `https://fanstar-app.netlify.app/artist/landing/${data}`,
-        '_blank'
-      );
+      window.open(`https://fanstar.app/artist/landing/${data}`, '_blank');
     } catch (error) {
       console.log(error);
     }
@@ -263,13 +260,18 @@ const ArtistDetails = (props) => {
               </div>
             </div>
             <div className='artistDetails-incomeCardDiv'>
+              <p className='artistDetails-incomeCardLabel'>Amount Paid</p>
+              <div className='artistDetails-incomeCard'>
+                <h3 className='artistDetails-incomeCardTitle'>Amount Paid</h3>
+                <p className='artistDetails-income'>{`Rs ${paidAmount}/-`}</p>
+              </div>
+            </div>
+            <div className='artistDetails-incomeCardDiv'>
               <p className='artistDetails-incomeCardLabel'>
                 Withdrawable Balance
               </p>
               <div className='artistDetails-incomeCard'>
-                <h3 className='artistDetails-incomeCardTitle'>
-                  Withdrawable Balance
-                </h3>
+                <h3 className='artistDetails-incomeCardTitle'>Balance</h3>
                 <p className='artistDetails-income'>{`Rs ${
                   totalIncome - pendingAmount - paidAmount
                 }/-`}</p>

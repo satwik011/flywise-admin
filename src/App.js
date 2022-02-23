@@ -13,6 +13,7 @@ import PaymentPage from './components/Payments/PaymentPage';
 import ArtistDetails from './components/Artists/ArtistDetails';
 import EmployeeDetails from './components/Employees/EmployeeDetails';
 import ArtistPayment from './components/Artists/ArtistPayment';
+import AddArtistAccount from './components/Artists/AddArtistAccount';
 
 export const history = createHistory();
 const App = () => {
@@ -24,6 +25,11 @@ const App = () => {
           <Route path='/home' exact component={DashboardPage} />
           <Route path='/artists' exact component={ArtistPage} />
           <Route path='/artists/add' exact component={AddArtistForm} />
+          {/* <Route
+            path='/artists/addaccount'
+            exact
+            component={AddArtistAccount}
+          /> */}
           <Route path='/artists/detail/:id' exact component={ArtistDetails} />
           <Route
             path='/artists/detail/:id/pay'
