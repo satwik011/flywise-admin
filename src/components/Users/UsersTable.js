@@ -24,6 +24,7 @@ const UsersTable = (props) => {
             <th>User Name</th>
             <th>Phone Number</th>
             <th>Email</th>
+            <th>Location</th>
             <th>Instagram</th>
             <th>Created At</th>
             <th>Action</th>
@@ -35,6 +36,7 @@ const UsersTable = (props) => {
               <td>{user.username ? user.username : 'NA'}</td>
               <td>{user.phone ? user.phone : 'NA'}</td>
               <td>{user.email ? user.email : 'NA'}</td>
+              <td>{user.location ? user.location : 'NA'}</td>
               <td>{user.insta ? user.insta : 'NA'}</td>
               <td>
                 {' '}

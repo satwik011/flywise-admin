@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getArtistList, addArtistAccount } from '../../redux/api';
+import { getEmployeeList, addEmployeeAccount } from '../../redux/api';
 import backTick from '../../images/backTick.png';
 import LoadingPage from '../utils/LoadingPage';
 // import ArtistAccountDetails from './ArtistAccountDetails';
@@ -10,25 +10,25 @@ const initialState = {
   accountNo: '',
   ifscCode: '',
   upiId: '',
-  artistId: '',
+  employeeId: '',
 };
 
-const AddArtistAccount = () => {
+const AddEmployeeAccount = () => {
   const history = useHistory();
   const [page, setPage] = useState(1);
   const [mode, setMode] = useState('account');
-  const [artistList, setArtistList] = useState([]);
+  const [employeeList, setEmployeeList] = useState([]);
   const [formData, setFormData] = useState(initialState);
   const [confirmAccount, setConfirmAccount] = useState('');
   const [loading, setLoading] = useState(false);
   const [boolVal, setBoolVal] = useState(false);
 
-  const fetchArtistList = async () => {
+  const fetchEmployeeList = async () => {
     setLoading(true);
     try {
-      const { data } = await getArtistList();
-      // console.log(data);
-      setArtistList(data);
+      const { data } = await getEmployeeList();
+      console.log(data);
+      setEmployeeList(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -39,7 +39,7 @@ const AddArtistAccount = () => {
 
   useEffect(() => {
     if (!boolVal) {
-      fetchArtistList();
+      fetchEmployeeList();
       setBoolVal(true);
     }
   }, [boolVal]);
@@ -62,7 +62,7 @@ const AddArtistAccount = () => {
       ) {
         try {
           setLoading(true);
-          const { data } = await addArtistAccount(formData.artistId, {
+          const { data } = await addEmployeeAccount(formData.employeeId, {
             accountNo: formData.accountNo,
             ifscCode: formData.ifscCode,
             upiId: formData.upiId,
@@ -96,20 +96,22 @@ const AddArtistAccount = () => {
                 >
                   <img src={backTick} alt='back' className='backBtnIcon' />
                 </button>
-                <h3 className='artist-setCommissionHead'>Select Artist *</h3>
+                <h3 className='artist-setCommissionHead'>Select Employee *</h3>
               </div>
               <div className='artist-commissionInputDiv'>
                 <select
                   className='addArtist-selectField'
-                  name='artistId'
-                  value={formData.artistId}
+                  name='employeeId'
+                  value={formData.employeeId}
                   onChange={handleChange}
                 >
-                  <option value='' selected={formData.artistId === ''}>
+                  <option value='' selected={formData.employeeId === ''}>
                     No select
                   </option>
-                  {artistList?.map((artist) => (
-                    <option value={artist.artistId}>{artist.artistName}</option>
+                  {employeeList?.map((employee) => (
+                    <option value={employee.employeeId}>
+                      {employee.employeeName}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -149,10 +151,10 @@ const AddArtistAccount = () => {
                 <button
                   className='artist-setPaymentBtn'
                   onClick={() => {
-                    if (formData.artistId !== '') {
+                    if (formData.employeeId !== '') {
                       setPage(page + 1);
                     } else {
-                      alert('Please select artist');
+                      alert('Please select employee');
                     }
                   }}
                 >
@@ -286,4 +288,4 @@ const AddArtistAccount = () => {
   );
 };
 
-export default AddArtistAccount;
+export default AddEmployeeAccount;

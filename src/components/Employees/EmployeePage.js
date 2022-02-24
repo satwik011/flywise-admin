@@ -73,7 +73,7 @@ const EmployeePage = () => {
             <span>Print</span>
           </button>
         </div> */}
-            <div className='employee-filterDiv'>
+            {/* <div className='employee-filterDiv'>
               <button className='employee-filterBtn'>
                 <img
                   src={filterIcon}
@@ -81,6 +81,15 @@ const EmployeePage = () => {
                   className='employee-filterIcon'
                 />
                 <span>Filter</span>
+              </button>
+            </div> */}
+            <div className='employee-addEmployeeDiv'>
+              <button
+                className='employee-addBtn'
+                onClick={() => history.push('/employees/addaccount')}
+              >
+                <img src={addIcon} alt='add' className='employee-addIcon' />
+                <span>Add Account</span>
               </button>
             </div>
           </div>
