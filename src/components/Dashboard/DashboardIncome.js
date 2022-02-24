@@ -12,10 +12,8 @@ const DashboardIncome = (props) => {
     try {
       const { data } = await getPaymentList();
       let total = 0;
-      data.forEach((d) => {
-        if (d.status === 'completed') {
+      data.forEach((d) => 
           total += parseInt(d.amount);
-        }
       });
       setTotalIncome(total);
     } catch (err) {
