@@ -48,6 +48,7 @@ const EmployeeDetails = (props) => {
   const fetchWeeklyIncome = async (id) => {
     try {
       const { data } = await allPaymentForEmployee(id);
+      // console.log(data);
       let today = new Date();
       let before = new Date(today);
       before.setDate(today.getDate() - 6);
@@ -56,10 +57,7 @@ const EmployeeDetails = (props) => {
       data.forEach((artist) => {
         if (artist?.paymentsOfArtist?.length > 0) {
           artist.paymentsOfArtist.forEach((d) => {
-            if (
-              d.status === 'completed' &&
-              new Date(d.createdAt).getTime() >= before
-            ) {
+            if (new Date(d.createdAt).getTime() >= before) {
               totalIncome += parseInt(d.amount);
             }
           });
@@ -75,6 +73,7 @@ const EmployeeDetails = (props) => {
     setIsLoading(true);
     try {
       const { data } = await getAnEmployee(id);
+      // console.log(data);
       setEmployeeData(data);
       setIsLoading(false);
     } catch (error) {
@@ -137,18 +136,40 @@ const EmployeeDetails = (props) => {
                 />
               </div>
               <div className='employeeDetails-infoDiv'>
-                <p className='employeeDetails-infoPara'>
-                  {employeeData.username ? employeeData.username : ''},{' '}
-                  <span className='employeeDetails-infoSpan'>
-                    {employeeData.gender ? employeeData.gender : ''}
-                  </span>
-                </p>
-                <p className='employeeDetails-infoPara'>
-                  {employeeData.phone ? employeeData.phone : ''}
-                </p>
-                <p className='employeeDetails-infoPara'>
-                  {employeeData.email ? employeeData.email : ''}
-                </p>
+                <div className='employeeDetails-infoContent'>
+                  <div className='employeeDetails-personal'>
+                    <p className='employeeDetails-infoPara'>
+                      {employeeData.username ? employeeData.username : ''},{' '}
+                      <span className='employeeDetails-infoSpan'>
+                        {employeeData.gender ? employeeData.gender : ''}
+                      </span>
+                    </p>
+                    <p className='employeeDetails-infoPara'>
+                      {employeeData.phone ? employeeData.phone : ''}
+                    </p>
+                    <p className='employeeDetails-infoPara'>
+                      {employeeData.email ? employeeData.email : ''}
+                    </p>
+                  </div>
+                  <div className='employeeDetails-account'>
+                    <p className='employeeDetails-infoPara'>
+                      <span className='employeeDetails-infoSpan'>
+                        Account No:{' '}
+                      </span>
+                      {employeeData.accountNo ? employeeData.accountNo : 'NA'}
+                    </p>
+                    <p className='employeeDetails-infoPara'>
+                      <span className='employeeDetails-infoSpan'>
+                        IFSC Code:{' '}
+                      </span>
+                      {employeeData.ifscCode ? employeeData.ifscCode : 'NA'}
+                    </p>
+                    <p className='employeeDetails-infoPara'>
+                      <span className='employeeDetails-infoSpan'>UPI Id: </span>
+                      {employeeData.upiId ? employeeData.upiId : 'NA'}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className='employeeDetails-rightDiv'>

@@ -36,7 +36,7 @@ const ArtistDetails = (props) => {
     setIsLoading(true);
     try {
       const { data } = await getAnArtist(id);
-      // console.log(data);
+      console.log(data);
       setArtistData(data);
       // setArtistCommission(parseInt(data.commission) / 100);
       setPaidAmount(parseInt(data.paid));
@@ -151,18 +151,40 @@ const ArtistDetails = (props) => {
                 />
               </div>
               <div className='artistDetails-infoDiv'>
-                <p className='artistDetails-infoPara'>
-                  {artistData.username ? artistData.username : ''},{' '}
-                  <span className='artistDetails-infoSpan'>
-                    {artistData.gender ? artistData.gender : ''}
-                  </span>
-                </p>
-                <p className='artistDetails-infoPara'>
-                  {artistData.phone ? artistData.phone : ''}
-                </p>
-                <p className='artistDetails-infoPara'>
-                  {artistData.email ? artistData.email : ''}
-                </p>
+                <div className='artistDetails-infoContent'>
+                  <div className='artistDetails-personal'>
+                    <p className='artistDetails-infoPara'>
+                      {artistData.username ? artistData.username : ''},{' '}
+                      <span className='artistDetails-infoSpan'>
+                        {artistData.gender ? artistData.gender : ''}
+                      </span>
+                    </p>
+                    <p className='artistDetails-infoPara'>
+                      {artistData.phone ? artistData.phone : ''}
+                    </p>
+                    <p className='artistDetails-infoPara'>
+                      {artistData.email ? artistData.email : ''}
+                    </p>
+                  </div>
+                  <div className='artistDetails-account'>
+                    <p className='artistDetails-infoPara'>
+                      <span className='artistDetails-infoSpan'>
+                        Account No:{' '}
+                      </span>
+                      {artistData.accountNo ? artistData.accountNo : 'NA'}
+                    </p>
+                    <p className='artistDetails-infoPara'>
+                      <span className='artistDetails-infoSpan'>
+                        IFSC Code:{' '}
+                      </span>
+                      {artistData.ifscCode ? artistData.ifscCode : 'NA'}
+                    </p>
+                    <p className='artistDetails-infoPara'>
+                      <span className='artistDetails-infoSpan'>UPI Id: </span>
+                      {artistData.upiId ? artistData.upiId : 'NA'}
+                    </p>
+                  </div>
+                </div>
                 <div className='artistDetails-leftBtnDiv'>
                   <button
                     className='artistDetails-leftBtns'

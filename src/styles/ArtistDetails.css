@@ -18,7 +18,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 40%;
+  width: 62%;
 }
 
 .artistDetails-imageDiv {
@@ -36,7 +36,24 @@
 }
 
 .artistDetails-infoDiv {
-  width: 50%;
+  width: 72%;
+}
+
+.artistDetails-infoContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.artistDetails-personal {
+  width: 40%;
+}
+
+.artistDetails-account {
+  width: 58%;
+  /* padding-left: 10px; */
+  /* border-left: 1px solid #7d8285; */
 }
 
 .artistDetails-infoPara {
@@ -57,7 +74,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 65%;
 }
 
 .artistDetails-leftBtns {
@@ -67,7 +84,7 @@
   align-items: center;
   background-color: #1c7ebf;
   color: #fff;
-  width: 48%;
+  width: 45%;
   padding: 4px;
   border: none;
   outline: none;
@@ -90,7 +107,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  min-width: 50%;
+  width: 35%;
 }
 
 .artistDetails-rightBtnDiv {

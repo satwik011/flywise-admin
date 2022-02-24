@@ -18,7 +18,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 40%;
+  width: 65%;
 }
 
 .employeeDetails-imageDiv {
@@ -36,7 +36,14 @@
 }
 
 .employeeDetails-infoDiv {
-  width: 50%;
+  width: 70%;
+}
+
+.employeeDetails-infoContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .employeeDetails-infoPara {
@@ -90,7 +97,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: 30%;
 }
 
 .employeeDetails-rightBtnDiv {

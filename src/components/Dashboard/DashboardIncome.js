@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getPaymentList, appVisits, totalSubscriptions } from '../../redux/api';
+import LoadingPage from '../utils/LoadingPage';
 
 const DashboardIncome = (props) => {
   const [totalIncome, setTotalIncome] = useState(0);
@@ -7,22 +8,36 @@ const DashboardIncome = (props) => {
   const [totalAppVisits, setTotalAppVisits] = useState(0);
   const [totalSubscription, setTotalSubscription] = useState(0);
   const [boolVal, setBoolVal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchTotalIncome = async () => {
     try {
+      setLoading(true);
       const { data } = await getPaymentList();
-      let total = 0;
+      console.log(data);
+      let total = 0,
+        count = 0;
       data.forEach((d) => {
-          total += parseInt(d.amount);
+        count += 1;
+        total +=
+          parseInt(d.amount) *
+          (1 -
+            parseInt(d?.artistId?.commission ? d?.artistId?.commission : 0) /
+              100);
+        if (count === data.length) {
+          setLoading(false);
+          setTotalIncome(total);
+        }
       });
-      setTotalIncome(total);
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
 
   const fetchWeeklyIncome = async () => {
     try {
+      // setLoading(true);
       const { data } = await getPaymentList();
       let today = new Date();
 
@@ -31,29 +46,41 @@ const DashboardIncome = (props) => {
       let total = 0;
       data.forEach((d) => {
         if (new Date(d.createdAt).getTime() >= before) {
-          total += parseInt(d.amount);
+          total +=
+            parseInt(d.amount) *
+            (1 -
+              parseInt(d?.artistId?.commission ? d?.artistId?.commission : 0) /
+                100);
         }
       });
+      // setLoading(false);
       setWeeklyIncome(total);
     } catch (err) {
+      // setLoading(false);
       console.log(err);
     }
   };
 
   const fetchAppVisits = async () => {
     try {
+      // setLoading(true);
       const { data } = await appVisits();
+      // setLoading(false);
       setTotalAppVisits(data);
     } catch (error) {
+      // setLoading(false);
       console.log(error);
     }
   };
 
   const fetchTotalSubscriptions = async () => {
     try {
+      // setLoading(true);
       const { data } = await totalSubscriptions();
+      // setLoading(false);
       setTotalSubscription(data);
     } catch (error) {
+      // setLoading(false);
       console.log(error);
     }
   };
@@ -99,6 +126,7 @@ const DashboardIncome = (props) => {
           </div>
         </div>
       </div>
+      {loading && <LoadingPage />}
     </div>
   );
 };
