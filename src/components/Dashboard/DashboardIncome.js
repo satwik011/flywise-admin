@@ -17,6 +17,9 @@ const DashboardIncome = (props) => {
       console.log(data);
       let total = 0,
         count = 0;
+      if (data.length === 0) {
+        setLoading(false);
+      }
       data.forEach((d) => {
         count += 1;
         total +=
