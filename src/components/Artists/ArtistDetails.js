@@ -10,7 +10,7 @@ import {
   allPaymentForArtist,
   EditArtist,
 } from '../../redux/api';
-// import paymentIcon from '../../images/paymentIcon.svg';
+import paymentIcon from '../../images/paymentIcon.svg';
 import editIcon from '../../images/editIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 import '../../styles/ArtistDetails.css';
@@ -213,32 +213,22 @@ const ArtistDetails = (props) => {
             </div>
             <div className='artistDetails-rightDiv'>
               <div className='artistDetails-rightBtnDiv'>
-                {/**pendingWithdraw.length > 0 && (
+                {
                   <button
                     className='artistDetails-rightBtn block paymentBtn'
                     onClick={() =>
                       history.push({
                         pathname: `/artists/detail/${id}/pay`,
                         state: {
-                          requests: pendingWithdraw,
+                          // requests: pendingWithdraw,
                           artistName: artistData.username,
                         },
                       })
                     }
                   >
-                    <img
-                      src={paymentIcon}
-                      alt='payment'
-                      className='paymentIcon'
-                    />
                     <span>Payment</span>
-                    {pendingWithdraw.length > 0 && (
-                      <span className='notification'>
-                        {pendingWithdraw.length}
-                      </span>
-                    )}
                   </button>
-                ) */}
+                }
                 <button
                   className='artistDetails-rightBtn block'
                   onClick={blockOrUnblock}

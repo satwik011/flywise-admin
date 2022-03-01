@@ -107,13 +107,13 @@ const DashboardIncome = (props) => {
             <div className='incomeCard-content'>
               <p className='income-label'>Total income</p>
               <h3 className='income-amount'>
-                ₹ <span>{totalIncome}</span>
+                ₹ <span>{parseInt(totalIncome).toFixed(2)}</span>
               </h3>
             </div>
             <div className='incomeCard-content'>
               <p className='income-label'>Weekly income</p>
               <h3 className='income-amount'>
-                ₹ <span>{weeklyIncome}</span>
+                ₹ <span>{parseInt(weeklyIncome).toFixed(2)}</span>
               </h3>
             </div>
           </div>
