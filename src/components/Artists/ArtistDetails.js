@@ -284,9 +284,11 @@ const ArtistDetails = (props) => {
               </p>
               <div className='artistDetails-incomeCard'>
                 <h3 className='artistDetails-incomeCardTitle'>Balance</h3>
-                <p className='artistDetails-income'>{`Rs ${
-                  totalIncome - pendingAmount - paidAmount
-                }/-`}</p>
+                <p className='artistDetails-income'>
+                  {totalIncome - pendingAmount - paidAmount >= 0
+                    ? `Rs ${totalIncome - pendingAmount - paidAmount}/-`
+                    : 'Rs 0/-'}
+                </p>
               </div>
             </div>
           </div>

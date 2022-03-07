@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { payToArtist } from '../../redux/api';
+import ConfirmationScreen from './ConfirmationScreen';
 import '../../styles/ArtistPayment.css';
 
 const ArtistPayment = (props) => {
   const history = useHistory();
   const [amount, setAmount] = useState('');
+  const [confirmScreen, setConfirmScreen] = useState(false);
   const state = props.location.state;
   const id = props.match.params.id;
   if (!state) {
@@ -17,17 +19,26 @@ const ArtistPayment = (props) => {
   };
 
   const handlePay = async () => {
-    // try {
-    //   await payToArtist({
-    //     withdrawId: state.requests[state.requests.length - 1]._id,
-    //     amount: amount,
-    //   });
-    //   alert('Amount Paid!');
-    //   history.push(`/artists/detail/${id}`);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    console.log(`Paid amount ${amount}`);
+    try {
+      await payToArtist({
+        // withdrawId: state.requests[state.requests.length - 1]._id,
+        artistId: id,
+        amount: amount,
+      });
+      alert('Amount Paid!');
+      history.push(`/artists/detail/${id}`);
+      setConfirmScreen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const openConfirm = () => {
+    if (amount > 0) {
+      setConfirmScreen(true);
+    } else {
+      alert('Please add some amount');
+    }
   };
 
   return (
@@ -45,9 +56,15 @@ const ArtistPayment = (props) => {
         value={amount}
         placeholder='Ex. 500'
       />
-      <button className='artistPay-btn' onClick={handlePay}>
+      <button className='artistPay-btn' onClick={openConfirm}>
         Pay
       </button>
+      {confirmScreen && (
+        <ConfirmationScreen
+          close={() => setConfirmScreen(false)}
+          proceedPay={handlePay}
+        />
+      )}
     </div>
   );
 };
