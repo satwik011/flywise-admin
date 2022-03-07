@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import EmployeePaymentMode from './EmployeePaymentMode';
 import EmployeeAccountDetails from './EmployeeAccountDetails';
 import CongratulationScreen from './CongratulationScreen';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
 import '../../styles/AddEmployeeForm.css';
 
@@ -17,12 +19,22 @@ const initialData = {
 
 const AddEmployeeForm = () => {
   const [formData, setFormData] = useState(initialData);
+  const [phone, setPhone] = useState('');
   const [mode, setMode] = useState('account');
   const [page, setPage] = useState(1);
 
   const handleChange = (e) => {
     const { name } = e.target;
     setFormData({ ...formData, [name]: e.target.value });
+  };
+
+  const handleNext = () => {
+    if (formData.username && phone) {
+      setFormData({ ...formData, phone: phone });
+      setPage(page + 1);
+    } else {
+      alert('Fill all required(*) fields');
+    }
   };
 
   return (
@@ -35,7 +47,7 @@ const AddEmployeeForm = () => {
               <input
                 type='text'
                 name='username'
-                placeholder='Full Name'
+                placeholder='Full Name *'
                 className='addEmployee-inputField'
                 value={formData.username}
                 onChange={handleChange}
@@ -43,13 +55,21 @@ const AddEmployeeForm = () => {
             </div>
             <div className='addEmployee-inputFieldDiv'>
               <label className='addEmployee-inputLabel'>Contact Number*</label>
-              <input
+              {/* <input
                 type='text'
                 name='phone'
                 value={formData.phone}
-                placeholder='Contact Number'
+                placeholder='Contact Number *'
                 className='addEmployee-inputField'
                 onChange={handleChange}
+              /> */}
+              <PhoneInput
+                className='addEmployee-inputField'
+                // type='tel'
+                defaultCountry='IN'
+                value={phone}
+                onChange={setPhone}
+                placeholder='Enter employee contact no'
               />
             </div>
           </div>
@@ -80,7 +100,7 @@ const AddEmployeeForm = () => {
           <div className='addEmployee-submitDetailDiv'>
             <button
               className='addEmployee-submitDetailBtn'
-              onClick={() => setPage(page + 1)}
+              onClick={handleNext}
             >
               Next
             </button>

@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import ArtistSetPaymentMode from './ArtistSetPaymentMode';
 import ArtistAccountDetails from './ArtistAccountDetails';
 import CongratulationScreen from './CongratulationScreen';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import { getEmployeeList } from '../../redux/api';
 import '../../styles/AddArtistForm.css';
 import LoadingPage from '../utils/LoadingPage';
@@ -22,6 +24,7 @@ const initialState = {
 
 const AddArtistForm = () => {
   const [formData, setFormData] = useState(initialState);
+  const [phone, setPhone] = useState('');
   const [mode, setMode] = useState('account');
   const [page, setPage] = useState(1);
   const [inputList, setInputList] = useState([
@@ -82,8 +85,13 @@ const AddArtistForm = () => {
   };
 
   const handleNext = () => {
-    setFormData({ ...formData, services: inputList });
-    setPage(page + 1);
+    // console.log(phone);
+    if (formData.username && phone && formData.appName) {
+      setFormData({ ...formData, phone: phone, services: inputList });
+      setPage(page + 1);
+    } else {
+      alert('Fill all required(*) fields');
+    }
   };
 
   return (
@@ -110,14 +118,22 @@ const AddArtistForm = () => {
                   <label className='addArtist-inputLabel'>
                     Contact Number*
                   </label>
-                  <input
+                  <PhoneInput
+                    className='addArtist-inputField'
+                    // type='tel'
+                    defaultCountry='IN'
+                    value={phone}
+                    onChange={setPhone}
+                    placeholder='Enter artist contact no'
+                  />
+                  {/* <input
                     type='text'
                     name='phone'
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder='Contact Number (10-digit)'
+                    // placeholder='Contact Number (10-digit)'
                     className='addArtist-inputField'
-                  />
+                  /> */}
                 </div>
               </div>
               <div className='addArtist-alignRow'>
