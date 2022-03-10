@@ -36,7 +36,7 @@ const ArtistDetails = (props) => {
     setIsLoading(true);
     try {
       const { data } = await getAnArtist(id);
-      console.log(data);
+      // console.log(data);
       setArtistData(data);
       // setArtistCommission(parseInt(data.commission) / 100);
       setPaidAmount(parseInt(data.paid));

@@ -4,7 +4,7 @@ import '../../styles/ArtistsTable.css';
 
 const DashboardTable = (props) => {
   const { paymentList } = props;
-  console.log(paymentList);
+  // console.log(paymentList);
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>

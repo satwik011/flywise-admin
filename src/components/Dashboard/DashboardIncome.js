@@ -14,7 +14,7 @@ const DashboardIncome = (props) => {
     try {
       setLoading(true);
       const { data } = await getPaymentList();
-      console.log(data);
+      // console.log(data);
       let total = 0,
         count = 0;
       if (data.length === 0) {
