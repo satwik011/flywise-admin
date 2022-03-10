@@ -3,8 +3,11 @@ import Cookies from 'js-cookie';
 
 // for live server
 const API = axios.create({
-  baseURL: 'https://fanstar-backend-uiwtg.ondigitalocean.app/',
+  baseURL: 'https://fanstar-kylo.herokuapp.com/',
 });
+
+// https://fanstar-kylo.herokuapp.com/
+// https://fanstar-backend-uiwtg.ondigitalocean.app/
 
 API.interceptors.request.use((req) => {
   if (Cookies.get('fanstarAdmin')) {

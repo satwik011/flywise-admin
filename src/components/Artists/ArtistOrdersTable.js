@@ -25,7 +25,11 @@ const ArtistOrdersTable = (props) => {
                 {payment?.userId?.username ? payment?.userId?.username : 'NA'}
               </td>
               <td>{payment?.userId?.phone ? payment?.userId?.phone : 'NA'}</td>
-              <td>{payment?.serviceName ? payment?.serviceName : 'NA'}</td>
+              <td>
+                {payment?.serviceName && `${payment?.serviceName}`}
+                {payment?.imageId && `${payment?.imageId?.caption}`}
+                {payment?.albumId && `${payment?.albumId?.albumName}`}
+              </td>
               <td>{payment?._id}</td>
               <td>
                 {payment?.createdAt
