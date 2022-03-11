@@ -34,7 +34,7 @@ const DashboardPage = () => {
         {/**<DashboardGraph /> */}
       </div>
       <div className='dashboard-firstSection'>
-        <div className='dashboard-searchDiv'>
+        {/* <div className='dashboard-searchDiv'>
           <img src={searchIcon} alt='search' className='searchIcon' />
           <input
             type='text'
@@ -42,24 +42,8 @@ const DashboardPage = () => {
             className='dashboard-searchInput'
             id='searchInput'
           />
-        </div>
-        {/**<div className='dashboard-downloadDiv'>
-          <button className='dashboard-downloadBtn'>
-            <img
-              src={downloadIcon}
-              alt='download'
-              className='dashboard-downloadIcon'
-            />
-            <span>Download</span>
-          </button>
-        </div>
-        <div className='dashboard-printDiv'>
-          <button className='dashboard-downloadBtn'>
-            <img src={printIcon} alt='print' className='dashboard-printIcon' />
-            <span>Print</span>
-          </button>
         </div> */}
-        <div className='dashboard-filterDiv'>
+        {/* <div className='dashboard-filterDiv'>
           <button className='dashboard-filterBtn'>
             <img
               src={filterIcon}
@@ -68,7 +52,7 @@ const DashboardPage = () => {
             />
             <span>Filter</span>
           </button>
-        </div>
+        </div> */}
       </div>
       <div className='dashboard-tableSection'>
         <DashboardTable paymentList={paymentList} />
