@@ -196,9 +196,9 @@ const ArtistDetails = (props) => {
                   <CopyToClipboard
                     text={
                       artistData.appName
-                        ? `https://fanstar.app/artist/${artistData.appName
+                        ? `https://fanstar.app/${artistData.appName
                             .split(' ')
-                            .join('-')}/${id}`
+                            .join('-')}`
                         : 'undefined'
                     }
                     onCopy={() => alert('Artist link copied!')}

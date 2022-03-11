@@ -40,7 +40,12 @@ const ArtistAccountDetails = (props) => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      console.log(error?.response?.data?.error);
+      alert(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong, Please try later!'
+      );
     }
   };
 
