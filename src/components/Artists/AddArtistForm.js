@@ -86,11 +86,21 @@ const AddArtistForm = () => {
 
   const handleNext = () => {
     // console.log(phone);
-    if (formData.username && phone && formData.appName) {
-      setFormData({ ...formData, phone: phone, services: inputList });
-      setPage(page + 1);
+    // /\s/g.test(s);
+    if (formData.appName.trim() && /\s/g.test(formData?.appName?.trim())) {
+      alert('App name should not contain spaces');
     } else {
-      alert('Fill all required(*) fields');
+      if (formData.username && phone && formData.appName.trim()) {
+        setFormData({
+          ...formData,
+          phone: phone,
+          services: inputList,
+          appName: formData.appName.trim(),
+        });
+        setPage(page + 1);
+      } else {
+        alert('Fill all required(*) fields');
+      }
     }
   };
 
