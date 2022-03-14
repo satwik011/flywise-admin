@@ -261,21 +261,27 @@ const ArtistDetails = (props) => {
               <p className='artistDetails-incomeCardLabel'>Total Income</p>
               <div className='artistDetails-incomeCard'>
                 <h3 className='artistDetails-incomeCardTitle'>Total Income</h3>
-                <p className='artistDetails-income'>{`Rs ${totalIncome}/-`}</p>
+                <p className='artistDetails-income'>{`Rs ${totalIncome.toFixed(
+                  2
+                )}/-`}</p>
               </div>
             </div>
             <div className='artistDetails-incomeCardDiv'>
               <p className='artistDetails-incomeCardLabel'>Weekly Income</p>
               <div className='artistDetails-incomeCard'>
                 <h3 className='artistDetails-incomeCardTitle'>Weekly Income</h3>
-                <p className='artistDetails-income'>{`Rs ${weeklyIncome}/-`}</p>
+                <p className='artistDetails-income'>{`Rs ${weeklyIncome.toFixed(
+                  2
+                )}/-`}</p>
               </div>
             </div>
             <div className='artistDetails-incomeCardDiv'>
               <p className='artistDetails-incomeCardLabel'>Amount Paid</p>
               <div className='artistDetails-incomeCard'>
                 <h3 className='artistDetails-incomeCardTitle'>Amount Paid</h3>
-                <p className='artistDetails-income'>{`Rs ${paidAmount}/-`}</p>
+                <p className='artistDetails-income'>{`Rs ${paidAmount.toFixed(
+                  2
+                )}/-`}</p>
               </div>
             </div>
             <div className='artistDetails-incomeCardDiv'>
@@ -286,7 +292,9 @@ const ArtistDetails = (props) => {
                 <h3 className='artistDetails-incomeCardTitle'>Balance</h3>
                 <p className='artistDetails-income'>
                   {totalIncome - pendingAmount - paidAmount >= 0
-                    ? `Rs ${totalIncome - pendingAmount - paidAmount}/-`
+                    ? `Rs ${(totalIncome - pendingAmount - paidAmount).toFixed(
+                        2
+                      )}/-`
                     : 'Rs 0/-'}
                 </p>
               </div>

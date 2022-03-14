@@ -201,7 +201,9 @@ const EmployeeDetails = (props) => {
                 <h3 className='employeeDetails-incomeCardTitle'>
                   Total Income
                 </h3>
-                <p className='employeeDetails-income'>{`Rs ${totalIncome}/-`}</p>
+                <p className='employeeDetails-income'>{`Rs ${totalIncome.toFixed(
+                  2
+                )}/-`}</p>
               </div>
             </div>
             <div className='employeeDetails-incomeCardDiv'>
@@ -210,7 +212,9 @@ const EmployeeDetails = (props) => {
                 <h3 className='employeeDetails-incomeCardTitle'>
                   Weekly Income
                 </h3>
-                <p className='employeeDetails-income'>{`Rs ${weeklyIncome}/-`}</p>
+                <p className='employeeDetails-income'>{`Rs ${weeklyIncome.toFixed(
+                  2
+                )}/-`}</p>
               </div>
             </div>
             <div className='employeeDetails-ordersDiv'>
