@@ -179,40 +179,40 @@ const NavSidebar = (props) => {
             <ListItem
               button
               className={
-                props.location.pathname.includes('/artists')
+                props.location.pathname.includes('/Universities')
                   ? classes.selectedList
                   : ''
               }
-              onClick={() => history.push('/artists')}
+              onClick={() => history.push('/Universities')}
             >
               <ListItemIcon>
-                {props.location.pathname.includes('/artists') ? (
+                {props.location.pathname.includes('/Universities') ? (
                   <img
                     src={artistActive}
                     className={classes.iconColor}
-                    alt='artist'
+                    alt='Universities'
                   />
                 ) : (
                   <img
                     src={artist}
                     className={classes.iconColor}
-                    alt='artist'
+                    alt='Universities'
                   />
                 )}
               </ListItemIcon>
-              <ListItemText primary='Artists' />
+              <ListItemText primary='Universities' />
             </ListItem>
             <ListItem
               button
               className={
-                props.location.pathname.includes('/employees')
+                props.location.pathname.includes('/blogs')
                   ? classes.selectedList
                   : ''
               }
-              onClick={() => history.push('/employees')}
+              onClick={() => history.push('/blogs')}
             >
               <ListItemIcon>
-                {props.location.pathname.includes('/employees') ? (
+                {props.location.pathname.includes('/blogs') ? (
                   <img
                     src={employeeActive}
                     className={classes.iconColor}
@@ -226,7 +226,7 @@ const NavSidebar = (props) => {
                   />
                 )}
               </ListItemIcon>
-              <ListItemText primary='Employees' />
+              <ListItemText primary='Blogs' />
             </ListItem>
             <ListItem
               button

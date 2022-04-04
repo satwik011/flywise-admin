@@ -13,7 +13,6 @@ const DashboardTable = (props) => {
             <th>Order Id</th>
             <th>Status</th>
             <th>Artist</th>
-            {/**<th>Location</th> */}
             <th>Order Date</th>
             {/**<th>Due Date</th> */}
           </tr>

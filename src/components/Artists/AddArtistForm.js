@@ -1,108 +1,66 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import ArtistSetPaymentMode from './ArtistSetPaymentMode';
-import ArtistAccountDetails from './ArtistAccountDetails';
-import CongratulationScreen from './CongratulationScreen';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import { getEmployeeList } from '../../redux/api';
 import '../../styles/AddArtistForm.css';
 import LoadingPage from '../utils/LoadingPage';
+import { Country, State, City }  from 'country-state-city';
 
 const initialState = {
-  username: '',
-  phone: '',
-  email: '',
-  address: '',
-  assignedEmployee: '6213c73e2d17e52c165d6c80',
-  appName: '',
-  accountNo: '',
-  ifscCode: '',
-  services: [],
-  upiId: '',
-  commission: '',
+  name: "",
+  uniPic:"",
+  country: "",
+  state: "",
+  level:"",
+  remarks:"",
+  private:{},
+  public:{},
 };
 
+
+
 const AddArtistForm = () => {
-  const [formData, setFormData] = useState(initialState);
-  const [phone, setPhone] = useState('');
-  const [mode, setMode] = useState('account');
+  const [universityData, setuniversityData] = useState(initialState);
+  const [countryState, setcountryState] = useState([])
   const [page, setPage] = useState(1);
-  const [inputList, setInputList] = useState([
-    { serviceName: '', amount: '', description: '' },
-  ]);
-  const [allEmployees, setAllEmployees] = useState([]);
-  const [boolVal, setBoolVal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  
+    useEffect(() => {
+      setcountryState(State.getStatesOfCountry(`${universityData.country}`));
+    }, [universityData.country])
 
-  const fetchEmployees = async () => {
-    setLoading(true);
-    try {
-      const { data } = await getEmployeeList();
-      setAllEmployees(data);
-      setFormData({
-        ...formData,
-        assignedEmployee: '6213c73e2d17e52c165d6c80',
-      });
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  };
 
-  useEffect(() => {
-    if (!boolVal) {
-      fetchEmployees();
-      setBoolVal(true);
-    }
-  }, [boolVal]);
 
   const handleChange = (e) => {
     const { name } = e.target;
-    setFormData({ ...formData, [name]: e.target.value });
+    setuniversityData({ ...universityData, [name]: e.target.value });
   };
 
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-  };
+  const handleinput2 = (e)=>{        
+    setuniversityData({...universityData, uniPic: e.target.files[0]});
+   }
+  
+  const handlesubmit = async(e)=>{
+    e.preventDefault();  
+    const formData = new FormData();
+    formData.append('name', universityData.name);
+    formData.append('uniPic', universityData.uniPic);
+    formData.append('level', universityData.level);
+    formData.append('country', universityData.country);
+    formData.append('state', universityData.state);
+    formData.append('remarks', universityData.remarks);    
+    formData.append('private[key]', universityData.private["key"]);    
+    formData.append('public[key2]', universityData.public["key2"]);    
+        
+    try{
+           await axios.post("https://flywise-admin.herokuapp.com/api/createUniversity",formData);
+          history.push('/Universities')
+        }catch(err){
+          console.log(err);
+        }
 
-  // handle click event of the Remove button
-  const handleRemoveClick = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-  };
-
-  // handle click event of the Add button
-  const handleAddClick = () => {
-    setInputList([
-      ...inputList,
-      { serviceName: '', amount: '', description: '' },
-    ]);
-  };
-
-  const handleNext = () => {
-    // console.log(phone);
-    // /\s/g.test(s);
-    if (formData.appName.trim() && /\s/g.test(formData?.appName?.trim())) {
-      alert('App name should not contain spaces');
-    } else {
-      if (formData.username && phone && formData.appName.trim()) {
-        setFormData({
-          ...formData,
-          phone: phone,
-          services: inputList,
-          appName: formData.appName.trim(),
-        });
-        setPage(page + 1);
-      } else {
-        alert('Fill all required(*) fields');
-      }
-    }
-  };
+   }
 
   return (
     <div className='addArtist-container'>
@@ -112,214 +70,121 @@ const AddArtistForm = () => {
         <Fragment>
           {page === 1 && (
             <div className='addArtist-personalDetails'>
+              {/* first row */}
+        <form onSubmit={handlesubmit} method="POST" enctype="multipart/form-data">
+        
               <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>Full Name*</label>
+
+                  <label className='addArtist-inputLabel'>University Name*</label>
                   <input
                     type='text'
-                    name='username'
-                    value={formData.username}
+                    name='name'
                     onChange={handleChange}
-                    placeholder='Full Name'
+                    placeholder='University Name'
                     className='addArtist-inputField'
                   />
                 </div>
+                
                 <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>
-                    Contact Number*
-                  </label>
-                  <PhoneInput
-                    className='addArtist-inputField'
-                    // type='tel'
-                    defaultCountry='IN'
-                    value={phone}
-                    onChange={setPhone}
-                    placeholder='Enter artist contact no'
-                  />
-                  {/* <input
-                    type='text'
-                    name='phone'
-                    value={formData.phone}
-                    onChange={handleChange}
-                    // placeholder='Contact Number (10-digit)'
-                    className='addArtist-inputField'
-                  /> */}
-                </div>
-              </div>
-              <div className='addArtist-alignRow'>
-                <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>E-mail</label>
+                  <label className='addArtist-inputLabel'>University Image*</label>
                   <input
-                    type='text'
-                    name='email'
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder='E-mail'
-                    className='addArtist-inputField'
-                  />
-                </div>
-                <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>Address</label>
-                  <input
-                    type='text'
-                    name='address'
-                    value={formData.address}
-                    onChange={handleChange}
-                    placeholder='Address & Pincode'
+                    type='file'
+                    name='uniPic'
+                    onChange={handleinput2}
+                    placeholder='Upload A Image'
                     className='addArtist-inputField'
                   />
                 </div>
               </div>
+
+
+              {/* 2nd row */}
               <div className='addArtist-alignRow'>
-                <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>App Name*</label>
-                  <input
-                    type='text'
-                    name='appName'
-                    value={formData.appName}
-                    onChange={handleChange}
-                    placeholder='App Name'
-                    className='addArtist-inputField'
-                  />
-                </div>
-                <div className='addArtist-inputFieldDiv'>
+              <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Employee Assigned
+                  Country*
                   </label>
-                  {/**<input
-                type='text'
-                name='employee'
-                placeholder='Employee Assigned'
-                className='addArtist-inputField'
-              /> */}
+            
                   <select
                     className='addArtist-selectField'
-                    name='assignedEmployee'
-                    value={formData.assignedEmployee}
-                    onChange={handleChange}
-                  >
-                    {allEmployees?.map((employee) => (
-                      <option
-                        value={employee.employeeId}
-                        selected={
-                          employee.employeeId === '6213c73e2d17e52c165d6c80'
-                        }
-                      >
-                        {employee.employeeName}
-                      </option>
-                    ))}
+                    name='country'
+                    defaultValue="Select A Country"
+                    onChange={handleChange}>
+                    <option value="">None</option>
+                    <option value="US">USA</option>
+                    <option value="GB">UK</option>
+                    <option value="CA">Canada</option>
+                    <option value="AU">Australia</option>
+                  </select>
+                </div>
+              
+              <div className='addArtist-inputFieldDiv'>
+                  <label className='addArtist-inputLabel'>
+                  States*
+                  </label>
+            
+                  <select
+                    className='addArtist-selectField'
+                    name='state'
+                    placeholder='Select A State'
+                    onChange={handleChange}>
+                    {
+                      countryState.length>0?(countryState.map((states,index)=>{
+                        return <option value={states.name} key={index}>{states.name}</option>
+                      }) ):(<option  style={{color:"red"}} value="">Please Select A country</option>)
+                    }
                   </select>
                 </div>
               </div>
-              {inputList.map((val, index) => (
-                <div className='addArtist-servicesDiv' key={index}>
-                  <div className='addArtist-alignRow'>
-                    <div className='addArtist-inputFieldDiv'>
-                      <label className='addArtist-inputLabel'>Services</label>
-                      <input
-                        type='text'
-                        name='serviceName'
-                        value={formData.serviceName}
-                        onChange={(e) => handleInputChange(e, index)}
-                        placeholder='Service name'
-                        className='addArtist-inputField'
-                      />
-                      {/**<select
-                    className='addArtist-selectField'
-                    name='serviceName'
-                    onChange={(e) => handleInputChange(e, index)}
-                  >
-                    <option value='service1'>Service 1</option>
-                    <option value='service2'>Service 2</option>
-                    <option value='service3'>Service 3</option>
-                  </select> */}
-                    </div>
-                    <div className='addArtist-inputFieldDiv'>
-                      <label className='addArtist-inputLabel'>Amount</label>
-                      <input
-                        type='text'
-                        name='amount'
-                        value={val.amount}
-                        onChange={(e) => handleInputChange(e, index)}
-                        placeholder='Amount'
-                        className='addArtist-inputField'
-                      />
-                    </div>
-                  </div>
-                  <div className='addArtist-alignRow'>
-                    <div className='addArtist-textFieldDiv'>
-                      <label className='addArtist-inputLabel'>
-                        Description
-                      </label>
-                      <textarea
-                        className='addArtist-textField'
-                        rows='3'
-                        placeholder='Service Description'
-                        name='description'
-                        value={val.description}
-                        onChange={(e) => handleInputChange(e, index)}
-                      />
-                    </div>
-                  </div>
-                  {inputList.length > 1 && (
-                    <div className='removeBtnDiv'>
-                      <button
-                        className='removeBtn'
-                        onClick={() => handleRemoveClick(index)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  )}
-                  {index === inputList.length - 1 && (
-                    <div className='addBtnDiv'>
-                      <button
-                        className='service-addBtn'
-                        onClick={handleAddClick}
-                      >
-                        + add
-                      </button>
-                    </div>
-                  )}
+
+
+                      {/* 3rd row */}
+            <div className='addArtist-alignRow'>
+
+            
+            <div className='addArtist-inputFieldDiv'>
+                  <label className='addArtist-inputLabel'>
+                    Remarks
+                  </label>       
+                  <input
+                    type='text'
+                    name='remarks'
+                    onChange={handleChange}
+                    placeholder='1-4 Sentences'
+                    className='addArtist-inputField'
+                  />     
                 </div>
-              ))}
+                
+                <div className='addArtist-inputFieldDiv'>
+                  <label className='addArtist-inputLabel'>
+                    University Level
+                  </label>     
+                  <select
+                    className='addArtist-selectField'
+                    name='level'
+                    onChange={handleChange}>
+                    <option value="">Select One</option>
+                    <option value="1">Tier 1</option>
+                    <option value="2">Tier 2</option>
+                    <option value="3">Tier 3</option>
+                  </select>
+                </div>
+              </div>
+                  
+
               <div className='addArtist-submitDetailDiv'>
                 <button
                   className='addArtist-submitDetailBtn'
-                  onClick={handleNext}
+                  onClick={handlesubmit}
                 >
-                  Next
+                Add University    
                 </button>
               </div>
+        </form>
             </div>
           )}
-          {page === 2 && (
-            <ArtistSetPaymentMode
-              page={page}
-              setPage={setPage}
-              mode={mode}
-              setMode={setMode}
-              formData={formData}
-              setFormData={setFormData}
-            />
-          )}
-          {page === 3 && (
-            <ArtistAccountDetails
-              page={page}
-              setPage={setPage}
-              mode={mode}
-              formData={formData}
-              setFormData={setFormData}
-              handleChange={handleChange}
-            />
-          )}
-          {page === 4 && (
-            <CongratulationScreen
-              page={page}
-              setPage={setPage}
-              formData={formData}
-            />
-          )}
+          
         </Fragment>
       )}
     </div>

@@ -1,4 +1,11 @@
 /* Table Styles */
+.Table-Container{
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .table-wrapper {
   max-width: 100%;
   max-height: 60vh;
@@ -93,4 +100,26 @@
 
 .cursor {
   cursor: pointer;
+}
+
+
+/* buttons */
+.uni-delete-btn{
+  color: white;
+  background-color: red;
+  outline: none;
+  border: 1px solid red;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.uni-edit-btn{
+  color: white;
+  background-color: green;
+  outline: none;
+  border: 1px solid green;
+  cursor: pointer;
+  
+  border-radius: 4px;
+  margin-right: 5px;
+
 }

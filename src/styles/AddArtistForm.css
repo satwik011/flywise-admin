@@ -423,3 +423,74 @@ input[type='radio']:checked:after {
   text-decoration-line: underline;
   cursor: pointer;
 }
+
+.Greverbal{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.Greverbal h3{
+  font-size: 1rem;
+  color: #000000;
+}
+.Greverbal label{
+  font-size: 0.8rem;
+}
+.Greverbal input{
+  height: 13%;
+  border: 0.5px solid #155b89;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  color: #a4a5a9;
+  background-color: transparent;
+  outline: none;
+  width: 33%;
+}
+.toefl-category-box{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height:25vh;
+}
+.toefl-category-box-single{
+  display: flex;
+  justify-content: space-between;
+
+}
+.toefl-category-box-single input{
+  width: 30%;
+}
+.department-details{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 15vh;
+}
+.department-details-single{
+  display:flex;
+  justify-content: space-between;
+}
+.deadline-boxes{
+  display: flex;
+  flex-direction: column;
+  height: 22vh;
+  justify-content: space-between;
+}
+.deadline-boxes-single{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deadline-boxes-single a{
+  text-decoration: none;
+  color: #9a9a9a;
+  font-size: 1.2rem;
+}
+.deadline-boxes-single input{
+  width: 65%;
+  font-size: 0.9rem;
+}

@@ -7,14 +7,18 @@ import NavSidebar from './components/NavSidebar';
 import ArtistPage from './components/Artists/ArtistPage';
 import UserPage from './components/Users/UserPage';
 import AddArtistForm from './components/Artists/AddArtistForm';
-import EmployeePage from './components/Employees/EmployeePage';
-import AddEmployeeForm from './components/Employees/AddEmployeeForm';
+import BlogPage from './components/Blogs/BlogPage';
+import AddBlogForm from './components/Blogs/AddBlogForm';
 import PaymentPage from './components/Payments/PaymentPage';
 import ArtistDetails from './components/Artists/ArtistDetails';
-import EmployeeDetails from './components/Employees/EmployeeDetails';
+import EmployeeDetails from './components/Blogs/EmployeeDetails';
 import ArtistPayment from './components/Artists/ArtistPayment';
-import AddArtistAccount from './components/Artists/AddArtistAccount';
-import AddEmployeeAccount from './components/Employees/AddEmployeeAccount';
+import Addcoursepage from './components/Artists/Addcoursepage';
+import AddEmployeeAccount from './components/Blogs/AddEmployeeAccount';
+import ViewCoursePage from './components/Artists/Courses/ViewCoursePage'
+import Edituniversity from './components/Artists/University/Edituniversity';
+import Editcourse from './components/Artists/Courses/Editcourse';
+import EditBlog from './components/Blogs/allblogs/EditBlog';
 
 export const history = createHistory();
 const App = () => {
@@ -24,21 +28,27 @@ const App = () => {
         <Route path='/' exact component={LoginPage} />
         <NavSidebar>
           <Route path='/home' exact component={DashboardPage} />
-          <Route path='/artists' exact component={ArtistPage} />
-          <Route path='/artists/add' exact component={AddArtistForm} />
-          <Route
-            path='/artists/addaccount'
-            exact
-            component={AddArtistAccount}
-          />
+       
+         {/* Universities */}
+
+          <Route path='/Universities' exact component={ArtistPage} />
+          <Route path='/Universities/add' exact component={AddArtistForm} />
+          <Route path='/Universities/edit/:id' exact component={Edituniversity} />
+          <Route path='/Universities/addcourse/:id' exact component={Addcoursepage} />
+          <Route path='/Universities/viewcourse/:id' exact component={ ViewCoursePage } />
+          <Route path='/Universities/editcourse/:id' exact component={Editcourse} />
+       
+
+       
           <Route path='/artists/detail/:id' exact component={ArtistDetails} />
           <Route
             path='/artists/detail/:id/pay'
             exact
             component={ArtistPayment}
           />
-          <Route path='/employees' exact component={EmployeePage} />
-          <Route path='/employees/add' exact component={AddEmployeeForm} />
+          <Route path='/blogs' exact component={BlogPage} />
+          <Route path='/blog/add' exact component={AddBlogForm} />
+          <Route path='/blog/edit/:id' exact component={EditBlog} />
           <Route
             path='/employees/addaccount'
             exact

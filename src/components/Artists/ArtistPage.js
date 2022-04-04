@@ -4,7 +4,7 @@ import addIcon from '../../images/addIcon.svg';
 // import printIcon from '../../images/printIcon.svg';
 import filterIcon from '../../images/filterIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
-import ArtistsTable from './ArtistsTable';
+import ArtistsTable from './University/ArtistsTable';
 import LoadingPage from '../utils/LoadingPage';
 import { getArtistList } from '../../redux/api';
 
@@ -47,7 +47,7 @@ const ArtistPage = () => {
               <img src={searchIcon} alt='search' className='searchIcon' />
               <input
                 type='text'
-                placeholder='Ex. Artist'
+                placeholder='Ex. Harvard University'
                 className='artist-searchInput'
                 id='searchInput'
                 value={searchInput}
@@ -60,22 +60,13 @@ const ArtistPage = () => {
             <div className='artist-addArtistDiv'>
               <button
                 className='artist-addBtn'
-                onClick={() => history.push('/artists/add')}
+                onClick={() => history.push('/universities/add')}
               >
                 <img src={addIcon} alt='add' className='artist-addIcon' />
-                <span>Add artist</span>
+                <span>Add University</span>
               </button>
             </div>
-            <div className='artist-addArtistDiv'>
-              <button
-                className='artist-addBtn'
-                onClick={() => history.push('/artists/addaccount')}
-              >
-                <img src={addIcon} alt='add' className='artist-addIcon' />
-                <span>Add Account</span>
-              </button>
-            </div>
-          </div>
+        </div>
           <div className='artist-tableSection'>
             <ArtistsTable
               allArtists={allArtists}
