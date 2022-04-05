@@ -19,7 +19,7 @@ function Onecourse(prop) {
             <td>{prop.departmentDetails.email}</td>
             <td className="text-right" >
               <div className="actions" style={{display:"flex",justifyContent:"space-betweens"}}>
-              <Link to={`/Universities/editcourse/${prop.id}`}> <button  className='uni-edit-btn'><ModeEditIcon/> </button></Link>
+              <Link to={`/Universities/editcourse/${prop.courseid}/${prop.id}`}> <button  className='uni-edit-btn'><ModeEditIcon/> </button></Link>
              <Link onClick={async(e) => {
                             e.preventDefault();
                                 const yes = window.confirm("Do you want delete ?");

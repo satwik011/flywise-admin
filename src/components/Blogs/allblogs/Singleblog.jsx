@@ -26,7 +26,7 @@ function Singleblog(prop) {
                                     console.log(err);
                                     }
                             }
-                          }}  ><button  className='uni-delete-btn'><DeleteIcon/> </button></Link>
+                          }} to={'#'}  ><button  className='uni-delete-btn'><DeleteIcon/> </button></Link>
               </div>
         </td>
         </tr>

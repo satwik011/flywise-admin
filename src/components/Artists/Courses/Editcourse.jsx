@@ -5,6 +5,7 @@ import LoadingPage from '../../utils/LoadingPage';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useParams,useHistory } from 'react-router-dom';
+import moment from 'moment';
 import axios from 'axios';
 
 
@@ -91,11 +92,14 @@ const initialState = {
     private: {},
     public: {}
   };
+
 function Editcourse() {
     const [getcoursedata, setgetcoursedata] = useState([])
     const [courseData, setcourseData] = useState(initialState);
     const [showgrebox, setshowgrebox] = useState(0);
     const [loading, setLoading] = useState(false);
+    const param = useParams();
+    const history =useHistory();
   
     //special waiver box
   
@@ -110,24 +114,20 @@ function Editcourse() {
       setshowgrebox(0);
     }
   
-  console.log(getcoursedata.transcriptRequired);
     //useeffects
-    const params = useParams();
-    const history =useHistory();
   
     useEffect(() => {
-        setcourseData({...courseData,university:params.id})
-        getdata();
+      setcourseData({...courseData,university:param.id})
+      getdata();
     }, [])
-
-
-  
-      //functions
-  
-    const getdata=async()=>{
-    setLoading(true);
+    
+    
+    //functions
+    //for calling data
+    const getdata =async()=>{
+      setLoading(true);
         try {
-            const call1 = await axios.get(`https://flywise-admin.herokuapp.com/api/courseById/${params.id}`);
+            const call1 = await axios.get(`https://flywise-admin.herokuapp.com/api/courseById/${param.id2}`);
             setgetcoursedata(call1.data.course);
             setcourseData(call1.data.course);
             setLoading(false);
@@ -138,6 +138,22 @@ function Editcourse() {
         }
     }
 
+    
+    //for posting updated data
+
+      const handlesubmit = async()=>{
+        try {
+          await axios.patch(`https://flywise-admin.herokuapp.com/api/updateCourse/${param.id2}`,courseData)
+          
+          history.push(`/Universities/viewcourse/${param.id1}`)
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+
+
+      //handlechange
 
     const handleChange = (e) => {
       const { name } = e.target;
@@ -190,21 +206,30 @@ function Editcourse() {
     }
   
   
-  
-  const handlesubmit=async()=>{
-      try {
-          await axios.post("https://flywise-admin.herokuapp.com/api/createCourse",courseData);
-          history.push('/Universities')
-  
-      } catch (error) {
-          console.log(error);
-      }
-  }
-  
-
 
 
 //   for display the data in inputs
+
+// deadlines
+
+let fallPrdate = getcoursedata?.fallDeadline?.priority;
+fallPrdate = moment(fallPrdate).format('YYYY-MM-DD')
+
+let fallFidate = getcoursedata?.fallDeadline?.final;
+fallFidate = moment(fallFidate).format('YYYY-MM-DD')
+
+let springPrdate = getcoursedata?.springDeadline?.priority;
+springPrdate = moment(springPrdate).format('YYYY-MM-DD')
+
+let springFidate = getcoursedata?.springDeadline?.final;
+springFidate = moment(springFidate).format('YYYY-MM-DD')
+
+let summerPrdate = getcoursedata?.summerDeadline?.priority;
+summerPrdate = moment(summerPrdate).format('YYYY-MM-DD')
+
+let summerFidate = getcoursedata?.summerDeadline?.final;
+summerFidate = moment(summerFidate).format('YYYY-MM-DD')
+
 
   return (
     <>  
@@ -261,7 +286,7 @@ function Editcourse() {
                     type='number'
                     min="1"
                     max="200"
-                    defaultValue={getcoursedata.applicationFees}
+                    defaultValue={getcoursedata?.applicationFees}
                     maxLength="3"
                     name='applicationFees'
                     onChange={handleChange}
@@ -278,7 +303,7 @@ function Editcourse() {
                     min="1k"
                     max="100k"
                     name='programFees'
-                    defaultValue={getcoursedata.programFees}
+                    defaultValue={getcoursedata?.programFees}
                     onChange={handleChange}
                     placeholder='1k-100k USD'
                     className='addArtist-inputField'
@@ -300,7 +325,7 @@ function Editcourse() {
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     name="transcriptRequired"
                     row
-                    defaultValue={getcoursedata.transcriptRequired}
+                    defaultValue={getcoursedata?.transcriptRequired}
                     onChange={handleChange}
                     className='addArtist-inputField'
                   >
@@ -316,7 +341,7 @@ function Editcourse() {
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     name="financialDocuRequired"
-                    defaultValue={getcoursedata.financialDocuRequired}
+                    defaultValue={getcoursedata?.financialDocuRequired}
                     onChange={handleChange}
                     className='addArtist-inputField'
                     row>
@@ -338,7 +363,7 @@ function Editcourse() {
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     name="thirdPartyRequired"
                     row
-                    defaultValue={getcoursedata.thirdPartyRequired}
+                    defaultValue={getcoursedata?.thirdPartyRequired}
                     onChange={handleChange}
                     className='addArtist-inputField'
                   >
@@ -355,7 +380,7 @@ function Editcourse() {
                     type='number'
                     min="0"
                     max="4.0"
-                    defaultValue={getcoursedata.minGpaRequired}
+                    defaultValue={getcoursedata?.minGpaRequired}
                     name='minGpaRequired'
                     onChange={handleChange}
                     placeholder='for ex: 2.5 , 3.0'
@@ -378,14 +403,15 @@ function Editcourse() {
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     name="greRequired"
                     row
-
+                    defaultValue={getcoursedata?.gre?.greRequired}
                     onChange={handlegre}
                     className='addArtist-inputField'
                   >
-                    <FormControlLabel value="yes" onClick={nobox} control={<Radio />} label="Yes" />
-                    <FormControlLabel value="no" onClick={nobox} control={<Radio />} label="No" />
-                    <FormControlLabel onClick={onbox} value="specialwaiver" control={<Radio />} label="Special Waiver" />
-                    {showgrebox ? (<input type="text"  onChange={handlegre} name="greWaiver" placeholder='Describe special waiver' className='addArtist-inputField' />
+                    <FormControlLabel value="true" onClick={nobox} control={<Radio />} label="Yes" />
+                    <FormControlLabel value="false" onClick={nobox} control={<Radio />} label="No" />
+                    <FormControlLabel onClick={onbox} value="Special Waiver" control={<Radio />} label="Special Waiver" />
+                    {showgrebox ? (<input type="text" defaultValue={getcoursedata?.gre?.greWaiver}
+                      onChange={handlegre} name="greWaiver" placeholder='Describe special waiver' className='addArtist-inputField' />
                     ) : ("")}
                   </RadioGroup>
                 </div>
@@ -395,32 +421,32 @@ function Editcourse() {
                     GRE Minimum Score Requirement
                   </label>
                   {
-                    (courseData.GREtestrequirement == "no") ? (
-                      <input type="text" onChange={handleChange} name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                    (getcoursedata?.gre?.greRequired === "false") ? (
+                      <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
                     ) : (
                       <div className='addArtist-inputField'>
 
                         <div className='Greverbal'>
                           <h3 > Total</h3>
                           <label>Score </label>
-                          <input onChange={handlegre} min="140" name="minTotal" max="170" placeholder='140 - 170' type="number" id="" />
+                          <input defaultValue={getcoursedata?.gre?.minTotal} onChange={handlegre} min="140" name="minTotal" max="170" placeholder='140 - 170' type="number" id="" />
                         </div>
                         <div className='Greverbal'>
                           <h3 > Verbal</h3>
                           <label>Score </label>
-                          <input name="minVerbal" onChange={handlegre} min="140" max="170" placeholder='140 - 170' type="number" id="" />
+                          <input defaultValue={getcoursedata?.gre?.minVerbal} name="minVerbal" onChange={handlegre} min="140" max="170" placeholder='140 - 170' type="number" id="" />
                         </div>
 
                         <div className='Greverbal'>
                           <h3 > Quant</h3>
                           <label>Score </label>
-                          <input name="minQuant" onChange={handlegre} min="140" max="170" type="number" placeholder='140 - 170' id="" />
+                          <input defaultValue={getcoursedata?.gre?.minQuant} name="minQuant" onChange={handlegre} min="140" max="170" type="number" placeholder='140 - 170' id="" />
                         </div>
 
                         <div className='Greverbal'>
                           <h3 > AWA</h3>
                           <label>Score </label>
-                          <input name="minAWA" onChange={handlegre} min="0" max="6.0" placeholder=' 0 - 6' type="number" id="" />
+                          <input name="minAWA" defaultValue={getcoursedata?.gre?.minAWA} onChange={handlegre} min="0" max="6.0" placeholder=' 0 - 6' type="number" id="" />
                         </div>
                       </div>
                     )
@@ -440,6 +466,7 @@ function Editcourse() {
                 <RadioGroup
                   aria-labelledby="demo-row-controlled-radio-buttons-group"
                   row
+                  defaultValue={getcoursedata?.toefl?.toeflAccepted}
                   onChange={handletoefl}
                   name="toeflAccepted"
                   className='addArtist-inputField'
@@ -448,7 +475,6 @@ function Editcourse() {
                   <FormControlLabel value="false" control={<Radio />} label="No" />
                 </RadioGroup>
               </div>
-
               <div className='addArtist-inputFieldDiv'>
                 <label className='addArtist-inputLabel'>
                   TOEFL Minimum Score Requirement
@@ -458,23 +484,23 @@ function Editcourse() {
                   <div className='toefl-category-box'>
                     <div className='toefl-category-box-single'>
                       <label >Total Score</label>
-                      <input type="number" onChange={handletoefl} name="Total" placeholder="< 120" max="120" min="0" />
+                      <input type="number" defaultValue={getcoursedata?.toefl?.Total} onChange={handletoefl} name="Total" placeholder="< 120" max="120" min="0" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Reading</label>
-                      <input type="number" onChange={handletoefl} name="minReading" placeholder='< 30' min="0" max="30" />
+                      <input type="number" defaultValue={getcoursedata?.toefl?.minReading} onChange={handletoefl} name="minReading" placeholder='< 30' min="0" max="30" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Writing</label>
-                      <input type="number" onChange={handletoefl} name="minWriting" placeholder='< 30' min="0" max="30" />
+                      <input type="number" defaultValue={getcoursedata?.toefl?.minWriting} onChange={handletoefl} name="minWriting" placeholder='< 30' min="0" max="30" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Speaking</label>
-                      <input type="number" onChange={handletoefl} name="minSpeaking" placeholder='< 30' min="0" max="30" />
+                      <input type="number" defaultValue={getcoursedata?.toefl?.minSpeaking} onChange={handletoefl} name="minSpeaking" placeholder='< 30' min="0" max="30" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Listening</label>
-                      <input type="number" onChange={handletoefl} name="minListening" placeholder='< 30' min="0" max="30" />
+                      <input type="number" defaultValue={getcoursedata?.toefl?.minListening} onChange={handletoefl} name="minListening" placeholder='< 30' min="0" max="30" />
                     </div>
                   </div>
                 </div>
@@ -496,6 +522,7 @@ function Editcourse() {
                       <RadioGroup
                         aria-labelledby="demo-row-controlled-radio-buttons-group"
                         row
+                        defaultValue={getcoursedata?.ielts?.ieltsAccepted}
                         onChange={handleielts}
                         name="ieltsAccepted"
                         className='addArtist-inputField'
@@ -515,23 +542,23 @@ function Editcourse() {
                         <div className='toefl-category-box'>
                           <div className='toefl-category-box-single'>
                             <label >Total Score</label>
-                            <input type="number" onChange={handleielts} name="Total" min="0" max="9" placeholder='< 9' />
+                            <input type="number" defaultValue={getcoursedata?.ielts?.Total} onChange={handleielts} name="Total" min="0" max="9" placeholder='< 9' />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Reading</label>
-                            <input type="number" onChange={handleielts} name="minReading" placeholder='< 9' min="0" max="9.0" />
+                            <input type="number" defaultValue={getcoursedata?.ielts?.minReading} onChange={handleielts} name="minReading" placeholder='< 9' min="0" max="9.0" />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Writing</label>
-                            <input type="number" onChange={handleielts} name="minWriting" placeholder='< 9' min="0" max="9.0" />
+                            <input type="number" defaultValue={getcoursedata?.ielts?.minWriting} onChange={handleielts} name="minWriting" placeholder='< 9' min="0" max="9.0" />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Speaking</label>
-                            <input type="number" onChange={handleielts} placeholder='< 9' min="0" max="9.0" name='minSpeaking' />
+                            <input type="number" defaultValue={getcoursedata?.ielts?.minSpeaking} onChange={handleielts} placeholder='< 9' min="0" max="9.0" name='minSpeaking' />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Listening</label>
-                            <input type="number" onChange={handleielts} placeholder='< 9' min="0" max="9.0" name='minListening' />
+                            <input type="number" defaultValue={getcoursedata?.ielts?.minListening} onChange={handleielts} placeholder='< 9' min="0" max="9.0" name='minListening' />
                           </div>
                         </div>
                       </div>
@@ -550,6 +577,7 @@ function Editcourse() {
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       row
+                      defaultValue={getcoursedata?.duolingo?.duoLingoAccepted}
                       onChange={handleduolingo}
                       name="duoLingoAccepted"
                       className='addArtist-inputField'
@@ -568,23 +596,23 @@ function Editcourse() {
                       <div className='toefl-category-box'>
                         <div className='toefl-category-box-single'>
                           <label >Total Score</label>
-                          <input type="number" onChange={handleduolingo} name="Total" min="0" max="160" placeholder='< 160' />
+                          <input type="number" defaultValue={getcoursedata?.duolingo?.Total} onChange={handleduolingo} name="Total" min="0" max="160" placeholder='< 160' />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Literacy</label>
-                          <input type="number" onChange={handleduolingo} name="minLiteracy" placeholder='< 160' min="0" max="160" />
+                          <input type="number" defaultValue={getcoursedata?.duolingo?.minLiteracy} onChange={handleduolingo} name="minLiteracy" placeholder='< 160' min="0" max="160" />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Comprehension</label>
-                          <input type="number" onChange={handleduolingo} name="minComprehension" placeholder='< 160' min="0" max="160" />
+                          <input type="number" defaultValue={getcoursedata?.duolingo?.minComprehension} onChange={handleduolingo} name="minComprehension" placeholder='< 160' min="0" max="160" />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Conversation</label>
-                          <input type="number" onChange={handleduolingo} placeholder='< 160' min="0" max="160" name='minConversation' />
+                          <input type="number" defaultValue={getcoursedata?.duolingo?.minConversation} onChange={handleduolingo} placeholder='< 160' min="0" max="160" name='minConversation' />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Production</label>
-                          <input type="number" onChange={handleduolingo} placeholder='< 160' min="0" max="160" name='minProduction' />
+                          <input type="number" defaultValue={getcoursedata?.duolingo?.minProduction} onChange={handleduolingo} placeholder='< 160' min="0" max="160" name='minProduction' />
                         </div>
                       </div>
                     </div>
@@ -605,6 +633,7 @@ function Editcourse() {
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     row
                     onChange={handlepte}
+                    defaultValue={getcoursedata?.pte?.pteAccepted}
                     name="pteAccepted"
                     className='addArtist-inputField'
                   >
@@ -618,6 +647,7 @@ function Editcourse() {
                   <input
                     type='number'
                     name='minScore'
+                    defaultValue={getcoursedata?.pte?.minScore}
                     onChange={handlepte}
                     placeholder='< 90'
                     min="0"
@@ -640,13 +670,13 @@ function Editcourse() {
                   <div className='addArtist-inputField deadline-boxes'>
                     <div className='deadline-boxes-single'>
                       <a href='#'>Priority</a>
-                      <input type="date" onChange={handlefalldeadline}
+                      <input type="date" defaultValue={fallPrdate} onChange={handlefalldeadline}
                         name='priority' className='addArtist-inputField'
                       />
                     </div>
                     <div className='deadline-boxes-single'>
                       <a href='#'>Final</a>
-                      <input type="date" onChange={handlefalldeadline}
+                      <input type="date" defaultValue={fallFidate} onChange={handlefalldeadline}
                         name='final' className='addArtist-inputField' />
                     </div>
                   </div>
@@ -660,13 +690,17 @@ function Editcourse() {
                   <div className='addArtist-inputField deadline-boxes'>
                     <div className='deadline-boxes-single'>
                       <a href='#'>Priority</a>
-                      <input type="date" onChange={handlespringdeadline}
+                      <input type="date"
+                        defaultValue={springPrdate}
+                       onChange={handlespringdeadline}
                         name='priority' className='addArtist-inputField' />
 
                     </div>
                     <div className='deadline-boxes-single'>
                       <a href='#'>Final</a>
-                      <input type="date" onChange={handlespringdeadline}
+                      <input type="date" 
+                      defaultValue={springFidate}
+                      onChange={handlespringdeadline}
                         name='final' className='addArtist-inputField' />
                     </div>
                   </div>
@@ -686,12 +720,14 @@ function Editcourse() {
                     <div className='addArtist-inputField deadline-boxes'>
                       <div className='deadline-boxes-single'>
                         <a href='#'>Priority</a>
-                        <input type="date" onChange={handlesummerdeadline}
+                        <input type="date" 
+                        defaultValue={summerPrdate}
+                        onChange={handlesummerdeadline}
                           name='priority' className='addArtist-inputField' />
                       </div>
                       <div className='deadline-boxes-single'>
                         <a href='#'>Final</a>
-                        <input type="date" onChange={handlesummerdeadline}
+                        <input type="date" defaultValue={summerFidate} onChange={handlesummerdeadline}
                           name='final'
                           className='addArtist-inputField' />
                       </div>
@@ -706,6 +742,7 @@ function Editcourse() {
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="nonITAccepted"
+                      defaultValue={getcoursedata?.nonITAccepted}
                       onChange={handleChange}
                       className='addArtist-inputField'
                       row
@@ -730,6 +767,7 @@ function Editcourse() {
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="preWaiverForNonIT"
+                      defaultValue={getcoursedata?.preWaiverForNonIT}
                       onChange={handleChange}
                       className='addArtist-inputField'
                       row
@@ -746,6 +784,7 @@ function Editcourse() {
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="last60UnitsConsidered"
+                      defaultValue={getcoursedata?.last60UnitsConsidered}
                       onChange={handleChange}
                       className='addArtist-inputField'
                       row
@@ -770,15 +809,15 @@ function Editcourse() {
 
                         <div className='department-details-single'>
                           <label >Email</label>
-                          <input type="email" onChange={handledepartment} name="email" id="" />
+                          <input type="email" defaultValue={getcoursedata?.departmentDetails?.email} onChange={handledepartment} name="email" id="" />
                         </div>
                         <div className='department-details-single'>
                           <label>Address</label>
-                          <input type="text" onChange={handledepartment} name='address' />
+                          <input type="text" defaultValue={getcoursedata?.departmentDetails?.address} onChange={handledepartment} name='address' />
                         </div>
                         <div className='department-details-single'>
                           <label>Phone</label>
-                          <input type="tel" onChange={handledepartment} name='number' />
+                          <input type="tel" defaultValue={getcoursedata?.departmentDetails?.number} onChange={handledepartment} name='number' />
                         </div>
                       </div>
                     </div>
@@ -793,6 +832,7 @@ function Editcourse() {
                       name="activityStatus"
                       onChange={handleChange}
                       className='addArtist-inputField'
+                      defaultValue={getcoursedata?.activityStatus}
                       row>
                       <FormControlLabel value="true" control={<Radio />} label="Yes" />
                       <FormControlLabel value="false" control={<Radio />} label="No" />
@@ -816,15 +856,15 @@ function Editcourse() {
 
                           <div className='department-details-single'>
                             <label >Email</label>
-                            <input type="email" onChange={handleadmissionoffice} name="email" id="" />
+                            <input type="email" defaultValue={getcoursedata?.admissionOffice?.email} onChange={handleadmissionoffice} name="email" id="" />
                           </div>
                           <div className='department-details-single'>
                             <label>Address</label>
-                            <input type="text" onChange={handleadmissionoffice} name='address' />
+                            <input type="text" defaultValue={getcoursedata?.admissionOffice?.address} onChange={handleadmissionoffice} name='address' />
                           </div>
                           <div className='department-details-single'>
                             <label>Phone</label>
-                            <input type="tel" onChange={handleadmissionoffice} name='number' />
+                            <input type="tel"  defaultValue={getcoursedata?.admissionOffice?.number} onChange={handleadmissionoffice} name='number' />
                           </div>
                         </div>
                       </div>
@@ -838,6 +878,7 @@ function Editcourse() {
                       type='number'
                       min="1"
                       max="60"
+                      defaultValue={getcoursedata?.programLength}
                       name='programLength'
                       onChange={handleChange}
                       placeholder='Enter a number'
@@ -854,7 +895,7 @@ function Editcourse() {
                   className='addArtist-submitDetailBtn'
                   onClick={ handlesubmit }
                 >
-                  Add Courses
+                  Update Course
                 </button>
               </div>
             </div>

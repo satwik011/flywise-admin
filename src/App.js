@@ -36,7 +36,7 @@ const App = () => {
           <Route path='/Universities/edit/:id' exact component={Edituniversity} />
           <Route path='/Universities/addcourse/:id' exact component={Addcoursepage} />
           <Route path='/Universities/viewcourse/:id' exact component={ ViewCoursePage } />
-          <Route path='/Universities/editcourse/:id' exact component={Editcourse} />
+          <Route path='/Universities/editcourse/:id1/:id2' exact component={Editcourse} />
        
 
        

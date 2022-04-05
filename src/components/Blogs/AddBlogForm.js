@@ -3,6 +3,8 @@ import 'react-phone-number-input/style.css';
 import '../../styles/AddEmployeeForm.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const initialData = {
   writerName: '',
@@ -44,6 +46,28 @@ const AddBlogForm = () => {
     const { name } = e.target;
     setblogData({...blogData, links:{...blogData.links,[name]:e.target.value} });
   }
+
+AddBlogForm.formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video'
+]
+AddBlogForm.modules = {
+  toolbar: [
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+    [{size: []}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, 
+     {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image', 'video'],
+    ['clean']
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  }
+}
 
 
   const handlesubmit = async(e)=>{
@@ -179,20 +203,30 @@ const AddBlogForm = () => {
                       <input className='addEmployee-inputField' type="text" onChange={handlelinks} name='fb' />
                   <label className='addEmployee-inputLabel'>Linkedin</label>
                       <input className='addEmployee-inputField' type="text" onChange={handlelinks} name='linkedin' />
-                  <label className='addEmployee-inputLabel'>Instagram</label>
-                      <input className='addEmployee-inputField' type="text" onChange={handlelinks} name='insta' />
-                  <label className='addEmployee-inputLabel'>Twitter</label>
-                      <input className='addEmployee-inputField' type="text" onChange={handlelinks} name='twitter' />
-                  </div>
+                         </div>
                 </div>
         
-          <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Body</label>
-              <textarea name="body" 
-              className='addEmployee-inputField'
-               onChange={handleChange} id="" cols="30" rows="10"></textarea>
-            </div>
+                  <div className='addEmployee-inputFieldDiv'>
+                  <label className='addEmployee-inputLabel'>Author's Socials</label>
+                    <div className='addEmployee-inputField'>
+                      <label className='addEmployee-inputLabel'>Instagram</label>
+                          <input className='addEmployee-inputField' type="text" onChange={handlelinks} name='insta' />
+                      <label className='addEmployee-inputLabel'>Twitter</label>
+                          <input className='addEmployee-inputField' type="text" onChange={handlelinks} name='twitter' />
+                    </div>
+                  </div>   
           </div>
+
+          <div className='addEmployee-alignRow'>
+                       <div style={{marginTop:"20px",width:"100%"}}>
+                        <label className='addEmployee-inputLabel'>Body</label>
+                          <ReactQuill 
+                             modules={AddBlogForm.modules}
+                             formats={AddBlogForm.formats}
+                            theme="snow"
+                           onChange={(content, delta, source, editor)=>{ setblogData({...blogData,body:editor.getHTML()}) }}  / >
+                        </div>
+                  </div>
 
 
 
@@ -208,5 +242,8 @@ const AddBlogForm = () => {
     </div>
   );
 };
+
+
+
 
 export default AddBlogForm;

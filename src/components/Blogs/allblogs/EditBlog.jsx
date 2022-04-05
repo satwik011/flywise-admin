@@ -1,9 +1,10 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory } from 'react-router-dom';
 import moment from 'moment';
 import LoadingPage from '../../utils/LoadingPage';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const initialData = {
   writerName: '',
@@ -30,10 +31,7 @@ function EditBlog() {
   const [getblogData, setgetblogData] = useState([])
   const [loading, setLoading] = useState(false);
   const param = useParams();
-  
-
-
-  console.log(getblogData);
+  const history = useHistory()
   // calling data to display 
   const fetchblog = async () => {
     setLoading(true);
@@ -74,18 +72,60 @@ function EditBlog() {
   }
 
 
-  //submit form
+  //Update form
 
-
-  const handlesubmit = ()=>{
-    console.log("ok");
-  }
+  const handlesubmit=async(e)=>{
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('writerName', blogData.writerName);
+    formData.append('writerTagline', blogData.writerTagline);
+    formData.append('title', blogData.title);
+    formData.append('date', blogData.date);
+    formData.append('body', blogData.body);
+    formData.append('tag', blogData.tag);
+    formData.append('profilePic', blogData.profilePic);
+    formData.append('blogPics', blogData.blogPics);
+    formData.append('minutes', blogData.minutes);
+    formData.append('links[fb]', blogData.links.fb);
+    formData.append('links[insta]', blogData.links.insta);
+    formData.append('links[twitter]', blogData.links.twitter);
+    formData.append('links[linkedin]', blogData.links.linkedin);
+    try {
+      await axios.patch( `https://flywise-admin.herokuapp.com/api/updateBlog/${param.id}`,formData);
+      history.push('/blogs')
+    } catch (error) {
+      console.log(error);
+    }
+}
 
 //display date input box
-
-
   let blogdate = getblogData.date;
   blogdate = moment(blogdate).format('YYYY-MM-DD')
+
+
+  // React Quill Changes
+
+  EditBlog.formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'video'
+  ]
+  EditBlog.modules = {
+    toolbar: [
+      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+      [{size: []}],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, 
+       {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+    clipboard: {
+      // toggle to add extra line breaks when pasting HTML:
+      matchVisual: false,
+    }
+  }
 
 
 
@@ -184,7 +224,7 @@ function EditBlog() {
                   <div className='addEmployee-alignRow'>
                         <div className='addEmployee-inputFieldDiv'>
                           <label className='addEmployee-inputLabel'>Hashtags</label>
-                          <input className='addEmployee-inputField' onChange={handleChange} type="text" name='tag' />
+                          <input className='addEmployee-inputField' defaultValue={ getblogData.tag } onChange={handleChange} type="text" name='tag' />
                         </div>
                       
                       <div className='addEmployee-inputFieldDiv'>
@@ -200,7 +240,7 @@ function EditBlog() {
                 </div>
 
                 {/* 5th row */}
-                  <div className='addEmployee-alignRow'>
+                <div className='addEmployee-alignRow'>
                     <div className='addEmployee-inputFieldDiv'>
                           <label className='addEmployee-inputLabel'>Author's Socials</label>
                           <div className='addEmployee-inputField'>
@@ -210,26 +250,33 @@ function EditBlog() {
                       
                           <label className='addEmployee-inputLabel'>Linkedin</label>
                               <input className='addEmployee-inputField' defaultValue={getblogData?.links?.linkedin} type="text" onChange={handlelinks} name='linkedin' />
+                          
+                          </div>
+                    </div>
+                    
+                    <div className='addEmployee-inputFieldDiv'>
+                          <label className='addEmployee-inputLabel'>Author's Socials</label>
+                          <div className='addEmployee-inputField'>
                       
                           <label className='addEmployee-inputLabel'>Instagram</label>
                               <input className='addEmployee-inputField' defaultValue={getblogData?.links?.insta} type="text"  onChange={handlelinks} name='insta' />
-                      11
+                      
                           <label className='addEmployee-inputLabel'>Twitter</label>
                               <input className='addEmployee-inputField' defaultValue={getblogData?.links?.twitter} type="text" onChange={handlelinks} name='twitter' />
                           </div>
-                        </div>
-
-
-                  <div className='addEmployee-inputFieldDiv'>
-                      <label className='addEmployee-inputLabel'>Body</label>
-                    
-                      <textarea name="body" 
-                      className='addEmployee-inputField'
-                      defaultValue={getblogData.body}
-                      onChange={handleChange} id="" cols="30" rows="10"></textarea>
                     </div>
-                  </div>
+              </div>
 
+                  <div className='addEmployee-alignRow'>
+                       <div style={{marginTop:"20px",width:"100%"}}>
+                        <label className='addEmployee-inputLabel'>Body</label>
+                        <ReactQuill 
+                        modules={EditBlog.modules}
+                        formats ={EditBlog.formats}
+                        onChange={ (content, delta, source, editor)=>setblogData({...blogData,body:editor.getHTML()})}  
+                        defaultValue={getblogData?.body} / >
+                          </div>
+                  </div>
 
 
                   <div className='addEmployee-submitDetailDiv'>
@@ -237,7 +284,7 @@ function EditBlog() {
                       className='addEmployee-submitDetailBtn'
                       onClick={handlesubmit}
                     >
-                      Submit
+                      Update
                     </button>
                   </div>
                 </div>
@@ -246,5 +293,6 @@ function EditBlog() {
     </>
   )
 }
+
 
 export default EditBlog

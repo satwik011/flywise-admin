@@ -70,7 +70,7 @@ function ViewCoursePage() {
                                       applicationFees={course.applicationFees}
                                       programFees={course.programFees}
                                       departmentDetails={course.departmentDetails}
-
+                                      courseid= {param.id}
                                     />
                                       })
                               }                        
