@@ -1,58 +1,37 @@
 import React from 'react';
 import moment from 'moment';
 import { blockUnblockUser } from '../../redux/api';
+import { Link } from 'react-router-dom';
 import '../../styles/ArtistsTable.css';
 
 const UsersTable = (props) => {
-  const { allUsers, fetchUserList } = props;
+  const { Users } = props;
 
-  const handleBlock = async (id) => {
-    try {
-      const { data } = await blockUnblockUser(id);
-      console.log(data);
-      fetchUserList();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  console.log(Users)
   return (
     <div className='table-wrapper' id='#scrollBar'>
       <table className='fl-table'>
         <thead>
           <tr>
-            <th>User Name</th>
+            <th>Name</th>
             <th>Phone Number</th>
+            <th>Country</th>
+            <th>session</th>
+            <th>fund</th>
             <th>Email</th>
-            <th>Location</th>
-            <th>Instagram</th>
-            <th>Created At</th>
-            <th>Action</th>
+            <th>View Details</th>
           </tr>
         </thead>
         <tbody>
-          {allUsers.map((user) => (
+          {Users?.map((user) => (
             <tr key={user._id}>
-              <td>{user.username ? user.username : 'NA'}</td>
-              <td>{user.phone ? user.phone : 'NA'}</td>
+              <td>{user.name ? user.name : 'NA'}</td>
+              <td>{user.mobileNo ? user.mobileNo : 'NA'}</td>
+              <td>{user.whichCountry ? user.whichCountry : 'NA'}</td>
+              <td>{user.session ? user.session : 'NA'}</td>
+              <td>{user.fund ? user.fund : 'NA'}</td>
               <td>{user.email ? user.email : 'NA'}</td>
-              <td>{user.location ? user.location : 'NA'}</td>
-              <td>{user.insta ? user.insta : 'NA'}</td>
-              <td>
-                {' '}
-                {user?.createdAt
-                  ? moment(user?.createdAt).format('MMMM Do YYYY')
-                  : ''}
-              </td>
-              {/**<td>{`Pending`}</td> */}
-              <td>
-                <button
-                  className='user-blockBtn'
-                  onClick={() => handleBlock(user._id)}
-                >
-                  {user?.blocked ? 'Unblock' : 'Block'}
-                </button>
-              </td>
+              <td><Link style={{ backgroundColor:"#155b89",padding:"6px",color:"white",textDecoration:"none" }} to={`/users/${user._id}`}>View Details</Link></td>
             </tr>
           ))}
         </tbody>

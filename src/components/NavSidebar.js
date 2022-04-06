@@ -250,7 +250,7 @@ const NavSidebar = (props) => {
               </ListItemIcon>
               <ListItemText primary='Users' />
             </ListItem>
-            <ListItem
+            {/* <ListItem
               button
               className={
                 props.location.pathname.includes('/payments')
@@ -275,7 +275,7 @@ const NavSidebar = (props) => {
                 )}
               </ListItemIcon>
               <ListItemText primary='Payments ' />
-            </ListItem>
+            </ListItem> */}
           </List>
         </Drawer>
         <Box

@@ -123,3 +123,16 @@
   margin-right: 5px;
 
 }
+
+.user-List li{
+text-decoration: none;
+list-style: none;
+padding: 0 10px;
+}
+.User-tablewrap{
+  width: 50vw;
+}
+.d-flex{
+  display: flex;
+  justify-content: space-between;
+}

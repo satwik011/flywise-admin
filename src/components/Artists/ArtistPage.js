@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 import addIcon from '../../images/addIcon.svg';
-// import printIcon from '../../images/printIcon.svg';
+import axios from 'axios';
 import filterIcon from '../../images/filterIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import ArtistsTable from './University/ArtistsTable';
@@ -12,30 +12,51 @@ import '../../styles/ArtistPage.css';
 
 const ArtistPage = () => {
   const history = useHistory();
-  const [allArtists, setAllArtists] = useState([]);
-  const [searchInput, setSearchInput] = useState('');
-  const [boolVal, setBoolVal] = useState(false);
+  const [searchInput, setsearchInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const fetchArtistList = async (searchInput) => {
+  const [universityData, setuniversityData] = useState([])
+  const [universityDataCopy, setUniversityDataCopy] = useState([])
+  
+  const unicall =async()=>{
     setLoading(true);
+   
     try {
-      const { data } = await getArtistList(searchInput);
-      // console.log(data);
-      setAllArtists(data);
-      setLoading(false);
+      const call1 = await axios.get("https://flywise-admin.herokuapp.com/api/allUni");
+        setuniversityData(call1.data.allUni);
+        setUniversityDataCopy(call1.data.allUni);
+        setLoading(false);
     } catch (error) {
-      setLoading(false);
-      console.log(error);
+        setLoading(false);
+        console.log(error);
     }
-  };
+  }
+
 
   useEffect(() => {
-    if (!boolVal) {
-      fetchArtistList(searchInput);
-      setBoolVal(true);
-    }
-  }, [boolVal, searchInput]);
+    unicall();
+  }, []);
 
+
+  const searchItems = (searchValue) => {
+    setsearchInput(searchValue)
+    let originalData = {...universityData};
+
+    let filteredData =  universityDataCopy.filter((item) => {  
+      return item.name.includes(searchValue.replace(/\s+/g, '').toUpperCase())
+      // return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+    })
+
+    if(filteredData.length > 0){
+     setuniversityData(filteredData)
+    }
+    else {
+      setuniversityData(universityData)
+    }
+
+
+  }
+  console.log(searchInput)
+  
   return (
     <div className='artist-container'>
       {loading ? (
@@ -51,10 +72,7 @@ const ArtistPage = () => {
                 className='artist-searchInput'
                 id='searchInput'
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                onKeyDown={(e) =>
-                  e.key === 'Enter' && fetchArtistList(searchInput)
-                }
+                onChange={(e)=>searchItems(e.target.value)}
               />
             </div>
             <div className='artist-addArtistDiv'>
@@ -69,8 +87,8 @@ const ArtistPage = () => {
         </div>
           <div className='artist-tableSection'>
             <ArtistsTable
-              allArtists={allArtists}
-              fetchArtistList={fetchArtistList}
+            
+                uniData={universityData}
             />
           </div>
         </Fragment>

@@ -3,28 +3,48 @@ import React, { useState, useEffect, Fragment } from 'react';
 import filterIcon from '../../images/filterIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import UsersTable from './UsersTable';
-
-import { getUserList } from '../../redux/api';
-
+import axios from 'axios';
 import '../../styles/UserPage.css';
 import LoadingPage from '../utils/LoadingPage';
 
 const UserPage = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
+  const [searchInput, setsearchInput] = useState('');
   const [loading, setLoading] = useState(false);
 
   const fetchUserList = async () => {
     setLoading(true);
     try {
-      const { data } = await getUserList();
-      setAllUsers(data);
+      const userData = await axios.get("https://flywise-admin.herokuapp.com/api/allUsers");
+      setAllUsers(userData.data.user);
       setLoading(false);
+
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
+
+
+
+  const searchItems = (searchValue) => {
+    setsearchInput(searchValue)
+
+
+    let filteredData =  allUsers.filter((item) => {  
+      return item.name.includes(searchValue.replace(/\s+/g, ''))
+      // return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+    })
+
+    if(filteredData.length > 0){
+     setAllUsers(filteredData)
+    }
+    else {
+    }
+
+
+  }
 
   useEffect(() => {
     if (!boolVal) {
@@ -47,6 +67,7 @@ const UserPage = () => {
                 placeholder='Ex. Users, Phone Number'
                 className='user-searchInput'
                 id='searchInput'
+                onChange={(e)=>searchItems(e.target.value)}
               />
             </div>
             {/**<div className='artist-addArtistDiv'>
@@ -69,7 +90,7 @@ const UserPage = () => {
             </div>
           </div>
           <div className='user-tableSection'>
-            <UsersTable allUsers={allUsers} fetchUserList={fetchUserList} />
+            <UsersTable Users = {allUsers} />
           </div>
         </Fragment>
       )}

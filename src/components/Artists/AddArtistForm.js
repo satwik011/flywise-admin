@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import 'react-phone-number-input/style.css';
 import '../../styles/AddArtistForm.css';
+import AlertTitle from '@mui/material/AlertTitle';
 import LoadingPage from '../utils/LoadingPage';
 import { Country, State, City }  from 'country-state-city';
 
@@ -56,6 +57,7 @@ const AddArtistForm = () => {
     try{
            await axios.post("https://flywise-admin.herokuapp.com/api/createUniversity",formData);
           history.push('/Universities')
+          
         }catch(err){
           console.log(err);
         }

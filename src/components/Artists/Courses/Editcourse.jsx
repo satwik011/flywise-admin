@@ -89,6 +89,8 @@ const initialState = {
       number: null,
       email: null
     },
+    loanAssist:false,
+    jobAssist:false,
     private: {},
     public: {}
   };
@@ -888,6 +890,41 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
               </div>
 
+
+                    
+                <div className='addArtist-alignRow'>
+                <div className='addArtist-inputFieldDiv'>
+                      <label className='addArtist-inputLabel'>
+                        Loan Asistance
+                      </label>
+                      <RadioGroup
+                        aria-labelledby="demo-row-controlled-radio-buttons-group"
+                        defaultValue={getcoursedata?.loanAssist}
+                        name="loanAssist"
+                        onChange={handleChange}
+                        className='addArtist-inputField'
+                        row>
+                        <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="false" control={<Radio />} label="No" />
+                      </RadioGroup>
+                    </div>
+
+                    <div className='addArtist-inputFieldDiv'>
+                      <label className='addArtist-inputLabel'>
+                       Job Assistance
+                      </label>
+                      <RadioGroup
+                        aria-labelledby="demo-row-controlled-radio-buttons-group"
+                        name="jobAssist"
+                        defaultValue={getcoursedata?.jobAssist}
+                        onChange={handleChange}
+                        className='addArtist-inputField'
+                        row>
+                        <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="false" control={<Radio />} label="No" />
+                      </RadioGroup>
+                    </div>
+                </div>
 
 
               <div className='addArtist-submitDetailDiv'>

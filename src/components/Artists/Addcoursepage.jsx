@@ -86,6 +86,8 @@ const initialState = {
     number: null,
     email: null
   },
+  loanAssist:false,
+  jobAssist:false,
   private: {},
   public: {}
 };
@@ -355,8 +357,8 @@ const handlesubmit=async()=>{
                       onChange={handlegre}
                       className='addArtist-inputField'
                     >
-                      <FormControlLabel value="yes" onClick={nobox} control={<Radio />} label="Yes" />
-                      <FormControlLabel value="no" onClick={nobox} control={<Radio />} label="No" />
+                      <FormControlLabel value="true" onClick={nobox} control={<Radio />} label="Yes" />
+                      <FormControlLabel value="false" onClick={nobox} control={<Radio />} label="No" />
                       <FormControlLabel onClick={onbox} value="specialwaiver" control={<Radio />} label="Special Waiver" />
                       {showgrebox ? (<input type="text" onChange={handlegre} name="greWaiver" placeholder='Describe special waiver' className='addArtist-inputField' />
                       ) : ("")}
@@ -368,8 +370,8 @@ const handlesubmit=async()=>{
                       GRE Minimum Score Requirement
                     </label>
                     {
-                      (courseData.GREtestrequirement == "no") ? (
-                        <input type="text" onChange={handleChange} name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                      (courseData?.gre?.greRequired == "false") ? (
+                        <input type="text" onChange={handleChange}  value="N/A" className='addArtist-inputField' />
                       ) : (
                         <div className='addArtist-inputField'>
 
@@ -820,7 +822,37 @@ const handlesubmit=async()=>{
 
                 </div>
 
+                <div className='addArtist-alignRow'>
+                <div className='addArtist-inputFieldDiv'>
+                      <label className='addArtist-inputLabel'>
+                        Loan Asistance
+                      </label>
+                      <RadioGroup
+                        aria-labelledby="demo-row-controlled-radio-buttons-group"
+                        name="loanAssist"
+                        onChange={handleChange}
+                        className='addArtist-inputField'
+                        row>
+                        <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="false" control={<Radio />} label="No" />
+                      </RadioGroup>
+                    </div>
 
+                    <div className='addArtist-inputFieldDiv'>
+                      <label className='addArtist-inputLabel'>
+                       Job Assistance
+                      </label>
+                      <RadioGroup
+                        aria-labelledby="demo-row-controlled-radio-buttons-group"
+                        name="jobAssist"
+                        onChange={handleChange}
+                        className='addArtist-inputField'
+                        row>
+                        <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="false" control={<Radio />} label="No" />
+                      </RadioGroup>
+                    </div>
+                </div>
 
                 <div className='addArtist-submitDetailDiv'>
                   <button
