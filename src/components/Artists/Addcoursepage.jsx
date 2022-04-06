@@ -80,7 +80,7 @@ const initialState = {
     email: null
   },
 
-  activityStatus: false,
+  activeStatus: false,
   admissionOffice: {
     address: null,
     number: null,
@@ -428,8 +428,11 @@ const handlesubmit=async()=>{
                   <label className='addArtist-inputLabel'>
                     TOEFL Minimum Score Requirement
                   </label>
+                {  
+                  (courseData?.toefl?.toeflAccepted == "false") ? (
+                        <input type="text" onChange={handleChange}  value="N/A" className='addArtist-inputField' />
+                      ) : (
                   <div className='addArtist-inputField'>
-
                     <div className='toefl-category-box'>
                       <div className='toefl-category-box-single'>
                         <label >Total Score</label>
@@ -453,6 +456,7 @@ const handlesubmit=async()=>{
                       </div>
                     </div>
                   </div>
+                  )}
                 </div>
 
               </div>
@@ -485,6 +489,10 @@ const handlesubmit=async()=>{
                         <label className='addArtist-inputLabel'>
                           IELTS Minimum Score Requirement
                         </label>
+              {  
+                  (courseData?.ielts?.ieltsAccepted == "false") ? (
+                        <input type="text" onChange={handleChange}  value="N/A" className='addArtist-inputField' />
+                      ) : (  
                         <div className='addArtist-inputField'>
 
                           <div className='toefl-category-box'>
@@ -510,6 +518,7 @@ const handlesubmit=async()=>{
                             </div>
                           </div>
                         </div>
+                        )}
                     </div>
               </div>
 
@@ -538,6 +547,10 @@ const handlesubmit=async()=>{
                       <label className='addArtist-inputLabel'>
                         Duolingo Score Requirement
                       </label>
+                {  
+                  (courseData?.duolingo?.duoLingoAccepted == "false") ? (
+                        <input type="text" onChange={handleChange}  value="N/A" className='addArtist-inputField' />
+                      ) : (  
                       <div className='addArtist-inputField'>
 
                         <div className='toefl-category-box'>
@@ -563,6 +576,7 @@ const handlesubmit=async()=>{
                           </div>
                         </div>
                       </div>
+                      )}
                      </div>
                 
                 </div>
@@ -590,6 +604,10 @@ const handlesubmit=async()=>{
 
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>PTE</label>
+                    {  
+                  (courseData?.pte?.pteAccepted == "false") ? (
+                        <input type="text" onChange={handleChange}  value="N/A" className='addArtist-inputField' />
+                      ) : (  
                     <input
                       type='number'
                       name='minScore'
@@ -599,6 +617,7 @@ const handlesubmit=async()=>{
                       max="90"
                       className='addArtist-inputField'
                     />
+                    )}
                   </div>
                 </div>
 
@@ -765,7 +784,7 @@ const handlesubmit=async()=>{
                       </label>
                       <RadioGroup
                         aria-labelledby="demo-row-controlled-radio-buttons-group"
-                        name="activityStatus"
+                        name="activeStatus"
                         onChange={handleChange}
                         className='addArtist-inputField'
                         row>

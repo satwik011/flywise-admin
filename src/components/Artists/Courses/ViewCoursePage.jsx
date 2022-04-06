@@ -35,7 +35,7 @@ function ViewCoursePage() {
         console.log(error);
     }
   }
-
+console.log(courseData)
   return (
     <>
     <div className='artist-container'>

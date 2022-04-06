@@ -50,7 +50,7 @@ const initialState = {
     },
     duolingo: {
       duoLingoAccepted: false,
-      Total: null,
+      total: null,
       minLiteracy: null,
       minComprehension: null,
       minConversation: null,
@@ -83,7 +83,7 @@ const initialState = {
       email: null
     },
   
-    activityStatus: false,
+    activeStatus: false,
     admissionOffice: {
       address: null,
       number: null,
@@ -423,9 +423,8 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     GRE Minimum Score Requirement
                   </label>
                   {
-                    (getcoursedata?.gre?.greRequired === "false") ? (
-                      <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
-                    ) : (
+                    courseData?.gre?.greRequired  ? (
+                    
                       <div className='addArtist-inputField'>
 
                         <div className='Greverbal'>
@@ -450,7 +449,8 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                           <label>Score </label>
                           <input name="minAWA" defaultValue={getcoursedata?.gre?.minAWA} onChange={handlegre} min="0" max="6.0" placeholder=' 0 - 6' type="number" id="" />
                         </div>
-                      </div>
+                      </div>) : (
+                      <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
                     )
                   }
                 </div>
@@ -481,6 +481,8 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                 <label className='addArtist-inputLabel'>
                   TOEFL Minimum Score Requirement
                 </label>
+                {
+              courseData?.toefl?.toeflAccepted  ? (
                 <div className='addArtist-inputField'>
 
                   <div className='toefl-category-box'>
@@ -505,7 +507,9 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       <input type="number" defaultValue={getcoursedata?.toefl?.minListening} onChange={handletoefl} name="minListening" placeholder='< 30' min="0" max="30" />
                     </div>
                   </div>
-                </div>
+                </div>):(
+                  <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                )}
               </div>
 
             </div>
@@ -539,6 +543,9 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                       <label className='addArtist-inputLabel'>
                         IELTS Minimum Score Requirement
                       </label>
+
+                      {
+              courseData?.ielts?.ieltsAccepted  ? (  
                       <div className='addArtist-inputField'>
 
                         <div className='toefl-category-box'>
@@ -563,7 +570,9 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                             <input type="number" defaultValue={getcoursedata?.ielts?.minListening} onChange={handleielts} placeholder='< 9' min="0" max="9.0" name='minListening' />
                           </div>
                         </div>
-                      </div>
+                      </div>):(
+                          <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                      )}
                   </div>
             </div>
 
@@ -593,12 +602,15 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     <label className='addArtist-inputLabel'>
                       Duolingo Score Requirement
                     </label>
+                   
+                    {
+              courseData?.duolingo?.duoLingoAccepted  ? (   
                     <div className='addArtist-inputField'>
 
                       <div className='toefl-category-box'>
                         <div className='toefl-category-box-single'>
                           <label >Total Score</label>
-                          <input type="number" defaultValue={getcoursedata?.duolingo?.Total} onChange={handleduolingo} name="Total" min="0" max="160" placeholder='< 160' />
+                          <input type="number" defaultValue={getcoursedata?.duolingo?.total} onChange={handleduolingo} name="total" min="0" max="160" placeholder='< 160' />
                         </div>
                         <div className='toefl-category-box-single'>
                           <label >Literacy</label>
@@ -617,7 +629,9 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                           <input type="number" defaultValue={getcoursedata?.duolingo?.minProduction} onChange={handleduolingo} placeholder='< 160' min="0" max="160" name='minProduction' />
                         </div>
                       </div>
-                    </div>
+                    </div>):(
+                      <input type="text" onChange={handleChange}  name="Gremindefault" value="N/A" className='addArtist-inputField' />
+                    )}
                    </div>
               
               </div>
@@ -831,10 +845,10 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     </label>
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
-                      name="activityStatus"
+                      name="activeStatus"
                       onChange={handleChange}
                       className='addArtist-inputField'
-                      defaultValue={getcoursedata?.activityStatus}
+                      defaultValue={getcoursedata?.activeStatus}
                       row>
                       <FormControlLabel value="true" control={<Radio />} label="Yes" />
                       <FormControlLabel value="false" control={<Radio />} label="No" />
