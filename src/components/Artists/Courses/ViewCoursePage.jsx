@@ -5,12 +5,15 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Onecourse from './Onecourse';
+import addIcon from '../../../images/addIcon.svg';
+
 
 function ViewCoursePage() {
 
   const [courseData, setcourseData] = useState([])
   const [loading, setLoading] = useState(false);
   const param = useParams();
+  const history = useHistory()
   // useEffects
   useEffect(() => {
     unicall();
@@ -42,7 +45,18 @@ console.log(courseData)
     
       {loading ? (
       <LoadingPage />
-            ) : (
+            ) : (<>
+              <div className='artist-firstSection'>
+                <div className='artist-addArtistDiv'>
+                  <button
+                    className='artist-addBtn'
+                    onClick={() => history.push(`/Universities/addcourse/${param.id}`)}
+                  >
+                    <img src={addIcon} alt='add' className='artist-addIcon' />
+                    <span>Add Course</span>
+                  </button>
+                </div>
+            </div>
               
                     <div className='artist-tableSection'>
                     <div className='table-wrapper' id='#scrollBar'>
@@ -78,7 +92,7 @@ console.log(courseData)
                     </table>
                     </div>
                     </div>
-                    
+                    </> 
     )}
     </div>
     </>

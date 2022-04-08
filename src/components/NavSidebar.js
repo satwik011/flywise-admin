@@ -146,7 +146,7 @@ const NavSidebar = (props) => {
             }}
           >
             <div className={classes.navHeader}>
-              <h3>Fanstar</h3>
+              <h3>Flywise</h3>
             </div>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon className={classes.closeDrawer} />
@@ -154,28 +154,7 @@ const NavSidebar = (props) => {
           </Toolbar>
           <Divider />
           <List className={classes.listDiv}>
-            <ListItem
-              button
-              className={
-                props.location.pathname.includes('/home')
-                  ? classes.selectedList
-                  : ''
-              }
-              onClick={() => history.push('/home')}
-            >
-              <ListItemIcon>
-                {props.location.pathname.includes('/home') ? (
-                  <img
-                    src={homeActive}
-                    className={classes.iconColor}
-                    alt='home'
-                  />
-                ) : (
-                  <img src={home} className={classes.iconColor} alt='home' />
-                )}
-              </ListItemIcon>
-              <ListItemText primary='Home' />
-            </ListItem>
+          
             <ListItem
               button
               className={

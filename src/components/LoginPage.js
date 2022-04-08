@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import demoLogo from '../images/demo-logo.png';
+import demoLogo from '../images/logo.svg';
 import LoadingPage from './utils/LoadingPage';
 import { login } from '../redux/api';
 import Cookies from 'js-cookie';
@@ -49,7 +49,7 @@ const LoginPage = () => {
           <div className='loginPage-formHeaderDiv'>
             <div className='logoContainer'>
               <img src={demoLogo} alt='logo' className='logoImage' />
-              <span className='brandName'>Fanstar </span>
+              <span className='brandName'>Flywise </span>
             </div>
             <div className='loginPage-headerContent'>
               <h3 className='loginPage-headerTitle'>Log In to Dashboard </h3>
