@@ -302,12 +302,12 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   </label>
                   <input
                     type='number'
-                    min="1k"
-                    max="100k"
+                    min="1000"
+                    max="100000"
                     name='programFees'
                     defaultValue={getcoursedata?.programFees}
                     onChange={handleChange}
-                    placeholder='1k-100k USD'
+                    placeholder='1000-100000 USD'
                     className='addArtist-inputField'
                   />
                 </div>

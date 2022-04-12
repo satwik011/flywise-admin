@@ -12,6 +12,7 @@ const initialState = {
     state: "",
     level:"",
     remarks:"",
+    uniType:"",
     private:{},
     public:{},
   };
@@ -69,6 +70,7 @@ function Edituniversity() {
         formData.append('country', universityData.country);
         formData.append('state', universityData.state);
         formData.append('remarks', universityData.remarks);    
+        formData.append('uniType', universityData.uniType);    
         formData.append('private[key]', universityData.private["key"]);    
         formData.append('public[key2]', universityData.public["key2"]);    
             
@@ -191,7 +193,24 @@ function Edituniversity() {
                 </div>
               
               </div>
-                  
+
+                                  {/* 4th row */}
+           <div className='addArtist-alignRow'>
+                
+                <div className='addArtist-inputFieldDiv'>
+                       <label className='addArtist-inputLabel'>
+                         University Type
+                       </label>     
+                       <select
+                         className='addArtist-selectField'
+                         name='uniType'
+                         onChange={handleChange}>
+                         <option value="">{unidata.uniType}</option>
+                         <option value="Private">Private</option>
+                         <option value="Public">Public</option>
+                       </select>
+                     </div>
+                </div>       
 
               <div className='addArtist-submitDetailDiv'>
                 <button

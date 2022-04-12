@@ -29,7 +29,7 @@ const LoginPage = () => {
         const { data } = await login(formData);
         setLoading(false);
         Cookies.set('fanstarAdmin', data);
-        history.push('/home');
+        history.push('/Universities');
       } catch (error) {
         console.log(error);
         setLoading(false);

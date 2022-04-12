@@ -15,7 +15,7 @@ function Onecourse(prop) {
             <td>{discipline.map((dis)=> <p>{dis.name}</p>)}</td>
             <td>{prop.activeStatus ? (<Button size="small" color="success" variant="contained">Active</Button>):(<Button color="error" variant="contained">Not Active</Button>)}</td>
             <td>{prop.applicationFees} </td>
-            <td>{prop.programFees} K</td>
+            <td>{prop.programFees} </td>
             <td>{prop.departmentDetails.email}</td>
             <td className="text-right" >
               <div className="actions" style={{display:"flex",justifyContent:"space-betweens"}}>

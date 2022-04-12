@@ -13,23 +13,22 @@ import '../../styles/ArtistPage.css';
 const ArtistPage = () => {
   const history = useHistory();
   const [searchInput, setsearchInput] = useState('');
+  const [filterData, setfilterData] = useState([])
   const [loading, setLoading] = useState(false);
   const [universityData, setuniversityData] = useState([])
-  const [universityDataCopy, setUniversityDataCopy] = useState([])
   
   const unicall =async()=>{
     setLoading(true);
    
     try {
       const call1 = await axios.get("https://flywise-admin.herokuapp.com/api/allUni");
-        setuniversityData(call1.data.allUni);
-        setUniversityDataCopy(call1.data.allUni);
-        setLoading(false);
+      setuniversityData(call1.data.allUni);
+      setLoading(false);
     } catch (error) {
-        setLoading(false);
+      setLoading(false);
         console.log(error);
+      }
     }
-  }
 
 
   useEffect(() => {
@@ -37,25 +36,18 @@ const ArtistPage = () => {
   }, []);
 
 
+
   const searchItems = (searchValue) => {
     setsearchInput(searchValue)
-    let originalData = {...universityData};
-
-    let filteredData =  universityDataCopy.filter((item) => {  
-      return item.name.includes(searchValue.replace(/\s+/g, '').toUpperCase())
-      // return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-    })
-
-    if(filteredData.length > 0){
-     setuniversityData(filteredData)
+    if(searchInput !== ''){
+      let filteredData =  universityData.filter((item) => {  
+      return Object.values(item).join('').toLowerCase().includes(searchValue.toLowerCase())
+      })
+      setfilterData(filteredData)
+    }else{
+      setfilterData(universityData)
     }
-    else {
-      setuniversityData(universityData)
-    }
-
-
   }
-  console.log(searchInput)
   
   return (
     <div className='artist-container'>
@@ -86,10 +78,12 @@ const ArtistPage = () => {
             </div>
         </div>
           <div className='artist-tableSection'>
-            <ArtistsTable
-            
-                uniData={universityData}
-            />
+            {
+              (searchInput.length > 1) ? (<ArtistsTable
+                                          uniData={filterData}/>):
+                                          (<ArtistsTable
+                                          uniData={universityData}/>)
+            }
           </div>
         </Fragment>
       )}

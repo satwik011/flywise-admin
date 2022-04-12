@@ -9,9 +9,9 @@ import LoadingPage from '../utils/LoadingPage';
 
 const UserPage = () => {
   const [allUsers, setAllUsers] = useState([]);
-  const [boolVal, setBoolVal] = useState(false);
   const [searchInput, setsearchInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [filterData, setfilterData] = useState([])
 
   const fetchUserList = async () => {
     setLoading(true);
@@ -19,39 +19,28 @@ const UserPage = () => {
       const userData = await axios.get("https://flywise-admin.herokuapp.com/api/allUsers");
       setAllUsers(userData.data.user);
       setLoading(false);
-
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
 
+    useEffect(() => {
+        fetchUserList();
+      
+    }, []);
 
-
-  const searchItems = (searchValue) => {
-    setsearchInput(searchValue)
-
-
-    let filteredData =  allUsers.filter((item) => {  
-      return item.name.includes(searchValue.replace(/\s+/g, ''))
-      // return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-    })
-
-    if(filteredData.length > 0){
-     setAllUsers(filteredData)
+    const searchItems = (searchValue) => {
+      setsearchInput(searchValue)
+      if(searchInput !== ''){
+        let filteredData =  allUsers.filter((item) => {  
+        return Object.values(item).join('').toLowerCase().includes(searchValue.toLowerCase())
+        })
+        setfilterData(filteredData)
+      }else{
+        setfilterData(allUsers)
+      }
     }
-    else {
-    }
-
-
-  }
-
-  useEffect(() => {
-    if (!boolVal) {
-      fetchUserList();
-      setBoolVal(true);
-    }
-  }, [boolVal]);
 
   return (
     <div className='user-container'>
@@ -64,24 +53,13 @@ const UserPage = () => {
               <img src={searchIcon} alt='search' className='searchIcon' />
               <input
                 type='text'
-                placeholder='Ex. Users, Phone Number'
-                className='user-searchInput'
+                placeholder='Enter A Name'
+                className='artist-searchInput'
                 id='searchInput'
+                value={searchInput}
                 onChange={(e)=>searchItems(e.target.value)}
               />
             </div>
-            {/**<div className='artist-addArtistDiv'>
-          <button className='artist-addBtn'>
-            <img src={addIcon} alt='add' className='artist-addIcon' />
-            <span>Add artist</span>
-          </button>
-        </div> */}
-            {/**<div className='user-printDiv'>
-          <button className='user-addBtn'>
-            <img src={printIcon} alt='print' className='user-printIcon' />
-            <span>Print</span>
-          </button>
-        </div> */}
             <div className='user-filterDiv'>
               <button className='user-filterBtn'>
                 <img src={filterIcon} alt='print' className='user-filterIcon' />
@@ -90,7 +68,12 @@ const UserPage = () => {
             </div>
           </div>
           <div className='user-tableSection'>
+          { (searchInput.length > 1) ?(
+            <UsersTable Users = {filterData} />
+                                      ):(
             <UsersTable Users = {allUsers} />
+                                        )
+          }
           </div>
         </Fragment>
       )}

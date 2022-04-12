@@ -21,7 +21,7 @@ const initialData = {
     twitter:null,
     linkedin:null
   },
-  blogPics:""
+  thumbnail:""
 };
 
 const AddBlogForm = () => {
@@ -39,7 +39,7 @@ const AddBlogForm = () => {
   }
   
   const handleinput3 = (e)=>{        
-    setblogData({...blogData, blogPics: e.target.files[0]});
+    setblogData({...blogData, thumbnail: e.target.files[0]});
    }
 
   const handlelinks = (e)=>{
@@ -80,7 +80,7 @@ AddBlogForm.modules = {
     formData.append('body', blogData.body);
     formData.append('tag', blogData.tag);
     formData.append('profilePic', blogData.profilePic);
-    formData.append('blogPics', blogData.blogPics);
+    formData.append('thumbnail', blogData.thumbnail);
     formData.append('minutes', blogData.minutes);
     formData.append('links[fb]', blogData.links.fb);
     formData.append('links[insta]', blogData.links.insta);
@@ -183,11 +183,11 @@ AddBlogForm.modules = {
                 </div>
               
               <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Blog Pic</label>
+              <label className='addEmployee-inputLabel'>Thumbnail Pic</label>
               <input
                 type='file'
-                name='blogPics'
-                placeholder='Blog Pic'
+                name='thumbnail'
+                placeholder='Thumbnail'
                 className='addEmployee-inputField'
                 onChange={handleinput3}
               />
