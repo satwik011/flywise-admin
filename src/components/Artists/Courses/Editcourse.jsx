@@ -488,7 +488,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   <div className='toefl-category-box'>
                     <div className='toefl-category-box-single'>
                       <label >Total Score</label>
-                      <input type="number" defaultValue={getcoursedata?.toefl?.total} onChange={handletoefl} name="Total" placeholder="< 120" max="120" min="0" />
+                      <input type="number" defaultValue={getcoursedata?.toefl?.total} onChange={handletoefl} name="total" placeholder="< 120" max="120" min="0" />
                     </div>
                     <div className='toefl-category-box-single'>
                       <label >Reading</label>
