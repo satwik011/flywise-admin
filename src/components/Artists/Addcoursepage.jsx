@@ -31,7 +31,7 @@ const initialState = {
   },
   toefl: {
     toeflAccepted: false,
-    Total: null,
+    total: null,
     minReading: null,
     minWriting: null,
     minSpeaking: null,
@@ -39,7 +39,7 @@ const initialState = {
   },
   ielts: {
     ieltsAccepted: false,
-    Total: null,
+    total: null,
     minReading: null,
     minWriting: null,
     minSpeaking: null,
@@ -47,7 +47,7 @@ const initialState = {
   },
   duolingo: {
     duoLingoAccepted: false,
-    Total: null,
+    total: null,
     minLiteracy: null,
     minComprehension: null,
     minConversation: null,
@@ -436,7 +436,7 @@ const handlesubmit=async()=>{
                     <div className='toefl-category-box'>
                       <div className='toefl-category-box-single'>
                         <label >Total Score</label>
-                        <input type="number" onChange={handletoefl} name="Total" placeholder="< 120" max="120" min="0" />
+                        <input type="number" onChange={handletoefl} name="total" placeholder="< 120" max="120" min="0" />
                       </div>
                       <div className='toefl-category-box-single'>
                         <label >Reading</label>
@@ -498,7 +498,7 @@ const handlesubmit=async()=>{
                           <div className='toefl-category-box'>
                             <div className='toefl-category-box-single'>
                               <label >Total Score</label>
-                              <input type="number" onChange={handleielts} name="Total" min="0" max="9" placeholder='< 9' />
+                              <input type="number" onChange={handleielts} name="total" min="0" max="9" placeholder='< 9' />
                             </div>
                             <div className='toefl-category-box-single'>
                               <label >Reading</label>
@@ -556,7 +556,7 @@ const handlesubmit=async()=>{
                         <div className='toefl-category-box'>
                           <div className='toefl-category-box-single'>
                             <label >Total Score</label>
-                            <input type="number" onChange={handleduolingo} name="Total" min="0" max="160" placeholder='< 160' />
+                            <input type="number" onChange={handleduolingo} name="total" min="0" max="160" placeholder='< 160' />
                           </div>
                           <div className='toefl-category-box-single'>
                             <label >Literacy</label>
