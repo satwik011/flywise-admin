@@ -25,7 +25,7 @@ const UsersTable = (props) => {
         <tbody>
           {Users?.map((user) => (
             <tr key={user._id}>
-              <td>{user.name ? user.name : 'NA'}</td>
+              <td>{(user.firstName) ? (user.firstName + " " +   user.lastName)   : user.name ? (user.name):  'N/A' }</td>
               <td>{user.mobileNo ? user.mobileNo : 'NA'}</td>
               <td>{user.whichCountry ? user.whichCountry : 'NA'}</td>
               <td>{user.session ? user.session : 'NA'}</td>
