@@ -6,7 +6,6 @@ import '../../styles/ArtistsTable.css';
 
 const UsersTable = (props) => {
   const { Users } = props;
-
   console.log(Users)
   return (
     <div className='table-wrapper' id='#scrollBar'>

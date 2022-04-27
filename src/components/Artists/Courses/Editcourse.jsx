@@ -89,6 +89,8 @@ const initialState = {
       number: null,
       email: null
     },
+    courseUrl:null,
+    remarks:null,
     loanAssist:false,
     jobAssist:false,
     private: {},
@@ -940,6 +942,39 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                     </div>
                 </div>
 
+
+
+
+                <div className='addArtist-alignRow'>
+                  
+                  <div className='addArtist-inputFieldDiv'>
+                    <label className='addArtist-inputLabel'>
+                      Course Link
+                    </label>
+                    <input
+                      type='text'
+                      name='courseUrl'
+                      defaultValue={getcoursedata?.courseUrl }
+                      onChange={handleChange}
+                      placeholder='Drop The Link Here'
+                      className='addArtist-inputField'
+                    />
+                  </div>
+
+                  <div className='addArtist-inputFieldDiv'>
+                    <label className='addArtist-inputLabel'>
+                      Remarks
+                    </label>
+                    <input
+                      type='text'
+                      name='remarks'
+                      defaultValue={getcoursedata?.remarks }
+                      onChange={handleChange}
+                      placeholder='Give Remarks to the course'
+                      className='addArtist-inputField'
+                    />
+                  </div>
+              </div>
 
               <div className='addArtist-submitDetailDiv'>
                 <button

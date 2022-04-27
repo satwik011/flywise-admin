@@ -86,6 +86,8 @@ const initialState = {
     number: null,
     email: null
   },
+  courseUrl:null,
+  remarks:null,
   loanAssist:false,
   jobAssist:false,
   private: {},
@@ -378,18 +380,18 @@ const handlesubmit=async()=>{
                           <div className='Greverbal'>
                             <h3 > Total</h3>
                             <label>Score </label>
-                            <input onChange={handlegre} min="140" name="minTotal" max="170" placeholder='140 - 170' type="number" id="" />
+                            <input onChange={handlegre} min="260" name="minTotal" max="340" placeholder='260 - 340' type="number" id="" />
                           </div>
                           <div className='Greverbal'>
                             <h3 > Verbal</h3>
                             <label>Score </label>
-                            <input name="minVerbal" onChange={handlegre} min="140" max="170" placeholder='140 - 170' type="number" id="" />
+                            <input name="minVerbal" onChange={handlegre} min="130" max="170" placeholder='130 - 170' type="number" id="" />
                           </div>
 
                           <div className='Greverbal'>
                             <h3 > Quant</h3>
                             <label>Score </label>
-                            <input name="minQuant" onChange={handlegre} min="140" max="170" type="number" placeholder='140 - 170' id="" />
+                            <input name="minQuant" onChange={handlegre} min="130" max="170" type="number" placeholder='130 - 170' id="" />
                           </div>
 
                           <div className='Greverbal'>
@@ -873,12 +875,43 @@ const handlesubmit=async()=>{
                     </div>
                 </div>
 
+
+
+                <div className='addArtist-alignRow'>
+                  
+                  <div className='addArtist-inputFieldDiv'>
+                    <label className='addArtist-inputLabel'>
+                      Course Link
+                    </label>
+                    <input
+                      type='text'
+                      name='courseUrl'
+                      onChange={handleChange}
+                      placeholder='Drop The Link Here'
+                      className='addArtist-inputField'
+                    />
+                  </div>
+
+                  <div className='addArtist-inputFieldDiv'>
+                    <label className='addArtist-inputLabel'>
+                      Remarks
+                    </label>
+                    <input
+                      type='text'
+                      name='remarks'
+                      onChange={handleChange}
+                      placeholder='Give Remarks to the course'
+                      className='addArtist-inputField'
+                    />
+                  </div>
+              </div>
+
                 <div className='addArtist-submitDetailDiv'>
                   <button
                     className='addArtist-submitDetailBtn'
                     onClick={ handlesubmit }
                   >
-                    Add Courses
+                    Add Course
                   </button>
                 </div>
               </div>

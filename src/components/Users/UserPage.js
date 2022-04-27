@@ -25,9 +25,11 @@ const UserPage = () => {
     }
   };
 
+
+
+
     useEffect(() => {
         fetchUserList();
-      
     }, []);
 
     const searchItems = (searchValue) => {

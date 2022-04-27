@@ -25,12 +25,11 @@ function ViewCoursePage() {
  
  
   //  functions
-
   const unicall =async()=>{
     setLoading(true);
    
     try {
-      const call1 = await axios.get( `https://flywise-admin.herokuapp.com/api/allCourseByUniId/${param.id}`);
+      const call1 = await axios.get(`https://flywise-admin.herokuapp.com/api/allCourseByUniId/${param.id}`);
         setcourseData(call1.data.courses);
         setLoading(false);
     } catch (error) {
