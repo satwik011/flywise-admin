@@ -95,7 +95,7 @@ function Edituniversity() {
               <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
 
-                  <label className='addArtist-inputLabel'>University Name*</label>
+                  <label className='addArtist-inputLabel'>University Name  <span style={{color:"red",fontSize:"1.2rem"}}>*</span> </label>
                   <input
                     type='text'
                     name='name'
@@ -107,7 +107,7 @@ function Edituniversity() {
                 </div>
                 
                 <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>University Image*</label>
+                  <label className='addArtist-inputLabel'>University Image</label>
                   <input
                     type='file'
                     name='uniPic'
@@ -124,7 +124,7 @@ function Edituniversity() {
               <div className='addArtist-alignRow'>
               <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                  Country*
+                  Country <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
                   </label>
             
                   <select
@@ -142,7 +142,7 @@ function Edituniversity() {
               
               <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                  States*
+                  States <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
                   </label>
             
                   <select

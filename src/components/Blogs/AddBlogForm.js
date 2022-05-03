@@ -104,19 +104,21 @@ AddBlogForm.modules = {
   
           <div className='addEmployee-alignRow'>
             <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Writer Name*</label>
+              <label className='addEmployee-inputLabel'>Writer Name <span style={{color:"red",fontSize:"1.2rem"}}>*</span> </label>
               <input
                 type='text'
                 name='writerName'
                 placeholder='Full Name'
                 className='addEmployee-inputField'
+                id={blogData?.writerName?.length ? "" : "red-border"}
                 onChange={handleChange}
               />
             </div>
             <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Writer Tagline*</label>
+              <label className='addEmployee-inputLabel'>Writer Tagline <span style={{color:"red",fontSize:"1.2rem"}}>*</span> </label>
               <input
                 type='text'
+                id={blogData?.writerTagline?.length ? "" : "red-border"}
                 name='writerTagline'
                 placeholder='Writer Tagling'
                 className='addEmployee-inputField'
@@ -129,10 +131,11 @@ AddBlogForm.modules = {
   
           <div className='addEmployee-alignRow'>
           <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Date</label>
+              <label className='addEmployee-inputLabel'>Date <span style={{color:"red",fontSize:"1.2rem"}}>*</span> </label>
               <input
                 type='date'
                 name='date'
+                id={blogData?.date?.length ? "" : "red-border"}
                 placeholder='Date'
                 className='addEmployee-inputField'
                 onChange={handleChange}
@@ -152,10 +155,11 @@ AddBlogForm.modules = {
 
           <div className='addEmployee-alignRow'>
             <div className='addEmployee-inputFieldDiv'>
-              <label className='addEmployee-inputLabel'>Title</label>
+              <label className='addEmployee-inputLabel'>Title <span style={{color:"red",fontSize:"1.2rem"}}>*</span> </label>
               <input
                 type='text'
                 name='title'
+                id={blogData?.title?.length ? "" : "red-border"}
                 placeholder='Title Tagling'
                 className='addEmployee-inputField'
                 onChange={handleChange}
@@ -219,8 +223,9 @@ AddBlogForm.modules = {
 
           <div className='addEmployee-alignRow'>
                        <div style={{marginTop:"20px",width:"100%"}}>
-                        <label className='addEmployee-inputLabel'>Body</label>
+                        <label className='addEmployee-inputLabel'>Body <span style={{color:"red",fontSize:"1.2rem"}}>*</span> </label>
                           <ReactQuill 
+                             id={blogData?.body?.length ? "" : "red-border"}
                              modules={AddBlogForm.modules}
                              formats={AddBlogForm.formats}
                             theme="snow"

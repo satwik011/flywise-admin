@@ -143,7 +143,7 @@ function EditBlog() {
 
                   <div className='addEmployee-alignRow'>
                     <div className='addEmployee-inputFieldDiv'>
-                      <label className='addEmployee-inputLabel'>Writer Name*</label>
+                      <label className='addEmployee-inputLabel'>Writer Name <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                       <input
                         type='text'
                         name='writerName'
@@ -154,7 +154,7 @@ function EditBlog() {
                       />
                     </div>
                     <div className='addEmployee-inputFieldDiv'>
-                      <label className='addEmployee-inputLabel'>Writer Tagline*</label>
+                      <label className='addEmployee-inputLabel'>Writer Tagline <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                       <input
                         type='text'
                         name='writerTagline'
@@ -170,7 +170,7 @@ function EditBlog() {
 
                   <div className='addEmployee-alignRow'>
                   <div className='addEmployee-inputFieldDiv'>
-                      <label className='addEmployee-inputLabel'>Date</label>
+                      <label className='addEmployee-inputLabel'>Date <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                       <input
                         type='date'
                         name='date'
@@ -196,7 +196,7 @@ function EditBlog() {
 
                   <div className='addEmployee-alignRow'>
                     <div className='addEmployee-inputFieldDiv'>
-                      <label className='addEmployee-inputLabel'>Title</label>
+                      <label className='addEmployee-inputLabel'>Title <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                       <input
                         type='text'
                         name='title'
@@ -269,7 +269,7 @@ function EditBlog() {
 
                   <div className='addEmployee-alignRow'>
                        <div style={{marginTop:"20px",width:"100%"}}>
-                        <label className='addEmployee-inputLabel'>Body</label>
+                        <label className='addEmployee-inputLabel'>Body <span style={{color:"red",fontSize:"1.2rem"}}>*</span></label>
                         <ReactQuill 
                         modules={EditBlog.modules}
                         formats ={EditBlog.formats}

@@ -80,18 +80,20 @@ const AddArtistForm = () => {
               <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
 
-                  <label className='addArtist-inputLabel'>University Name*</label>
+                  <label className='addArtist-inputLabel'>University Name <span style={{color:"red",fontSize:"1.2rem"}}>*</span> </label>
                   <input
                     type='text'
+                    required="required" 
                     name='name'
+                    id={universityData?.name?.length ? "" : "red-border"}
                     onChange={handleChange}
                     placeholder='University Name'
-                    className='addArtist-inputField'
+                    className={`${"addArtist-inputField"} `}
                   />
                 </div>
                 
                 <div className='addArtist-inputFieldDiv'>
-                  <label className='addArtist-inputLabel'>University Image*</label>
+                  <label className='addArtist-inputLabel'>University Image</label>
                   <input
                     type='file'
                     name='uniPic'
@@ -107,12 +109,14 @@ const AddArtistForm = () => {
               <div className='addArtist-alignRow'>
               <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                  Country*
+                  Country <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
                   </label>
             
                   <select
                     className='addArtist-selectField'
                     name='country'
+                    id={universityData?.country?.length ? "" : "red-border"}
+                    required
                     defaultValue="Select A Country"
                     onChange={handleChange}>
                     <option value="">None</option>
@@ -125,12 +129,14 @@ const AddArtistForm = () => {
               
               <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                  States*
+                  States <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
                   </label>
             
                   <select
                     className='addArtist-selectField'
                     name='state'
+                    required
+                    id={universityData?.state?.length ? "" : "red-border"}
                     placeholder='Select A State'
                     onChange={handleChange}>
                     {

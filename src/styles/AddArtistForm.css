@@ -2,7 +2,9 @@
   width: 90%;
   margin: auto;
 }
-
+#red-border{
+  border: 1px solid red;
+}
 .addArtist-personalDetails {
   width: 70%;
   margin: auto;
