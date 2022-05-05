@@ -27,6 +27,8 @@ const initialData = {
 const AddBlogForm = () => {
   
   const [blogData, setblogData] = useState(initialData);
+  const [spinn, setspinn] = useState(false);
+
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -72,6 +74,7 @@ AddBlogForm.modules = {
 
   const handlesubmit = async(e)=>{
     e.preventDefault();
+    setspinn(true)
     const formData = new FormData();
     formData.append('writerName', blogData.writerName);
     formData.append('writerTagline', blogData.writerTagline);
@@ -90,8 +93,11 @@ AddBlogForm.modules = {
     try {
          await axios.post("https://flywise-admin.herokuapp.com/api/createBlog",formData)
          history.push('/blogs');
+          setspinn(false)
+
     } catch (error) {
       console.log(error);
+      setspinn(false)
     }
   }
 
@@ -240,7 +246,14 @@ AddBlogForm.modules = {
               className='addEmployee-submitDetailBtn'
               onClick={handlesubmit}
             >
-              Submit
+              Add Blog 
+              {
+                        spinn ? (
+                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>    
+                        ) : ("")
+                      }
             </button>
           </div>
         </div>

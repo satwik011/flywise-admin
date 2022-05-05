@@ -102,6 +102,8 @@ function Editcourse() {
     const [courseData, setcourseData] = useState(initialState);
     const [showgrebox, setshowgrebox] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [spinn, setspinn] = useState(false);
+
     const param = useParams();
     const history =useHistory();
   
@@ -146,12 +148,16 @@ function Editcourse() {
     //for posting updated data
 
       const handlesubmit = async()=>{
+        setspinn(true)
         try {
           await axios.patch(`https://flywise-admin.herokuapp.com/api/updateCourse/${param.id2}`,courseData)
-          
           history.push(`/Universities/viewcourse/${param.id1}`)
+        setspinn(false)
+
         } catch (error) {
           console.log(error);
+        setspinn(false)
+
         }
       }
 
@@ -982,6 +988,13 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                   onClick={ handlesubmit }
                 >
                   Update Course
+                  {
+                        spinn ? (
+                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>    
+                        ) : ("")
+                }
                 </button>
               </div>
             </div>

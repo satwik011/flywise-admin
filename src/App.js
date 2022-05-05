@@ -20,6 +20,7 @@ import Edituniversity from './components/Artists/University/Edituniversity';
 import Editcourse from './components/Artists/Courses/Editcourse';
 import EditBlog from './components/Blogs/allblogs/EditBlog';
 import ViewSingleUser from './components/Users/ViewSingleUser';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const history = createHistory();
 const App = () => {

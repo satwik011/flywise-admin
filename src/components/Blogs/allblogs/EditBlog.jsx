@@ -30,6 +30,8 @@ function EditBlog() {
   const [blogData, setblogData] = useState(initialData);
   const [getblogData, setgetblogData] = useState([])
   const [loading, setLoading] = useState(false);
+  const [spinn, setspinn] = useState(false);
+
   const param = useParams();
   const history = useHistory()
   // calling data to display 
@@ -75,6 +77,7 @@ function EditBlog() {
   //Update form
 
   const handlesubmit=async(e)=>{
+    setspinn(true)
     e.preventDefault();
     const formData = new FormData();
     formData.append('writerName', blogData.writerName);
@@ -93,8 +96,12 @@ function EditBlog() {
     try {
       await axios.patch( `https://flywise-admin.herokuapp.com/api/updateBlog/${param.id}`,formData);
       history.push('/blogs')
+      setspinn(false)
+
     } catch (error) {
       console.log(error);
+      setspinn(false)
+
     }
 }
 
@@ -284,7 +291,14 @@ function EditBlog() {
                       className='addEmployee-submitDetailBtn'
                       onClick={handlesubmit}
                     >
-                      Update
+                      Update Blog
+                      {
+                        spinn ? (
+                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>    
+                        ) : ("")
+                      }
                     </button>
                   </div>
                 </div>

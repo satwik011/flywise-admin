@@ -7,6 +7,8 @@ import AlertTitle from '@mui/material/AlertTitle';
 import LoadingPage from '../utils/LoadingPage';
 import { Country, State, City }  from 'country-state-city';
 
+
+
 const initialState = {
   name: "",
   uniPic:"",
@@ -27,7 +29,7 @@ const AddArtistForm = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  
+  const [spinn, setspinn] = useState(false);
     useEffect(() => {
       setcountryState(State.getStatesOfCountry(`${universityData.country}`));
     }, [universityData.country])
@@ -44,6 +46,7 @@ const AddArtistForm = () => {
    }
   
   const handlesubmit = async(e)=>{
+    setspinn(true)
     e.preventDefault();  
     const formData = new FormData();
     formData.append('name', universityData.name);
@@ -59,9 +62,10 @@ const AddArtistForm = () => {
     try{
            await axios.post("https://flywise-admin.herokuapp.com/api/createUniversity",formData);
           history.push('/Universities')
-          
+          setspinn(false)
         }catch(err){
           console.log(err);
+          setspinn(false)
         }
 
    }
@@ -203,10 +207,18 @@ const AddArtistForm = () => {
 
               <div className='addArtist-submitDetailDiv'>
                 <button
-                  className='addArtist-submitDetailBtn'
+                  className='addArtist-submitDetailBtn '
                   onClick={handlesubmit}
                 >
-                Add University    
+                Add University
+                      {
+                        spinn ? (
+                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>    
+                        ) : ("")
+                      }
+
                 </button>
               </div>
         </form>

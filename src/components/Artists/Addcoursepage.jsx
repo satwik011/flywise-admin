@@ -7,6 +7,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useParams,useHistory } from 'react-router-dom';
 import axios from 'axios';
+
 const initialState = {
 
   university: "",
@@ -102,6 +103,7 @@ const Addcoursepage = () => {
   const [page, setPage] = useState(1);
   const [showgrebox, setshowgrebox] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [spinn, setspinn] = useState(false);
 
   //special waiver box
 
@@ -181,12 +183,16 @@ const Addcoursepage = () => {
 
 
 const handlesubmit=async()=>{
+  setspinn(true)
     try {
         await axios.post("https://flywise-admin.herokuapp.com/api/createCourse",courseData);
         history.push('/Universities')
-
+    setspinn(false)
+        
     } catch (error) {
         console.log(error);
+        setspinn(false)
+
     }
 }
 
@@ -925,6 +931,13 @@ const handlesubmit=async()=>{
                     onClick={ handlesubmit }
                   >
                     Add Course
+                    {
+                        spinn ? (
+                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>    
+                        ) : ("")
+                      }
                   </button>
                 </div>
               </div>

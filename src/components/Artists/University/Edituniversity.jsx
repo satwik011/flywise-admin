@@ -24,6 +24,8 @@ function Edituniversity() {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const param = useParams();
+    const [spinn, setspinn] = useState(false);
+    
     console.log(universityData.name);
 
     // useeffect
@@ -42,7 +44,7 @@ function Edituniversity() {
       //functions
     
   const getunidata=async()=>{
-          try {
+    try {
               const call1 = await axios.get(`https://flywise-admin.herokuapp.com/api/uniById/${param.id}`)
                 setunidata(call1.data.uni);
                 setuniversityData(call1.data.uni);
@@ -63,6 +65,7 @@ function Edituniversity() {
     
     const handlesubmit = async(e)=>{
         e.preventDefault();  
+        setspinn(true)
         const formData = new FormData();
         formData.append('name', universityData.name);
         formData.append('uniPic', universityData.uniPic);
@@ -77,8 +80,12 @@ function Edituniversity() {
         try{
             await axios.patch(`https://flywise-admin.herokuapp.com/api/updateUniversity/${param.id}`,formData);
             history.push('/Universities')
+            setspinn(false)
+
             }catch(err){
             console.log(err);
+            setspinn(false)
+
             }
 
     }
@@ -218,6 +225,14 @@ function Edituniversity() {
                   onClick={handlesubmit}
                 >
                 Update University    
+                {
+                        spinn ? (
+                          <div class="spinner-border spinner-border-sm text-white mx-2" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>    
+                        ) : ("")
+                }
+
                 </button>
               </div>
         </form>
