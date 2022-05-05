@@ -167,11 +167,12 @@ const AddArtistForm = () => {
                 
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    University Level
+                    University Level <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
                   </label>     
                   <select
                     className='addArtist-selectField'
                     name='level'
+                    id={universityData?.level?.length ? "" : "red-border"}
                     onChange={handleChange}>
                     <option value="">Select One</option>
                     <option value="1">Tier 1</option>

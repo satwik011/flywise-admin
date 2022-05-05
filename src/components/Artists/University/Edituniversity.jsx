@@ -166,7 +166,7 @@ function Edituniversity() {
               
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    University Level
+                    University Level <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
                   </label>     
                   <select
                     className='addArtist-selectField'
