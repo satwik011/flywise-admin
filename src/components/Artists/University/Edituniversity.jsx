@@ -45,7 +45,7 @@ function Edituniversity() {
     
   const getunidata=async()=>{
     try {
-              const call1 = await axios.get(`https://flywise-admin.herokuapp.com/api/uniById/${param.id}`)
+              const call1 = await axios.get(`https://flywise-admin2.herokuapp.com/api/uniById/${param.id}`)
                 setunidata(call1.data.uni);
                 setuniversityData(call1.data.uni);
             } catch (error) {
@@ -78,7 +78,7 @@ function Edituniversity() {
         formData.append('public[key2]', universityData.public["key2"]);    
             
         try{
-            await axios.patch(`https://flywise-admin.herokuapp.com/api/updateUniversity/${param.id}`,formData);
+            await axios.patch(`https://flywise-admin2.herokuapp.com/api/updateUniversity/${param.id}`,formData);
             history.push('/Universities')
             setspinn(false)
 

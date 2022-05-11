@@ -10,7 +10,7 @@ function ViewSingleUser() {
     console.log(SingleUserData);
     const call1=async()=>{
         try {
-          const get =   await axios.get(`https://flywise-admin.herokuapp.com/api/users/${param.id}`)
+          const get =   await axios.get(`https://flywise-admin2.herokuapp.com/api/users/${param.id}`)
           setSingleUserData(get.data.user);
         } catch (error) {
             console.log(error);

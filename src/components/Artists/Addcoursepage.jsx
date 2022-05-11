@@ -185,7 +185,7 @@ const Addcoursepage = () => {
 const handlesubmit=async()=>{
   setspinn(true)
     try {
-        await axios.post("https://flywise-admin.herokuapp.com/api/createCourse",courseData);
+        await axios.post("https://flywise-admin2.herokuapp.com/api/createCourse",courseData);
         history.push('/Universities')
     setspinn(false)
         

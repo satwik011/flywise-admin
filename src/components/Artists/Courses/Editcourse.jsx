@@ -133,7 +133,7 @@ function Editcourse() {
     const getdata =async()=>{
       setLoading(true);
         try {
-            const call1 = await axios.get(`https://flywise-admin.herokuapp.com/api/courseById/${param.id2}`);
+            const call1 = await axios.get(`https://flywise-admin2.herokuapp.com/api/courseById/${param.id2}`);
             setgetcoursedata(call1.data.course);
             setcourseData(call1.data.course);
             setLoading(false);
@@ -150,7 +150,7 @@ function Editcourse() {
       const handlesubmit = async()=>{
         setspinn(true)
         try {
-          await axios.patch(`https://flywise-admin.herokuapp.com/api/updateCourse/${param.id2}`,courseData)
+          await axios.patch(`https://flywise-admin2.herokuapp.com/api/updateCourse/${param.id2}`,courseData)
           history.push(`/Universities/viewcourse/${param.id1}`)
         setspinn(false)
 

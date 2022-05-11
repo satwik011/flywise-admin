@@ -38,7 +38,7 @@ function EditBlog() {
   const fetchblog = async () => {
     setLoading(true);
     try {
-      const call1 = await axios.get(`https://flywise-admin.herokuapp.com/api/blogById/${param.id}`);
+      const call1 = await axios.get(`https://flywise-admin2.herokuapp.com/api/blogById/${param.id}`);
       setgetblogData(call1.data.blog)
       setblogData(call1.data.blog)
       setLoading(false);
@@ -94,7 +94,7 @@ function EditBlog() {
     formData.append('links[twitter]', blogData.links.twitter);
     formData.append('links[linkedin]', blogData.links.linkedin);
     try {
-      await axios.patch( `https://flywise-admin.herokuapp.com/api/updateBlog/${param.id}`,formData);
+      await axios.patch( `https://flywise-admin2.herokuapp.com/api/updateBlog/${param.id}`,formData);
       history.push('/blogs')
       setspinn(false)
 

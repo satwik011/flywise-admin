@@ -60,7 +60,7 @@ const AddArtistForm = () => {
     formData.append('public[key2]', universityData.public["key2"]);    
         
     try{
-           await axios.post("https://flywise-admin.herokuapp.com/api/createUniversity",formData);
+           await axios.post("https://flywise-admin2.herokuapp.com/api/createUniversity",formData);
           history.push('/Universities')
           setspinn(false)
         }catch(err){

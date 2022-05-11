@@ -21,7 +21,7 @@ const ArtistPage = () => {
     setLoading(true);
    
     try {
-      const call1 = await axios.get("https://flywise-admin.herokuapp.com/api/allUni");
+      const call1 = await axios.get("https://flywise-admin2.herokuapp.com/api/allUni");
       setuniversityData(call1.data.allUni);
       setLoading(false);
     } catch (error) {

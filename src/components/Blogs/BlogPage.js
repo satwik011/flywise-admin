@@ -17,7 +17,7 @@ const BlogPage = () => {
   const fetchblogList = async () => {
     setLoading(true);
     try {
-      const call1 = await axios.get("https://flywise-admin.herokuapp.com/api/allBlogs");
+      const call1 = await axios.get("https://flywise-admin2.herokuapp.com/api/allBlogs");
       setallblogData(call1.data.allBlogs)
       setLoading(false);
     } catch (error) {

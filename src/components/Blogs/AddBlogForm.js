@@ -91,7 +91,7 @@ AddBlogForm.modules = {
     formData.append('links[linkedin]', blogData.links.linkedin);
     
     try {
-         await axios.post("https://flywise-admin.herokuapp.com/api/createBlog",formData)
+         await axios.post("https://flywise-admin2.herokuapp.com/api/createBlog",formData)
          history.push('/blogs');
           setspinn(false)
 

@@ -25,7 +25,7 @@ function Onecourse(prop) {
                                 const yes = window.confirm("Do you want delete ?");
                             if (yes) {
                                 try {
-                                    await axios.delete(`https://flywise-admin.herokuapp.com/api/deleteUnivesity/${prop.id}`);
+                                    await axios.delete(`https://flywise-admin2.herokuapp.com/api/deleteUnivesity/${prop.id}`);
                                     window.location.reload();
                                 } catch (err) {
                                     console.log(err);

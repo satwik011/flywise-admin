@@ -16,7 +16,7 @@ const UserPage = () => {
   const fetchUserList = async () => {
     setLoading(true);
     try {
-      const userData = await axios.get("https://flywise-admin.herokuapp.com/api/allUsers");
+      const userData = await axios.get("https://flywise-admin2.herokuapp.com/api/allUsers");
       setAllUsers(userData.data.user);
       setLoading(false);
     } catch (error) {
