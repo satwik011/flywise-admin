@@ -223,12 +223,11 @@ const handlesubmit=async()=>{
 
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Discipline <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      Discipline 
                     </label>
                     <select
                       className='addArtist-selectField'
                       defaultValue="Select A Country"
-                      id={courseData?.discipline?.name?.length ? "" : "red-border"}
                       onChange={(e) => { setcourseData({ ...courseData, discipline: { name: e.target.value } }) }}>
                       <option value="">Choose a discipline</option>
                       <option value="Computer Science">Computer Science</option>
@@ -248,14 +247,13 @@ const handlesubmit=async()=>{
                   
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Application Fee (USD) <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      Application Fee (USD) 
                     </label>
                     <input
                       type='number'
                       min="0"
                       max="200"
                       maxLength="3"
-                      id={courseData?.applicationFees?.length ? "" : "red-border"}
                       name='applicationFees'
                       onChange={handleChange}
                       placeholder='Between 0-200 USD'
@@ -264,13 +262,12 @@ const handlesubmit=async()=>{
                   </div>
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Program Fee (USD) <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      Program Fee (USD) 
                     </label>
                     <input
                       type='number'
                       min="1000"
                       max="100000"
-                      id={courseData?.programFees?.length ? "" : "red-border"}
                       name='programFees'
                       onChange={handleChange}
                       placeholder='1000-100000 USD'
@@ -287,13 +284,12 @@ const handlesubmit=async()=>{
               <div className='addArtist-alignRow'>
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Physical Transcript requirement <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      Physical Transcript requirement 
                     </label>
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="transcriptRequired"
                       row
-                      id={courseData?.transcriptRequired?.length ? "" : "red-border"}
                       onChange={handleChange}
                       className='addArtist-inputField'
                     >
@@ -304,13 +300,12 @@ const handlesubmit=async()=>{
                 
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Financial Documents Requirement Review <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      Financial Documents Requirement Review 
                     </label>
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="financialDocuRequired"
                       onChange={handleChange}
-                      id={courseData?.financialDocuRequired?.length ? "" : "red-border"}
                       className='addArtist-inputField'
                       row>
                       <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -325,13 +320,12 @@ const handlesubmit=async()=>{
               <div className='addArtist-alignRow'>
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Third Party Transcript evaluation <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      Third Party Transcript evaluation 
                     </label>
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="thirdPartyRequired"
                       row
-                      id={courseData?.thirdPartyRequired?.length ? "" : "red-border"}
                       onChange={handleChange}
                       className='addArtist-inputField'
                     >
@@ -341,12 +335,11 @@ const handlesubmit=async()=>{
                   </div>
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Minimum GPA Requirement <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      Minimum GPA Requirement 
                     </label>
                     <input
                       type='number'
                       min="0"
-                      id={courseData?.minGpaRequired?.length ? "" : "red-border"}
                       max="4.0"
                       name='minGpaRequired'
                       onChange={handleChange}
@@ -364,10 +357,9 @@ const handlesubmit=async()=>{
               <div className='addArtist-alignRow'>
                   <div  className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      GRE Test Requirement <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      GRE Test Requirement 
                     </label>
                     <RadioGroup
-                      id={courseData?.gre?.greRequired?.length ? "" : "red-border"}
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       name="greRequired"
                       row
@@ -427,12 +419,11 @@ const handlesubmit=async()=>{
 
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Toefl Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                    Toefl Accepted ? 
                   </label>
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
                     row
-                    id={courseData?.toefl?.toeflAccepted?.length ? "" : "red-border"}
                     onChange={handletoefl}
                     name="toeflAccepted"
                     className='addArtist-inputField'
@@ -488,12 +479,11 @@ const handlesubmit=async()=>{
 
                       <div className='addArtist-inputFieldDiv'>
                         <label className='addArtist-inputLabel'>
-                          IELTS Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                          IELTS Accepted ? 
                         </label>
                         <RadioGroup
                           aria-labelledby="demo-row-controlled-radio-buttons-group"
                           row
-                          id={courseData?.ielts?.ieltsAccepted ?.length ? "" : "red-border"}
                           onChange={handleielts}
                           name="ieltsAccepted"
                           className='addArtist-inputField'
@@ -548,12 +538,11 @@ const handlesubmit=async()=>{
 
                     <div className='addArtist-inputFieldDiv'>
                       <label className='addArtist-inputLabel'>
-                        Duolingo Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                        Duolingo Accepted ? 
                       </label>
                       <RadioGroup
                         aria-labelledby="demo-row-controlled-radio-buttons-group"
                         row
-                        id={courseData?.duolingo ?.duoLingoAccepted ?.length ? "" : "red-border"}
                         onChange={handleduolingo}
                         name="duoLingoAccepted"
                         className='addArtist-inputField'
@@ -608,12 +597,11 @@ const handlesubmit=async()=>{
 
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      PTE Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span>
+                      PTE Accepted ? 
                     </label>
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
                       row
-                      id={courseData?.pte?.pteAccepted ?.length ? "" : "red-border"}
                       onChange={handlepte}
                       name="pteAccepted"
                       className='addArtist-inputField'

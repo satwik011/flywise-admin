@@ -267,7 +267,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Discipline <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    Discipline  
                   </label>
                   <select
                     className='addArtist-selectField'
@@ -290,7 +290,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                 
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Application Fee (USD) <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    Application Fee (USD)  
                   </label>
                   <input
                     type='number'
@@ -306,7 +306,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
                 </div>
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Program Fee (USD) <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    Program Fee (USD)  
                   </label>
                   <input
                     type='number'
@@ -329,7 +329,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
             <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Physical Transcript requirement <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    Physical Transcript requirement  
                   </label>
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
@@ -346,7 +346,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
               
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Financial Documents Requirement Review <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    Financial Documents Requirement Review 
                   </label>
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
@@ -367,7 +367,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
             <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Third Party Transcript evaluation <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    Third Party Transcript evaluation  
                   </label>
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
@@ -384,7 +384,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    Minimum GPA Requirement <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    Minimum GPA Requirement 
                   </label>
                   <input
                     type='number'
@@ -407,7 +407,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
             <div className='addArtist-alignRow'>
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    GRE Test Requirement <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    GRE Test Requirement  
                   </label>
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
@@ -471,7 +471,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
               <div className='addArtist-inputFieldDiv'>
                 <label className='addArtist-inputLabel'>
-                  Toefl Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                  Toefl Accepted ?  
                 </label>
                 <RadioGroup
                   aria-labelledby="demo-row-controlled-radio-buttons-group"
@@ -531,7 +531,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
                     <div className='addArtist-inputFieldDiv'>
                       <label className='addArtist-inputLabel'>
-                        IELTS Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                        IELTS Accepted ? 
                       </label>
                       <RadioGroup
                         aria-labelledby="demo-row-controlled-radio-buttons-group"
@@ -591,7 +591,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
                   <div className='addArtist-inputFieldDiv'>
                     <label className='addArtist-inputLabel'>
-                      Duolingo Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                      Duolingo Accepted ?  
                     </label>
                     <RadioGroup
                       aria-labelledby="demo-row-controlled-radio-buttons-group"
@@ -651,7 +651,7 @@ summerFidate = moment(summerFidate).format('YYYY-MM-DD')
 
                 <div className='addArtist-inputFieldDiv'>
                   <label className='addArtist-inputLabel'>
-                    PTE Accepted ? <span style={{color:"red",fontSize:"1.2rem"}}>*</span> 
+                    PTE Accepted ?  
                   </label>
                   <RadioGroup
                     aria-labelledby="demo-row-controlled-radio-buttons-group"
