@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 // for live server
 const API = axios.create({
-  baseURL: 'https://fanstar-backend-uiwtg.ondigitalocean.app/',
+  baseURL: 'https://fanstar-kylo.herokuapp.com/',
 });
 
 // https://fanstar-kylo.herokuapp.com/
@@ -17,7 +17,7 @@ API.interceptors.request.use((req) => {
 });
 
 export const login = (loginData) =>
-  API.post('/api/admin/public/login', loginData);
+  API.post('/api/admin/signin', loginData);
 
 export const appVisits = () => API.get('/api/admin/private/gettotalappvisits');
 export const totalSubscriptions = () =>

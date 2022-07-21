@@ -27,7 +27,7 @@ import userActive from '../images/userActive.svg';
 import payment from '../images/payment.svg';
 import paymentActive from '../images/paymentActive.svg';
 import useStyles from '../styles/NavSidebar';
-
+import { Navigate } from 'react-router';
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -94,9 +94,19 @@ const NavSidebar = (props) => {
   const history = useHistory();
 
   const handleLogout = () => {
-    Cookies.remove('fanstarAdmin');
+    sessionStorage.removeItem('flywise')
     history.push('/');
   };
+  
+  const Adminauth=()=> {
+    const res = JSON.parse(sessionStorage.getItem('flywise'))
+    if(!res){
+      return <Navigate to={'/'} />
+    }
+  }
+  React.useEffect(() => {
+      Adminauth()
+  }, [])
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -228,6 +238,29 @@ const NavSidebar = (props) => {
                 )}
               </ListItemIcon>
               <ListItemText primary='Users' />
+            </ListItem>
+           
+            <ListItem
+              button
+              className={
+                props.location.pathname.includes('/access')
+                  ? classes.selectedList
+                  : ''
+              }
+              onClick={() => history.push('/access')}
+            >
+              <ListItemIcon>
+                {props.location.pathname.includes('/access') ? (
+                  <img
+                    src={userActive}
+                    className={classes.iconColor}
+                    alt='access'
+                  />
+                ) : (
+                  <img src={user} className={classes.iconColor} alt='access' />
+                )}
+              </ListItemIcon>
+              <ListItemText primary='Access' />
             </ListItem>
             {/* <ListItem
               button

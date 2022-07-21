@@ -7,8 +7,9 @@ import searchIcon from '../../images/searchIcon.svg';
 import ArtistsTable from './University/ArtistsTable';
 import LoadingPage from '../utils/LoadingPage';
 import { getArtistList } from '../../redux/api';
-
+import { Navigate } from 'react-router';
 import '../../styles/ArtistPage.css';
+import { Redirect } from 'react-router-dom';
 
 const ArtistPage = () => {
   const history = useHistory();
@@ -16,7 +17,10 @@ const ArtistPage = () => {
   const [filterData, setfilterData] = useState([])
   const [loading, setLoading] = useState(false);
   const [universityData, setuniversityData] = useState([])
+
   
+
+
   const unicall =async()=>{
     setLoading(true);
    

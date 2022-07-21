@@ -4,7 +4,7 @@ import demoLogo from '../images/logo.svg';
 import LoadingPage from './utils/LoadingPage';
 import { login } from '../redux/api';
 import Cookies from 'js-cookie';
-
+import axios from 'axios';
 import '../styles/LoginPage.css';
 
 const initialData = {
@@ -26,9 +26,10 @@ const LoginPage = () => {
     if (formData.email && formData.password) {
       setLoading(true);
       try {
-        const { data } = await login(formData);
+        const { data } = await axios.post("http://flywise0.herokuapp.com/api/admin/signin",formData)
         setLoading(false);
-        Cookies.set('fanstarAdmin', data);
+        sessionStorage.setItem("flywise",JSON.stringify(data?.data))
+        console.log(data)
         history.push('/Universities');
       } catch (error) {
         console.log(error);
@@ -51,6 +52,7 @@ const LoginPage = () => {
               <img src={demoLogo} alt='logo' className='logoImage' />
               <span className='brandName'>Flywise </span>
             </div>
+
             <div className='loginPage-headerContent'>
               <h3 className='loginPage-headerTitle'>Log In to Dashboard </h3>
               <p className='loginPage-headerSub'>
@@ -58,12 +60,14 @@ const LoginPage = () => {
               </p>
             </div>
           </div>
+            <form>
           <div className='loginPage-formContent'>
             <div className='loginPage-formFieldDiv'>
               <label className='loginPage-inputLabel'>Email</label>
               <input
                 type='email'
                 name='email'
+                autoComplete="current-email"
                 className='loginPage-inputField'
                 placeholder='Email address'
                 value={formData.email}
@@ -82,6 +86,7 @@ const LoginPage = () => {
                 name='password'
                 placeholder='Password'
                 onChange={handleChange}
+                autoComplete="current-password"
                 value={formData.password}
                 className='loginPage-inputField'
               />
@@ -92,6 +97,7 @@ const LoginPage = () => {
               </button>
             </div>
           </div>
+      </form>
         </div>
       )}
     </div>
