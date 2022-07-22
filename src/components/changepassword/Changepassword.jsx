@@ -3,12 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-function Access() {
+function Changepassword() {
     const [access, setaccess] = useState({
-        email:"",
-        password:""
+        adminId:"",
+        password:"",
+        newPassword:""
     })
-const history = useHistory()
+    const history=useHistory()
     const handlechange=(e)=>{
         const { name } = e.target;
         setaccess({ ...access, [name]: e.target.value });
@@ -16,13 +17,17 @@ const history = useHistory()
     const handlesubmit = async(e)=>{
      e.preventDefault();
       try {
-        const data=await axios.post("http://flywise0.herokuapp.com/api/admin/add",access)
+        const data=await axios.post("http://flywise0.herokuapp.com/api/admin/change-password",access)
           console.log(data)
-          alert("user added");
+          alert("Password Changed");
           history.push('/Universities')
         } catch (error) {
-          console.log(error)
-          alert("problem occured");
+          if (error.response.status === 400 ) {
+            alert("old password not matched")
+          }
+          else{
+            alert("problem occured");
+          }
 
       }
     }
@@ -34,13 +39,18 @@ const history = useHistory()
     <Form onSubmit={handlesubmit}>
       <Form.Group className="mb-3"  controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" autoComplete='email' onChange={handlechange} name="email" placeholder="Enter email" />
+        <Form.Control type="email" autoComplete='email' onChange={handlechange} name="adminId" placeholder="Enter email" />
 
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" name="password" autoComplete='password' onChange={handlechange} placeholder="Password" />
+        <Form.Label>Old Password</Form.Label>
+        <Form.Control type="password" name="password" autoComplete='password' onChange={handlechange} placeholder="Old Password" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicNewPassword">
+        <Form.Label>New Password</Form.Label>
+        <Form.Control type="password" name="newPassword" autoComplete='password' onChange={handlechange} placeholder="New Password" />
       </Form.Group>
       
       <Button variant="primary" type="submit">
@@ -52,4 +62,4 @@ const history = useHistory()
   );
 }
 
-export default Access;
+export default Changepassword;

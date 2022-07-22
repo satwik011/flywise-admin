@@ -26,29 +26,32 @@ import Cookies from 'js-cookie';
 import { Navigate,Outlet } from 'react-router';
 import Privateroute from './components/Privateroute';
 import { Redirect } from 'react-router-dom';
+import Changepassword from './components/changepassword/Changepassword';
 export const history = createHistory();
 const App = () => {
   const [loginstate, setloginstate] = useState(true);
   
 
   
-  const Adminauth=()=> {
-    const res = JSON.parse(sessionStorage.getItem('flywise'))
-    if(!res){
-      setloginstate(false)
-    }
-  }
-  React.useEffect(() => {
-      Adminauth()
-  }, [loginstate])
+  // const Adminauth=async()=> {
+  //   // const res = JSON.parse(localStorage.getItem('flywise'))
+  //   const res= Cookies.get("flywise")
+  //   console.log(res);
+  //   if(res){
+  //     setloginstate(true)
+  //   }
+  // }
 console.log(loginstate)
+  // React.useEffect(() => {
+  //     Adminauth()
+  // }, [])
   return (
     <Router history={history}>
       <Switch>
         
         <Route path='/' exact component={LoginPage} />
       {
-        loginstate ? ('') : (<Redirect from="*" to={'/'} />)
+        loginstate ? ('') : ( <Redirect to="/"/> )
       }
 
                 <NavSidebar>
@@ -61,6 +64,7 @@ console.log(loginstate)
           <Route path='/Universities/viewcourse/:id' exact component={ ViewCoursePage } />
           <Route path='/Universities/editcourse/:id1/:id2' exact component={Editcourse} />
           <Route path='/access' exact component={Access} />
+          <Route path='/changepassword' exact component={Changepassword} />
           <Route path='/users' exact component={UserPage} />
           <Route path='/blogs' exact component={BlogPage} />
           <Route path='/blog/add' exact component={AddBlogForm} />

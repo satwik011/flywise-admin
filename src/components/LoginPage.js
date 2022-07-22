@@ -28,7 +28,8 @@ const LoginPage = () => {
       try {
         const { data } = await axios.post("http://flywise0.herokuapp.com/api/admin/signin",formData)
         setLoading(false);
-        sessionStorage.setItem("flywise",JSON.stringify(data?.data))
+        localStorage.setItem("flywise",JSON.stringify(data?.data))
+        Cookies.set("flywise",data.data.email)
         console.log(data)
         history.push('/Universities');
       } catch (error) {

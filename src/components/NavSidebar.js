@@ -28,6 +28,11 @@ import payment from '../images/payment.svg';
 import paymentActive from '../images/paymentActive.svg';
 import useStyles from '../styles/NavSidebar';
 import { Navigate } from 'react-router';
+import InputIcon from '@mui/icons-material/Input';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import ArticleIcon from '@mui/icons-material/Article';
+import PersonIcon from '@mui/icons-material/Person';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -84,7 +89,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const mdTheme = createTheme();
-
 const NavSidebar = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -94,19 +98,19 @@ const NavSidebar = (props) => {
   const history = useHistory();
 
   const handleLogout = () => {
-    sessionStorage.removeItem('flywise')
+    Cookies.remove("flywise")
     history.push('/');
   };
-  
-  const Adminauth=()=> {
-    const res = JSON.parse(sessionStorage.getItem('flywise'))
-    if(!res){
-      return <Navigate to={'/'} />
-    }
-  }
+
+  let k = Cookies.get('flywise')
   React.useEffect(() => {
-      Adminauth()
+    if(!k){
+      history.push('/');
+    }
   }, [])
+
+  
+
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -176,17 +180,11 @@ const NavSidebar = (props) => {
             >
               <ListItemIcon>
                 {props.location.pathname.includes('/Universities') ? (
-                  <img
-                    src={artistActive}
-                    className={classes.iconColor}
-                    alt='Universities'
-                  />
+                  <ApartmentIcon style={{color:"#ebebeb"}}/>
+
                 ) : (
-                  <img
-                    src={artist}
-                    className={classes.iconColor}
-                    alt='Universities'
-                  />
+                  <ApartmentIcon style={{color:"#ebebeb"}}/>
+
                 )}
               </ListItemIcon>
               <ListItemText primary='Universities' />
@@ -202,17 +200,10 @@ const NavSidebar = (props) => {
             >
               <ListItemIcon>
                 {props.location.pathname.includes('/blogs') ? (
-                  <img
-                    src={employeeActive}
-                    className={classes.iconColor}
-                    alt='employee'
-                  />
+                  <ArticleIcon style={{color:"#ebebeb"}}/>
                 ) : (
-                  <img
-                    src={employee}
-                    className={classes.iconColor}
-                    alt='employee'
-                  />
+                  <ArticleIcon style={{color:"#ebebeb"}}/>
+
                 )}
               </ListItemIcon>
               <ListItemText primary='Blogs' />
@@ -228,13 +219,11 @@ const NavSidebar = (props) => {
             >
               <ListItemIcon>
                 {props.location.pathname.includes('/users') ? (
-                  <img
-                    src={userActive}
-                    className={classes.iconColor}
-                    alt='users'
-                  />
+                  <PersonIcon style={{color:"#ebebeb"}}/>
+
                 ) : (
-                  <img src={user} className={classes.iconColor} alt='users' />
+                  <PersonIcon style={{color:"#ebebeb"}}/>
+
                 )}
               </ListItemIcon>
               <ListItemText primary='Users' />
@@ -251,16 +240,32 @@ const NavSidebar = (props) => {
             >
               <ListItemIcon>
                 {props.location.pathname.includes('/access') ? (
-                  <img
-                    src={userActive}
-                    className={classes.iconColor}
-                    alt='access'
-                  />
+                  <InputIcon style={{color:"#ebebeb"}}/>
                 ) : (
-                  <img src={user} className={classes.iconColor} alt='access' />
+                  <InputIcon style={{color:"#ebebeb"}}/>
                 )}
               </ListItemIcon>
               <ListItemText primary='Access' />
+            </ListItem>
+           
+            <ListItem
+              button
+              className={
+                props.location.pathname.includes('/changepassword')
+                  ? classes.selectedList
+                  : ''
+              }
+              onClick={() => history.push('/changepassword')}
+            >
+              <ListItemIcon>
+                {props.location.pathname.includes('/changepassword') ? (
+                  <VpnKeyIcon style={{color:"#ebebeb"}}/>
+                ) : (
+                  <VpnKeyIcon style={{color:"#ebebeb"}}/>
+
+                )}
+              </ListItemIcon>
+              <ListItemText primary='Change password' />
             </ListItem>
             {/* <ListItem
               button
