@@ -99,10 +99,11 @@ const NavSidebar = (props) => {
 
   const handleLogout = () => {
     Cookies.remove("flywise")
+    localStorage.removeItem('flywise')
     history.push('/');
   };
 
-  let k = Cookies.get('flywise')
+  let k = JSON.parse(localStorage.getItem("flywise"))
   React.useEffect(() => {
     if(!k){
       history.push('/');
