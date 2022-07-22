@@ -26,7 +26,7 @@ const LoginPage = () => {
     if (formData.email && formData.password) {
       setLoading(true);
       try {
-        const { data } = await axios.post("http://flywise0.herokuapp.com/api/admin/signin",formData)
+        const { data } = await axios.post("https://flywise0.herokuapp.com/api/admin/signin",formData)
         setLoading(false);
         localStorage.setItem("flywise",JSON.stringify(data?.data))
         Cookies.set("flywise",data.data.email)

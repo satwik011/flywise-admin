@@ -17,7 +17,7 @@ function Changepassword() {
     const handlesubmit = async(e)=>{
      e.preventDefault();
       try {
-        const data=await axios.post("http://flywise0.herokuapp.com/api/admin/change-password",access)
+        const data=await axios.post("https://flywise0.herokuapp.com/api/admin/change-password",access)
           console.log(data)
           alert("Password Changed");
           history.push('/Universities')

@@ -16,7 +16,7 @@ const history = useHistory()
     const handlesubmit = async(e)=>{
      e.preventDefault();
       try {
-        const data=await axios.post("http://flywise0.herokuapp.com/api/admin/add",access)
+        const data=await axios.post("https://flywise0.herokuapp.com/api/admin/add",access)
           console.log(data)
           alert("user added");
           history.push('/Universities')
