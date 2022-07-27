@@ -28,8 +28,12 @@ const LoginPage = () => {
       try {
         const { data } = await axios.post("https://flywise0.herokuapp.com/api/admin/signin",formData)
         setLoading(false);
-        localStorage.setItem("flywise",JSON.stringify(data?.data))
-        Cookies.set("flywise",data.data.email)
+        if(data?.data?.isView==false){
+          localStorage.setItem("flywise",JSON.stringify(data?.data))
+        }else{
+          alert("you can't access the admin panel")
+        }
+        
         console.log(data)
         history.push('/Universities');
       } catch (error) {
