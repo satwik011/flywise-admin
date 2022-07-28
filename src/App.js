@@ -27,6 +27,7 @@ import { Navigate,Outlet } from 'react-router';
 import Privateroute from './components/Privateroute';
 import { Redirect } from 'react-router-dom';
 import Changepassword from './components/changepassword/Changepassword';
+import Modal from './components/Modal/Modal';
 export const history = createHistory();
 const App = () => {
   const [loginstate, setloginstate] = useState(true);
@@ -66,6 +67,7 @@ console.log(loginstate)
           <Route path='/access' exact component={Access} />
           <Route path='/changepassword' exact component={Changepassword} />
           <Route path='/users' exact component={UserPage} />
+          <Route path='/modal' exact component={Modal} />
           <Route path='/blogs' exact component={BlogPage} />
           <Route path='/blog/add' exact component={AddBlogForm} />
           <Route path='/blog/edit/:id' exact component={EditBlog} />

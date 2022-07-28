@@ -229,6 +229,27 @@ const NavSidebar = (props) => {
               </ListItemIcon>
               <ListItemText primary='Users' />
             </ListItem>
+            
+            <ListItem
+              button
+              className={
+                props.location.pathname.includes('/modal')
+                  ? classes.selectedList
+                  : ''
+              }
+              onClick={() => history.push('/modal')}
+            >
+              <ListItemIcon>
+                {props.location.pathname.includes('/modal') ? (
+                  <PersonIcon style={{color:"#ebebeb"}}/>
+
+                ) : (
+                  <PersonIcon style={{color:"#ebebeb"}}/>
+
+                )}
+              </ListItemIcon>
+              <ListItemText primary='Modal Data' />
+            </ListItem>
            
             <ListItem
               button
