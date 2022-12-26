@@ -30,8 +30,9 @@ const LoginPage = () => {
           "https://api.flywise.in/api/admin/signin",
           formData
         );
+
         setLoading(false);
-        if (data?.data?.isView == false) {
+        if (data?.data?.isView == true) {
           localStorage.setItem("flywise", JSON.stringify(data?.data));
         } else {
           alert("you can't access the admin panel");
